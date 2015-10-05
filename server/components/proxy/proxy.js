@@ -17,4 +17,29 @@ request({
     var stressedWord = $('textarea').last().text();
     console.log(stressedWord);
   };
+  var stressArray = stressedWord.split('\r\n');  /* turning string to a string array */
+  stressArray.splice(-1,1); /* deleting the last array elem. which is empty string */
+  var regexp = /^[^ ]+[ ]([^ ]+) \(([^)]+)/;
+  var wordApi = [];
+  var arrLen = stressArray.length;
+
+  if(arrLen != 0){
+    stressArray.forEach(function (item, i){
+      var mtch = item.match(regexp);
+      var smth = mtch[2].split(' ');
+      var jsonObj = {};
+      jsonObj.word = mtch[1];
+      jsonObj.class = smth.shift();
+      jsonObj.state = smth;
+      wordApi[i] = jsonObj;
+    });
+    wordApi[arrLen] = jsonObj = {totalWordsFound: arrLen};
+    var checkIfEmpty = false;
+  }
+  else{
+    wordApi[0] = text; /* if text was not found write word to first array position */
+    var checkIfEmpty = true;
+    console.log('You\'ve got', checkIfEmpty, 'value. Please check the spelling of the word', '\''+wordApi[0]+'\'');
+  }
+
 });
