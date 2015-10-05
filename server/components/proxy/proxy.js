@@ -17,6 +17,11 @@ request({
     var stressedWord = $('textarea').last().text();
     console.log(stressedWord);
   };
+  }
+  else {
+    console.log('Error, Please try later');
+  }
+
   var stressArray = stressedWord.split('\r\n');  /* turning string to a string array */
   stressArray.splice(-1,1); /* deleting the last array elem. which is empty string */
   var regexp = /^[^ ]+[ ]([^ ]+) \(([^)]+)/;
