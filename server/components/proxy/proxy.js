@@ -3,20 +3,19 @@
 var request = require('request');
 var cheerio = require('cheerio');  /* HTML parser */
 
-var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1'; /*alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text*/
-
+var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1'; /* alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text */
+var text = 'dangus'  /* Viena for testing */
+text = text.charAt(0).toUpperCase() + text.slice(1);  /* uppercase first letter */
 request({
   uri: link,
   method: 'POST',
   form: {
-    tekstas: 'Namas'
+    tekstas: text
   }
 }, function(error, response, body) {
   if(!error && response.statusCode == 200){
     var $ = cheerio.load(body);
     var stressedWord = $('textarea').last().text();
-    console.log(stressedWord);
-  };
   }
   else {
     console.log('Error, Please try later');
