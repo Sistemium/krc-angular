@@ -5,7 +5,7 @@ md-dialog(aria-label='List dialog')
     form(name='projectForm')
       md-input-container
         label Description
-        input(md-maxlength='30', required='', name='description', ng-model='newThing')
+        input(md-maxlength='56', required='', name='description', ng-model='newThing')
         div(ng-messages='projectForm.description.$error')
           div(ng-message='required') This is required.
           div(ng-message='md-maxlength') The name has to be less than 30 characters long.
