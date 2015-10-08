@@ -11,7 +11,8 @@ var test200 = [
   {word: 'Medus', len: 3}
 ];
 
-test404.forEach(function(item, i){
+
+test404.forEach(function(item){
 
   describe('Test for some wrong words from \'test404\' array \n GET /api/krc/'+item, function() {
     it('Should return status 404', function(done) {
@@ -22,8 +23,6 @@ test404.forEach(function(item, i){
   });
 
 });
-
-
 
 test200.forEach(function(item){
 
@@ -46,3 +45,14 @@ test200.forEach(function(item){
   });
 
 });
+
+
+
+  describe('Test for no words from GET /api/krc', function() {
+    it('Should return status 400', function(done) {
+      request(app)
+        .get('/api/krc/')
+        .expect(400, done)
+    });
+  });
+
