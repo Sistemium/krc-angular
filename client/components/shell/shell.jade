@@ -1,9 +1,10 @@
 div(ng-controller='ShellCtrl').main-shell
   md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left')
     md-toolbar.md-tall.md-accent
-      
+
     md-content(layout-padding='')
   md-toolbar
+    h2(class='flex') Sveiki Atvykę į Kirčiavimo programa
     .md-toolbar-tools
       md-button.md-icon-button(ng-click='toggleLeft()', aria-label='Settings')
         md-icon(md-svg-icon='navigation:menu')
@@ -30,4 +31,4 @@ div(ng-controller='ShellCtrl').main-shell
             md-button(ng-click='toggleNotifications()')
               md-icon(md-svg-icon="social:notifications{{notificationsEnabled ? '_off' : ''}}")
               |               {{notificationsEnabled ? 'Disable' : 'Enable' }} notifications
-          
+
