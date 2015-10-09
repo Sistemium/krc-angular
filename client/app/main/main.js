@@ -5,7 +5,8 @@ angular.module('stklcApp')
     $stateProvider
       .state('main', {
         url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'app/krc/krc.html',
+        controller: 'KrcCtrl',
+        controllerAs: 'ctrl'
       });
   });
