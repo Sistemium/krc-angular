@@ -19,8 +19,7 @@ exports.index = function(req, res, next){
       var stressedWord = $('textarea').last().text();
     }
     else {
-      res.status(500).send('The server is down. Please try later');
-      return;
+      return res.status(500).send('The server is down. Please try later.');
     }
 
     var stressArray = stressedWord.split('\r\n');  /* turning string to a string array */
