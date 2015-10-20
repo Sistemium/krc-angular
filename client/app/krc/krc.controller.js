@@ -4,6 +4,7 @@ angular.module('stklcApp')
   .controller('KrcCtrl', function ($http) {
 
     var me = this;
+    var notfound = false;
     angular.extend (me, {
 
       kirciuoti: function (word) {
@@ -15,6 +16,7 @@ angular.module('stklcApp')
           me.errMsg ='';
         }).error(function(){
           me.data = [];
+          me.notfound = true;
         });
 
       },
