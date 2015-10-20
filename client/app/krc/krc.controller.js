@@ -4,10 +4,9 @@ angular.module('stklcApp')
   .controller('KrcCtrl', function ($http) {
 
     var me = this;
-    var errMsg = '';
-    angular.extend (me,{
+    angular.extend (me, {
 
-      kircuoti: function (word) {
+      kirciuoti: function (word) {
 
         var w = word || me.wordInput;
 
@@ -16,13 +15,17 @@ angular.module('stklcApp')
           me.errMsg ='';
         }).error(function(){
           me.data = [];
-          me.errMsg = 'Word not found';
         });
 
       },
 
-      wordInput: 'qwew'
+      wordInput: ''
 
     });
 
+
+
+
   });
+
+
