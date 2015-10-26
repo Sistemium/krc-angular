@@ -19,19 +19,20 @@
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
+      <link rel="stylesheet" href="app/about/about.css">
       <link rel="stylesheet" href="app/app.css">
-      <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/test/test.css">
       <!-- endinjector -->
     <!-- endbuild -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
   </head>
-  <body ng-app="stklcApp">
+  <body ng-app="stklcApp" ng-cloak>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-include='"components/shell/shell.html"'></div>
+
     <div ui-view=""></div>
 
 
@@ -69,13 +70,12 @@
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
+      <script src="app/about/about.controller.js"></script>
+      <script src="app/about/about.js"></script>
       <script src="app/krc/krc.controller.js"></script>
-      <script src="app/krc/krc.swipe.controller.js"></script>
-      <script src="app/krc/toast.controller.js"></script>
-      <script src="app/main/main.controller.js"></script>
-      <script src="app/main/main.js"></script>
-      <script src="components/shell/dialog/dialog.controller.js"></script>
-      <script src="components/shell/shell.controller.js"></script>
+      <script src="app/krc/routes.js"></script>
+      <script src="app/test/test.controller.js"></script>
+      <script src="app/test/test.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->
 
