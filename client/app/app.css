@@ -17,3 +17,17 @@
     color: #000;
     padding: 0.2em 0;
 }
+
+md-chips.md-readonly md-chip {
+  padding-right: 10px !important;
+}
+
+.wrapper{
+  min-width: 360px;
+  min-height: inherit;
+  text-align: center;
+}
+
+md-chips-wrap.md-chips:hover{
+  cursor: default;
+}

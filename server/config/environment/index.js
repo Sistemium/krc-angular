@@ -42,7 +42,7 @@ var all = {
         safe: true
       }
     }
-  },
+  }
 
 };
 

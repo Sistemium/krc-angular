@@ -1,0 +1,108 @@
+div.main-shell
+  //md-toolbar(layout='row' layout-align='space-around start')
+  //  div(layout='row' layout-align='space-around center')
+  //    h3(class='md-toolbar-tools') Kirčiavimo programa
+  //    md-button(class='md-primary md-raised' arial-label='Settings' ui-sref='main.about' layout-padding) Apie
+  //    md-button(class='md-primary md-raised' arial-label='Settings' ui-sref='main.about.test' layout-padding) test
+  //md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left-nav', md-is-locked-open="$mdMedia('gt-md')")
+  //  md-toolbar
+  //    .md-toolbar-tools
+  //      h1 Menu
+  //      span(flex='')
+  //      md-button(ng-click='close()', hide-gt-md='')
+  //        | Close
+  //  md-content.md-padding
+  //    p(hide-md='', show-gt-md='')
+  //      | This sidenav is locked open on your device. To go back to the default behavior,
+  //      | narrow your display.
+  //
+  //
+  //div(class='mainContent' ui-view='')
+  //  form(name='wordInputForm')
+  //    md-input-container(layout='column' layout-align='center center')
+  //
+  //      div(class='wrapper')
+  //
+  //        div(layout='column')
+  //
+  //          div(layout='row' layout-align='start center')
+  //            label(layout-margin) Sukirčiuoti žodį
+  //          input(ng-model='ctrl.wordInput' md-minlength='1' md-maxlength='30' name='word' aria-label='Input' layout-margin flex)
+  //          div(ng-messages='wordInputForm.word.$error' role='alert' multiple flex layout-margin lauout-align='start center' layout='row')
+  //            div(ng-message='md-maxlength' class='my-message') Žodžio ilgis turi būti mažiau, nei 30 simbolių
+  //
+  //        div(layout='column')
+  //          md-button(class='md-raised md-primary' ng-click='ctrl.kirciuoti()') Kirčiuoti
+  //
+  //        div(layout='column' layout-align='center center' layout-margin layout-padding)
+  //
+  //          div(ng-repeat='item in ctrl.data' layout-margin)
+  //
+  //            div(layout-margin layout='column' layout-align='start start')
+  //              p
+  //                strong {{ item.word }}
+  //                | &nbsp;
+  //                em ({{ item.class }})
+  //              md-chips.md-readonly(ng-model='item.state' readonly='true' layout='column')
+  //                md-chip-template(class='data')
+  //                  | {{$chip}}
+
+
+  div(layout='column', layout-fill='')
+    div(layout='row', flex='')
+      // Side Navigation (id: 'left-nav')
+      md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left-nav', md-is-locked-open="$mdMedia('gt-md')" id='left-nav')
+        md-toolbar
+          .md-toolbar-tools
+            h1 Istorija
+            span(flex='')
+            md-button(ng-click='ctrl.closeSideNav()', hide-gt-md='')
+              | Uždaryti
+        md-content.md-padding
+          div(show-gt-md='')
+            div(ng-repeat='history in ctrl.history track by $index')
+              p.md-title {{ history }}
+      md-cotent(flex='')
+        md-toolbar
+          .md-toolbar-tools(layout='row' layout-align='space-between center')
+            h1 Kirčiavimo programa
+            md-button(class='md-primary' ng-click='ctrl.toggleLeft()' hide-gt-md) Istorija
+        .md-padding(layout='column')
+          div(class='mainContent' ui-view='')
+            form(name='wordInputForm')
+              md-input-container(layout='column' layout-align='center center')
+
+                div(class='wrapper')
+
+                  div(layout='column')
+
+                    div(layout='row' layout-align='start center')
+                      label(layout-margin) Sukirčiuoti žodį
+                    input(ng-model='ctrl.wordInput' md-minlength='1' md-maxlength='30' name='word' aria-label='Input' layout-margin flex)
+                    div(ng-messages='wordInputForm.word.$error' role='alert' multiple flex layout-margin lauout-align='start center' layout='row')
+                      div(ng-message='md-maxlength' class='my-message') Žodžio ilgis turi būti mažiau, nei 30 simbolių
+
+                  div(layout='column')
+                    md-button(class='md-raised md-primary md-hue-2' ng-click='ctrl.kirciuoti()') Kirčiuoti
+
+                  div(layout='column' layout-align='center center' layout-padding)
+
+                    div(ng-repeat='item in ctrl.data' layout-margin)
+
+                      div(layout='column' layout-align='start start')
+                        div(layout-margin)
+                          strong {{ item.word }}
+                          | &nbsp;
+                          em ({{ item.class }})
+                        md-chips.md-readonly(ng-model='item.state' readonly='true' layout='column')
+                          md-chip-template(class='data')
+                            | {{$chip}}
+
+  md-toolbar(layout='row' layout-align="center center")
+    span(class='md-subhead') © UAB Sistemium 2015
+
+
+
+
+
+
