@@ -11,14 +11,21 @@ angular.module('stklcApp')
     };
 
     var me = this;
+    var localStorage = window.localStorage;
+
+    $scope.$watchCollection('ctrl.history',function (newHistory){
+      localStorage.setItem('history',JSON.stringify(newHistory));
+    });
 
     angular.extend (me, {
-      history: [],
+      history: JSON.parse(localStorage.getItem('history')) || [],
+
       kirciuoti: function (word) {
 
         var w = word || me.wordInput;
         $http.get('/api/krc/' + w).success(function(data) {
           me.writeSearchedWords(w);
+          console.log(w);
           me.data = data;
         }).error(function(){
           me.data = [];
@@ -28,13 +35,19 @@ angular.module('stklcApp')
       },
 
       writeSearchedWords: function(searchedWord){
-        if(me.history.length < 10){
-          me.history.push({word: searchedWord});
-        }
-        else{
-          me.history.shift();
-          me.history.push({word: searchedWord});
-        }
+
+        me.duplicationRemover(searchedWord);
+        me.history.unshift(searchedWord);
+
+      },
+
+      duplicationRemover: function(wordToCheck){
+        me.history.forEach(function(item,idx){
+          if (wordToCheck == item) {
+            me.history.splice(idx,1);
+          }
+        });
+        console.log(me.history);
       },
 
       showSimpleToast: function(){
