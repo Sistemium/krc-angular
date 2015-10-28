@@ -14,7 +14,7 @@ angular.module('stklcApp')
     var localStorage = window.localStorage;
 
     $scope.$watchCollection('ctrl.history',function (newHistory){
-      localStorage.setItem('history',JSON.stringify(newHistory));
+        localStorage.setItem('history',JSON.stringify(newHistory));
     });
 
     angular.extend (me, {
@@ -23,9 +23,9 @@ angular.module('stklcApp')
       kirciuoti: function (word) {
 
         var w = word || me.wordInput;
+        var w = w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
         $http.get('/api/krc/' + w).success(function(data) {
           me.writeSearchedWords(w);
-          console.log(w);
           me.data = data;
         }).error(function(){
           me.data = [];
