@@ -24,7 +24,7 @@ var stateJson = [
   {
     "neįvardž.": "",
     "įvardž.": ""
-  },
+  }
 ];
 
 var classJson = [
