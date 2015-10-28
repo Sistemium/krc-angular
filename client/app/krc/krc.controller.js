@@ -14,7 +14,7 @@ angular.module('stklcApp')
     var localStorage = window.localStorage;
 
     $scope.$watchCollection('ctrl.history',function (newHistory){
-      localStorage.setItem('history',JSON.stringify(newHistory));
+        localStorage.setItem('history',JSON.stringify(newHistory));
     });
 
     angular.extend (me, {
@@ -23,9 +23,9 @@ angular.module('stklcApp')
       kirciuoti: function (word) {
 
         var w = word || me.wordInput;
+        var w = w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
         $http.get('/api/krc/' + w).success(function(data) {
           me.writeSearchedWords(w);
-          console.log(w);
           me.data = data;
         }).error(function(){
           me.data = [];
@@ -35,10 +35,14 @@ angular.module('stklcApp')
       },
 
       writeSearchedWords: function(searchedWord){
-
         me.duplicationRemover(searchedWord);
-        me.history.unshift(searchedWord);
-
+        if(me.history.length < 5)
+          me.history.unshift(searchedWord);
+        else{
+          me.history.pop();
+          me.history.unshift(searchedWord);
+        }
+        console.log(me.history);
       },
 
       duplicationRemover: function(wordToCheck){
@@ -47,7 +51,7 @@ angular.module('stklcApp')
             me.history.splice(idx,1);
           }
         });
-        console.log(me.history);
+
       },
 
       showSimpleToast: function(){
