@@ -6,7 +6,7 @@ exports.index = function(req, res, next){
   var cheerio = require('cheerio');  /* HTML parser */
   var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1'; /* alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text */
   var text =  req.params.word; /* Viena for testing */
-  text = text.charAt(0).toUpperCase() + text.slice(1);  /* uppercase first letter */
+  text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();  /* uppercase first letter lowercase other*/
   request({
     uri: link,
     method: 'POST',
