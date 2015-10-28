@@ -36,13 +36,12 @@ angular.module('stklcApp')
 
       writeSearchedWords: function(searchedWord){
         me.duplicationRemover(searchedWord);
-        if(me.history.length < 5)
+        if(me.history.length < 12)
           me.history.unshift(searchedWord);
         else{
           me.history.pop();
           me.history.unshift(searchedWord);
         }
-        console.log(me.history);
       },
 
       duplicationRemover: function(wordToCheck){
