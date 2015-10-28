@@ -35,10 +35,14 @@ angular.module('stklcApp')
       },
 
       writeSearchedWords: function(searchedWord){
-
         me.duplicationRemover(searchedWord);
-        me.history.unshift(searchedWord);
-
+        if(me.history.length < 5)
+          me.history.unshift(searchedWord);
+        else{
+          me.history.pop();
+          me.history.unshift(searchedWord);
+        }
+        console.log(me.history);
       },
 
       duplicationRemover: function(wordToCheck){
@@ -47,7 +51,7 @@ angular.module('stklcApp')
             me.history.splice(idx,1);
           }
         });
-        console.log(me.history);
+
       },
 
       showSimpleToast: function(){
