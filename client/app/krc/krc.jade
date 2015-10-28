@@ -59,14 +59,14 @@ div.main-shell
             md-button(ng-click='ctrl.closeSideNav()', hide-gt-md='')
               | Uždaryti
         md-content.md-padding
-          div(hide-md='', show-gt-md='')
-            div(ng-repeat='history in ctrl.history'  flex offset='33')
-              p.md-title {{ history.word }}
+          div(show-gt-md='')
+            div(ng-repeat='history in ctrl.history track by $index')
+              p.md-title {{ history }}
       md-cotent(flex='')
         md-toolbar
           .md-toolbar-tools(layout='row' layout-align='space-between center')
             h1 Kirčiavimo programa
-            md-button(class='md-primary md-hue-4' ng-click='ctrl.toggleLeft()' hide-gt-md) Istorija
+            md-button(class='md-primary' ng-click='ctrl.toggleLeft()' hide-gt-md) Istorija
         .md-padding(layout='column')
           div(class='mainContent' ui-view='')
             form(name='wordInputForm')
@@ -83,14 +83,14 @@ div.main-shell
                       div(ng-message='md-maxlength' class='my-message') Žodžio ilgis turi būti mažiau, nei 30 simbolių
 
                   div(layout='column')
-                    md-button(class='md-raised md-primary' ng-click='ctrl.kirciuoti()') Kirčiuoti
+                    md-button(class='md-raised md-primary md-hue-2' ng-click='ctrl.kirciuoti()') Kirčiuoti
 
-                  div(layout='column' layout-align='center center' layout-margin layout-padding)
+                  div(layout='column' layout-align='center center' layout-padding)
 
                     div(ng-repeat='item in ctrl.data' layout-margin)
 
-                      div(layout-margin layout='column' layout-align='start start')
-                        p
+                      div(layout='column' layout-align='start start')
+                        div(layout-margin)
                           strong {{ item.word }}
                           | &nbsp;
                           em ({{ item.class }})
@@ -100,6 +100,8 @@ div.main-shell
 
   md-toolbar(layout='row' layout-align="center center")
     span(class='md-subhead') © UAB Sistemium 2015
+
+
 
 
 
