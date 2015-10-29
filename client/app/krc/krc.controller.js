@@ -23,8 +23,8 @@ angular.module('stklcApp')
 
       kirciuoti: function (word) {
 
-        var w = word || me.wordInput;
-        var w = w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+        var w = _.capitalize ((word || me.wordInput|| '').toLowerCase());
+
         $http.get('/api/krc/' + w).success(function(data) {
           me.writeSearchedWords(w);
           me.data = data;
