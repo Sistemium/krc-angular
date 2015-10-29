@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('stklcApp')
-  .controller('KrcCtrl', function ($http, $scope, $mdToast, $mdSidenav) {
+  .controller('KrcCtrl', ['$http', '$scope', '$mdToast', '$mdSidenav',
+    function ($http, $scope, $mdToast, $mdSidenav) {
 
     var toastPosition = {
       bottom: false,
@@ -22,8 +23,8 @@ angular.module('stklcApp')
 
       kirciuoti: function (word) {
 
-        var w = word || me.wordInput;
-        var w = w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+        var w = _.capitalize ((word || me.wordInput|| '').toLowerCase());
+
         $http.get('/api/krc/' + w).success(function(data) {
           me.writeSearchedWords(w);
           me.data = data;
@@ -36,12 +37,8 @@ angular.module('stklcApp')
 
       writeSearchedWords: function(searchedWord){
         me.duplicationRemover(searchedWord);
-        if(me.history.length < 12)
-          me.history.unshift(searchedWord);
-        else{
-          me.history.pop();
-          me.history.unshift(searchedWord);
-        }
+        me.history.unshift(searchedWord);
+        me.history = _.take(me.history,20);
       },
 
       duplicationRemover: function(wordToCheck){
@@ -76,10 +73,13 @@ angular.module('stklcApp')
         $mdSidenav('left-nav').close();
       },
 
-      wordInput: 'Mama',
+      deleteHistory: function(){
+        localStorage.removeItem('history');
+        me.history = [];
+      },
 
     });
 
-  });
+  }]);
 
 
