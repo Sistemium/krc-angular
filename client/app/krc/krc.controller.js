@@ -74,9 +74,7 @@ angular.module('stklcApp')
 
       closeSideNav: function() {
         $mdSidenav('left-nav').close();
-      },
-
-      wordInput: 'Mama',
+      }
 
     });
 
