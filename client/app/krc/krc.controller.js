@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('stklcApp')
-  .controller('KrcCtrl', function ($http, $scope, $mdToast, $mdSidenav) {
+  .controller('KrcCtrl', ['$http', '$scope', '$mdToast', '$mdSidenav',
+    function ($http, $scope, $mdToast, $mdSidenav) {
 
     var toastPosition = {
       bottom: false,
@@ -78,6 +79,6 @@ angular.module('stklcApp')
 
     });
 
-  });
+  }]);
 
 
