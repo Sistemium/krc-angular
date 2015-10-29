@@ -10,7 +10,7 @@
     "angular-messages": ">=1.2.*",
     "angular-sanitize": ">=1.2.*",
     "angular-material": "latest",
-    "lodash": "~2.4.1",
+    "lodash": "~3.10.0",
     "angular-ui-router": "~0.2.15"
   },
   "devDependencies": {
