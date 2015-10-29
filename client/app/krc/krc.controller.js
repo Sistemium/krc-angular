@@ -71,7 +71,12 @@ angular.module('stklcApp')
 
       closeSideNav: function() {
         $mdSidenav('left-nav').close();
-      }
+      },
+
+      deleteHistory: function(){
+        localStorage.removeItem('history');
+        me.history = [];
+      },
 
     });
 
