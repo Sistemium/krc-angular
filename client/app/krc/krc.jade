@@ -1,7 +1,7 @@
-div(class='main-shell' layout-fill)
+div(class='main-shell' layout-fill ui-view='')
   div(layout='row')
     // Side Navigation (id: 'left-nav')
-    md-sidenav(md-component-id='left-nav' md-is-locked-open="$mdMedia('gt-md')" id='left-nav' layout='column' class='md-sidenav-left md-whiteframe-z2')
+    md-sidenav(md-component-id='left-nav' md-is-locked-open="$mdMedia('gt-md')" id='left-nav' layout='column' class='md-sidenav-left md-whiteframe-z2' layout-fill flex)
       md-toolbar(class='md-toolbar-tools')
           h1 Istorija
           span(flex='')
@@ -13,13 +13,13 @@ div(class='main-shell' layout-fill)
             p(class='md-title' flex) {{ history }}
           div(layout-align='center' layout='center')
             md-button(class='md-raised md-primary md-hue-2' ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length > 0') Trintri istoriją
-    md-cotent(flex='')
+    div(flex='')
       md-toolbar
         .md-toolbar-tools(layout='row' layout-align='space-between center')
           h1 Kirčiavimo programa
           md-button(class='md-primary' ng-click='ctrl.toggleLeft()' hide-gt-md) Istorija
       .md-padding(layout='column')
-        div(class='mainContent' ui-view='')
+        div(class='mainContent')
           form(name='wordInputForm')
             md-input-container(layout='column' layout-align='center center')
 

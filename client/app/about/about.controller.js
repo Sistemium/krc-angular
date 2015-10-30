@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('stklcApp')
-  .controller('AboutCtrl', function ($scope) {
-    $scope.message = 'Hello';
-  });
+  .controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav){
+
+}]);

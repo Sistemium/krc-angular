@@ -6,6 +6,8 @@ angular.module('stklcApp')
       .state('main.about', {
         url: 'about',
         templateUrl: 'app/about/about.html',
-        controller: 'AboutCtrl'
+        controller: 'AppCtrl'
       });
   });
+
+
