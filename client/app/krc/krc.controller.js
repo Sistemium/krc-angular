@@ -88,7 +88,7 @@ angular.module('stklcApp')
       deleteHistory: function(){
         localStorage.removeItem('history');
         me.history = [];
-      },
+      }
 
     });
 
