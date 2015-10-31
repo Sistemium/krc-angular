@@ -10,6 +10,9 @@
  .main-shell .profile-container .profile-name {
    font-weight: 500;
  }
+.viewport {
+  padding-bottom: 40px;
+}
 
 .browsehappy {
     margin: 0.2em 0;
@@ -31,3 +34,14 @@ md-chips.md-readonly md-chip {
 md-chips-wrap.md-chips:hover{
   cursor: default;
 }
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  z-index: 1000;
+}
+md-sidenav {
+  padding-bottom: 60px;
+}
+
