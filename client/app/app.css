@@ -40,7 +40,18 @@ md-chips-wrap.md-chips:hover{
   right: 0px;
   z-index: 1000;
 }
+
+md-backdrop, md-backdrop + md-sidenav {
+  position: fixed !important;
+}
+
 md-sidenav {
   padding-bottom: 60px;
 }
 
+.disableScroll {
+  overflow: hidden;
+  position: fixed;
+  right: 0px;
+  left: 0px;
+}

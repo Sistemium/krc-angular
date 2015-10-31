@@ -1,6 +1,13 @@
 'use strict';
 
 angular.module('stklcApp')
+
+  .controller('bodyController', function($scope) {
+    $scope.disableScroll = function(arg) {
+      $scope.scrollDisabled = !!arg;
+    };
+  })
+
   .controller('KrcCtrl', ['$http', '$scope', '$mdToast', '$mdSidenav',
     function ($http, $scope, $mdToast, $mdSidenav) {
 
@@ -18,7 +25,12 @@ angular.module('stklcApp')
         localStorage.setItem('history',JSON.stringify(newHistory));
     });
 
+    $scope.$watch('ctrl.isSideNavOpen',function (nv,ov){
+      $scope.disableScroll(nv && !ov);
+    });
+
     angular.extend (me, {
+
       history: JSON.parse(localStorage.getItem('history')) || [],
 
       kirciuoti: function (word) {
