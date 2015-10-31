@@ -2,13 +2,6 @@
  * App-wide Styles
  */
 
- .main-shell .profile-container {
-   height: 100%;
-   font-size: 14px;
- }
-
- .main-shell .profile-container .profile-name {
-   font-weight: 500;
  }
 .viewport {
   padding-bottom: 40px;
@@ -25,10 +18,16 @@ md-chips.md-readonly md-chip {
   padding-right: 10px !important;
 }
 
-.wrapper{
-  min-width: 360px;
-  min-height: inherit;
-  text-align: center;
+@media screen and (max-width: 767px) {
+  .w360 {
+    min-width: 270px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .w360 {
+    min-width: 360px;
+  }
 }
 
 md-chips-wrap.md-chips:hover{
