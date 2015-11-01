@@ -88,6 +88,15 @@ angular.module('stklcApp')
       deleteHistory: function(){
         localStorage.removeItem('history');
         me.history = [];
+      },
+
+      clearInput: function () {
+        me.wordInput = '';
+        setTimeout(function(){
+          _.each($scope.wordInputForm.word.$viewChangeListeners,function(l){
+            l('');
+          });
+        },100);
       }
 
     });
