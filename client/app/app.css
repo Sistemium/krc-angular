@@ -54,3 +54,13 @@ md-sidenav {
   right: 0px;
   left: 0px;
 }
+
+md-input-container.md-has-icon.icon-right {
+  padding-left: 0px;
+}
+
+md-input-container.md-has-icon.icon-right md-icon {
+  right: 3px;
+  left: inherit;
+  cursor: pointer;
+}
