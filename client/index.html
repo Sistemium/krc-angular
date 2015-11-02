@@ -8,8 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/">
     <title>Kirčiavimas internetu</title>
-    <meta name="description" content="">
+    <meta name="description" content="Kirčiavimas internetu">
     <meta name="viewport" content="width=device-width">
+    <meta name="resource-type" content="document">
+    <meta name="keywords" content="kirčiavimas, kirtis, kirčiuoti, kirčiuoti">
+    <meta name="robots" content="index,nofollow">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
@@ -25,27 +28,34 @@
       <!-- endinjector -->
     <!-- endbuild -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "SoftwareApplication",
+      "name" : "Kirčiavimo programa"
+    }
+    </script>
   </head>
-  <body ng-app="stklcApp" ng-cloak>
+  <body ng-app="stklcApp" ng-cloak ng-class="{disableScroll: scrollDisabled}" ng-controller="bodyController">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
 
-    <div ui-view=""></div>
+    <div class="viewport" ui-view=""></div>
+    <div ng-include="'app/bottom.html'"></div>
 
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <!--script>
+    <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-XXXXX-X');
+      ga('create', 'UA-69539625-1', 'auto');
       ga('send', 'pageview');
-    </script-->
+
+    </script>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>

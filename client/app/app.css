@@ -2,14 +2,9 @@
  * App-wide Styles
  */
 
- .main-shell .profile-container {
-   height: 100%;
-   font-size: 14px;
- }
-
- .main-shell .profile-container .profile-name {
-   font-weight: 500;
- }
+.viewport {
+  padding-bottom: 40px;
+}
 
 .browsehappy {
     margin: 0.2em 0;
@@ -22,12 +17,50 @@ md-chips.md-readonly md-chip {
   padding-right: 10px !important;
 }
 
-.wrapper{
-  min-width: 360px;
-  min-height: inherit;
-  text-align: center;
+@media screen and (max-width: 767px) {
+  .w360 {
+    min-width: 270px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .w360 {
+    min-width: 360px;
+  }
 }
 
 md-chips-wrap.md-chips:hover{
   cursor: default;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  z-index: 1000;
+}
+
+md-backdrop, md-backdrop + md-sidenav {
+  position: fixed !important;
+}
+
+md-sidenav {
+  padding-bottom: 60px;
+}
+
+.disableScroll {
+  overflow: hidden;
+  position: fixed;
+  right: 0px;
+  left: 0px;
+}
+
+md-input-container.md-has-icon.icon-right {
+  padding-left: 0px;
+}
+
+md-input-container.md-has-icon.icon-right md-icon {
+  right: 3px;
+  left: inherit;
+  cursor: pointer;
 }

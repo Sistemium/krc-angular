@@ -1,53 +1,64 @@
-div(class='main-shell' layout-fill)
+div(layout-fill)
   div(layout='row')
-    // Side Navigation (id: 'left-nav')
-    md-sidenav(md-component-id='left-nav' md-is-locked-open="$mdMedia('gt-md')" id='left-nav' layout='column' class='md-sidenav-left md-whiteframe-z2')
-      md-toolbar(class='md-toolbar-tools')
-          h1 Istorija
-          span(flex='')
-          md-button(ng-click='ctrl.closeSideNav()', hide-gt-md='')
-            | Uždaryti
-      md-content(class='md-padding' flex)
-        div(show-gt-md='')
+
+    md-sidenav.md-sidenav-left.md-whiteframe-z2#left-nav(
+      md-component-id='left-nav'
+      md-is-locked-open="$mdMedia('gt-md')"
+      layout='column'
+      md-is-open="ctrl.isSideNavOpen"
+    )
+      md-toolbar.md-toolbar-tools
+        h1 Istorija
+        span(flex='')
+        md-button(ng-click='ctrl.closeSideNav()' hide-gt-md='')
+          | Uždaryti
+      md-content(flex layout-padding)
+        div(show-gt-md)
           div(ng-repeat='history in ctrl.history track by $index')
-            p(class='md-title' flex) {{ history }}
+            p.md-title(flex) {{ history }}
           div(layout-align='center' layout='center')
-            md-button(class='md-raised md-primary md-hue-2' ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length > 0') Trintri istoriją
-    md-cotent(flex='')
+            md-button.md-raised.md-primary.md-hue-2(ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length')
+              | Trintri istoriją
+
+    md-content(flex)
+
       md-toolbar
         .md-toolbar-tools(layout='row' layout-align='space-between center')
           h1 Kirčiavimo programa
-          md-button(class='md-primary' ng-click='ctrl.toggleLeft()' hide-gt-md) Istorija
-      .md-padding(layout='column')
-        div(class='mainContent' ui-view='')
-          form(name='wordInputForm')
-            md-input-container(layout='column' layout-align='center center')
+          md-button.md-primary(ng-click='ctrl.toggleLeft()' hide-gt-md) Istorija
 
-              div(class='wrapper')
+      md-content(layout-padding)
+        form(name='wordInputForm' ng-submit='ctrl.kirciuoti()' layout='column' layout-align='center center')
 
-                div(layout='column')
+          div
+            md-input-container.w360.icon-right
+              label Sukirčiuoti žodį
+              input(
+                ng-model='ctrl.wordInput'
+                md-minlength='1'
+                md-maxlength='30'
+                name='word'
+                aria-label='Sukirčiuoti žodį'
+              )
+              md-icon(md-svg-icon="content:clear" ng-show="ctrl.wordInput" ng-click="ctrl.clearInput()")
+              div(
+                ng-messages='wordInputForm.word.$error'
+                role='alert'
+              )
+                div.my-message(ng-message='md-maxlength')
+                  | Žodžio ilgis turi būti mažiau, nei 30 simbolių
 
-                  div(layout='row' layout-align='start center')
-                    label(layout-margin) Sukirčiuoti žodį
-                  input(ng-model='ctrl.wordInput' md-minlength='1' md-maxlength='30' name='word' aria-label='Input' layout-margin flex)
-                  div(ng-messages='wordInputForm.word.$error' role='alert' multiple flex layout-margin lauout-align='start center' layout='row')
-                    div(ng-message='md-maxlength' class='my-message') Žodžio ilgis turi būti mažiau, nei 30 simbolių
+          div
+            md-button.w360.md-raised.md-primary.md-hue-2(type='submit')
+              | Kirčiuoti
 
-                div(layout='column')
-                  md-button(class='md-raised md-primary md-hue-2' ng-click='ctrl.kirciuoti()') Kirčiuoti
-
-                div(layout='column' layout-align='center center' layout-padding)
-
-                  div(ng-repeat='item in ctrl.data' layout-margin)
-
-                    div(layout='column' layout-align='start start')
-                      div(layout-margin)
-                        strong {{ item.word }}
-                        | &nbsp;
-                        em ({{ item.class }})
-                      md-chips.md-readonly(ng-model='item.state' readonly='true' layout='column')
-                        md-chip-template(class='data')
-                          | {{$chip}}
-  md-toolbar(layout='row' layout-align="center center" id='footer')
-    span(class='md-subhead') © UAB Sistemium 2015
-
+          div(layout='column' layout-align='center center' layout-padding)
+            div(ng-repeat='item in ctrl.data' layout-margin)
+              div(layout='column' layout-align='start start')
+                div(layout-margin)
+                  strong {{ item.word }}
+                  | &nbsp;
+                  em ({{ item.class }})
+                md-chips.md-readonly(ng-model='item.state' readonly='true' layout='column')
+                  md-chip-template(class='data')
+                    | {{$chip}}
