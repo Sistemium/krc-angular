@@ -40,7 +40,7 @@ div(layout-fill)
                 name='word'
                 aria-label='Sukirčiuoti žodį'
               )
-              md-icon(md-svg-icon="content:clear" ng-show="ctrl.wordInput" ng-click="ctrl.clearInput()")
+              md-icon(md-svg-icon="content:clear" ng-show="wordInputForm.word.$viewValue" ng-click="ctrl.clearInput()")
               div(
                 ng-messages='wordInputForm.word.$error'
                 role='alert'
