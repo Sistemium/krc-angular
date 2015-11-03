@@ -91,12 +91,22 @@ angular.module('stklcApp')
       },
 
       clearInput: function () {
-        me.wordInput = '';
+        me.setWord('');
+      },
+
+      setWord: function (word) {
+        me.wordInput = word;
         setTimeout(function(){
           _.each($scope.wordInputForm.word.$viewChangeListeners,function(l){
-            l('');
+            l();
           });
         },100);
+      },
+
+      historyClicked: function (word) {
+        me.setWord(word);
+        me.kirciuoti(word);
+        console.log(word);
       }
 
     });
