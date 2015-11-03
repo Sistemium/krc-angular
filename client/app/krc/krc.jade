@@ -12,13 +12,13 @@ div(layout-fill)
         span(flex='')
         md-button(ng-click='ctrl.closeSideNav()' hide-gt-md='')
           | Uždaryti
-      md-content(flex layout-padding)
-        div(show-gt-md)
-          div(ng-repeat='history in ctrl.history track by $index')
-            p.md-title(flex) {{ history }}
-          div(layout-align='center' layout='center')
-            md-button.md-raised.md-primary.md-hue-2(ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length')
-              | Trintri istoriją
+      md-content
+        div(layout='column')
+          md-button.left-align(ng-repeat='history in ctrl.history track by $index' ng-click='ctrl.historyClicked(history)')
+            a.md-title {{ history }}
+        div(layout-align='center' layout='center')
+          md-button.md-raised.md-primary.md-hue-2(ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length' flex='80')
+            | Trintri istoriją
 
     md-content(flex)
 
@@ -53,12 +53,12 @@ div(layout-fill)
               | Kirčiuoti
 
           div(layout='column' layout-align='center center' layout-padding)
-            div(ng-repeat='item in ctrl.data' layout-margin)
-              div(layout='column' layout-align='start start')
-                div(layout-margin)
+            div(ng-repeat='item in ctrl.data' layout-padding)
+              div.center-align
+                div.word
                   strong {{ item.word }}
                   | &nbsp;
                   em ({{ item.class }})
-                md-chips.md-readonly(ng-model='item.state' readonly='true' layout='column')
-                  md-chip-template(class='data')
+                md-chips.md-readonly(ng-model='item.state' readonly='true')
+                  md-chip-template.data
                     | {{$chip}}
