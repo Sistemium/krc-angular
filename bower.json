@@ -9,7 +9,7 @@
     "angular-cookies": ">=1.2.*",
     "angular-messages": ">=1.2.*",
     "angular-sanitize": ">=1.2.*",
-    "angular-material": "latest",
+    "angular-material": ">=1.0.0-rc2",
     "lodash": "~3.10.0",
     "angular-ui-router": "~0.2.15"
   },
