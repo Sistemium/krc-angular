@@ -106,6 +106,7 @@ angular.module('stklcApp')
       historyClicked: function (word) {
         me.setWord(word);
         me.kirciuoti(word);
+        me.closeSideNav();
         console.log(word);
       }
 
