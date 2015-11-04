@@ -34,4 +34,10 @@ angular.module('stklcApp', [
       .otherwise('/krc');
 
     //$locationProvider.html5Mode(true);
+  })
+  .controller('bodyController', function($scope) {
+    $scope.disableScroll = function(arg) {
+      $scope.scrollDisabled = !!arg;
+    };
+  })
   });

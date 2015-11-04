@@ -2,12 +2,6 @@
 
 angular.module('stklcApp')
 
-  .controller('bodyController', function($scope) {
-    $scope.disableScroll = function(arg) {
-      $scope.scrollDisabled = !!arg;
-    };
-  })
-
 
   .controller('KrcCtrl', ['$http', '$scope', '$mdToast', '$mdSidenav', '$window',
     function ($http, $scope, $mdToast, $mdSidenav, $window) {
