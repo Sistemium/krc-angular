@@ -22,10 +22,10 @@ div(layout-fill)
 
     md-content(flex)
 
-      md-toolbar
-        .md-toolbar-tools(layout='row' layout-align='space-between center')
-          h1 Kirčiavimo programa
-          md-button.md-primary(ng-click='ctrl.toggleLeft()' hide-gt-md) Istorija
+      //md-toolbar
+      //  .md-toolbar-tools(layout='row' layout-align='space-between center')
+      //    h1 Kirčiavimo programa
+      //    md-button.md-primary(ng-click='ctrl.toggleLeft()' hide-gt-md) Istorija
 
       md-content(layout-padding)
         form(name='wordInputForm' ng-submit='ctrl.kirciuoti()' layout='column' layout-align='center center')
@@ -45,11 +45,11 @@ div(layout-fill)
                 ng-messages='wordInputForm.word.$error'
                 role='alert'
               )
-                div.my-message(ng-message='md-maxlength')
+                .my-message(ng-message='md-maxlength')
                   | Žodžio ilgis turi būti mažiau, nei 30 simbolių
 
           div
-            md-button.w360.md-raised.md-primary.md-hue-2(type='submit')
+            md-button.w360.md-raised.md-primary.md-hue-2(type='submit' ng-disabled-="!ctrl.wordInput")
               | Kirčiuoti
 
           div(layout='column' layout-align='center center' layout-padding)

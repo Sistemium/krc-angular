@@ -31,7 +31,7 @@ angular.module('stklcApp', [
   })
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/krc');
 
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
   });

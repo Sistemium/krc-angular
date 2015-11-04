@@ -11,23 +11,7 @@
     <meta name="description" content="Kirčiavimas internetu">
     <meta name="viewport" content="width=device-width">
     <meta name="resource-type" content="document">
-    <meta name="keywords" content="kirčiavimas,
-      kirtis,
-      kirčiuoti,
-      kirčiuoti,
-      kirciuoti,
-      iphone,
-      ipad,
-      ipod,
-      mobilioj aplikacija kirciavimas,
-      kirciavimas per telefona,
-      kirčiavimas per iphone,
-      kirčiavimas android,
-      kirčiavimas android,
-      kirčiuoti per android,
-      sukirčiuti žodį,
-      sukirciuoti zodi
-    ">
+    <meta name="keywords" content="kirčiavimas, kirtis, kirčiuoti, kirciuoti, mobilioji, aplikacija, kirciavimas, sukirčiuoti">
     <!--meta name="robots" content="index,follow"-->
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
@@ -58,8 +42,19 @@
 
     <!-- Add your site or application content here -->
 
-    <div class="viewport" ui-view=""></div>
-    <div ng-include="'app/bottom.html'"></div>
+    <div ng-controller="MainCtrl as ctrl">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h1 ng-repeat="nav in ctrl.navs">{{ nav.title }}</h1>
+        </div>
+      </md-toolbar>
+
+      <div ui-view class="viewport"></div>
+
+      <md-toolbar layout="row" layout-align="center center" id="footer" class="fixed-bottom">
+        <div class="md-subhead">© UAB Sistemium 2015</div>
+      </md-toolbar>
+    </div>
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -96,11 +91,10 @@
       <script src="app/app.js"></script>
       <!-- injector:js -->
       <script src="app/about/about.controller.js"></script>
-      <script src="app/about/about.js"></script>
       <script src="app/krc/krc.controller.js"></script>
-      <script src="app/krc/routes.js"></script>
+      <script src="app/main.controller.js"></script>
+      <script src="app/routes.js"></script>
       <script src="app/test/test.controller.js"></script>
-      <script src="app/test/test.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->
 
