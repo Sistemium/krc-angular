@@ -84,3 +84,11 @@ md-input-container.md-has-icon.icon-right md-icon {
 .word {
   margin-bottom: 7px;
 }
+
+md-menu-item.active {
+  color: rgb(255, 64, 129);
+}
+
+md-menu-item.active md-icon {
+  color: rgb(255, 64, 129);
+}
