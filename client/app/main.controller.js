@@ -8,7 +8,7 @@ angular.module('stklcApp')
     angular.extend(me,{
 
       navs: [
-        { name: 'krc', title: 'Kirčiavimas', sref: 'krc', icon: 'action:exit_to_app'},
+        { name: 'krc', title: 'Kirčiavimo programa', sref: 'krc', icon: 'action:exit_to_app'},
         { name: 'about', title: 'Apie projektą', sref: 'about', icon: 'action:question_answer'}
       ],
 
