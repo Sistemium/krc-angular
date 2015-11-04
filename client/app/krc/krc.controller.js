@@ -1,10 +1,8 @@
 'use strict';
 
-angular.module('stklcApp')
-
-
-  .controller('KrcCtrl', ['$http', '$scope', '$mdToast', '$mdSidenav', '$window',
-    function ($http, $scope, $mdToast, $mdSidenav, $window) {
+angular.module('stklcApp').controller('KrcCtrl', [
+    '$http', '$scope', '$mdToast', '$mdSidenav', '$window',
+  function ($http, $scope, $mdToast, $mdSidenav, $window) {
 
     var toastPosition = {
       bottom: false,
@@ -21,7 +19,6 @@ angular.module('stklcApp')
       if(me.isSideNavOpen){
         me.closeSideNav();
       }
-      console.log('sdfdsfdsf');
     });
 
     $scope.$watchCollection('ctrl.history',function (newHistory){
@@ -35,7 +32,6 @@ angular.module('stklcApp')
     $scope.$on('$destroy', function () {
       w.unbind('resize', resizeBind);
     });
-
 
     angular.extend (me, {
 
@@ -143,8 +139,7 @@ angular.module('stklcApp')
         me.setWord(word);
         me.kirciuoti(word);
         me.closeSideNav();
-        console.log(word);
-      },
+      }
 
     });
 
