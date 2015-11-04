@@ -148,6 +148,11 @@ angular.module('stklcApp')
 
     });
 
-  }]);
+    $scope.setSubNavs([{
+      name: 'history', title: 'Istorija', clickFn: me.toggleLeft, class: 'hide-gt-md'
+    }]);
+
+  }
+]);
 
 
