@@ -1,0 +1,14 @@
+md-toolbar
+  .md-toolbar-tools
+    md-menu
+      md-button.md-icon-button(aria-label='Open demo menu' ng-click='$mdOpenMenu($event)')
+        md-icon(md-menu-origin='' md-svg-icon='navigation:menu')
+      md-menu-content(width=4)
+        md-menu-item(ng-repeat='item in ctrl.navs' ui-sref="{{item.sref}}" ui-sref-active="active")
+          md-button
+            md-icon(md-menu-align-target='' md-svg-icon='{{item.icon}}')
+            span {{item.title}}
+    h1 Kirčiavimas internetu
+    span.flex
+    md-button.md-primary(ng-repeat="nav in ctrl.subNavs" ng-click="nav.clickFn()" ng-class="nav.class")
+      | {{nav.title}}

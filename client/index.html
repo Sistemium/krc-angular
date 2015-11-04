@@ -43,11 +43,7 @@
     <!-- Add your site or application content here -->
 
     <div ng-controller="MainCtrl as ctrl">
-      <md-toolbar>
-        <div class="md-toolbar-tools">
-          <h1 ng-repeat="nav in ctrl.navs">{{ nav.title }}</h1>
-        </div>
-      </md-toolbar>
+      <ng-include src="'app/toolbar.html'"></ng-include>
 
       <div ui-view class="viewport"></div>
 
