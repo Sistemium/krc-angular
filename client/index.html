@@ -51,9 +51,7 @@
 
       <div ui-view class="viewport"></div>
 
-      <md-toolbar layout="row" layout-align="center center" id="footer" class="fixed-bottom">
-        <div class="md-subhead">© UAB Sistemium 2015</div>
-      </md-toolbar>
+      <div include-replace ng-include="'app/footer.html'"></div>
     </div>
 
     <script>
