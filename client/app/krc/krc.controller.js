@@ -25,7 +25,7 @@ angular.module('stklcApp')
     });
 
     $scope.$watchCollection('ctrl.history',function (newHistory){
-      localStorage.setItem('history',JSON.stringify(newHistory));
+      newHistory && newHistory.length && localStorage.setItem('history',JSON.stringify(newHistory));
     });
 
     $scope.$watch('ctrl.isSideNavOpen',function (nv,ov){
