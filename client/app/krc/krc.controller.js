@@ -8,8 +8,9 @@ angular.module('stklcApp')
     };
   })
 
-  .controller('KrcCtrl', ['$http', '$scope', '$mdToast', '$mdSidenav',
-    function ($http, $scope, $mdToast, $mdSidenav) {
+
+  .controller('KrcCtrl', ['$http', '$scope', '$mdToast', '$mdSidenav', '$window',
+    function ($http, $scope, $mdToast, $mdSidenav, $window) {
 
     var toastPosition = {
       bottom: false,
@@ -20,29 +21,70 @@ angular.module('stklcApp')
 
     var me = this;
     var localStorage = window.localStorage;
+    var w = angular.element($window);
+
+    var resizeBind = w.bind('resize', function () {
+      if(me.isSideNavOpen){
+        me.closeSideNav();
+      }
+      console.log('sdfdsfdsf');
+    });
 
     $scope.$watchCollection('ctrl.history',function (newHistory){
-        localStorage.setItem('history',JSON.stringify(newHistory));
+      localStorage.setItem('history',JSON.stringify(newHistory));
     });
 
     $scope.$watch('ctrl.isSideNavOpen',function (nv,ov){
       $scope.disableScroll(nv && !ov);
     });
 
+    $scope.$on('$destroy', function () {
+      w.unbind('resize', resizeBind);
+    });
+
+
     angular.extend (me, {
+
+      errors: {
+        'md-maxlength': 'Žodžio ilgis per didelis',
+        'md-required': 'Žodis neįvestas'
+      },
 
       history: JSON.parse(localStorage.getItem('history')) || [],
 
       kirciuoti: function (word) {
 
         var w = _.capitalize ((word || me.wordInput|| '').toLowerCase());
+        var errors = angular.copy($scope.wordInputForm.word.$error);
+
+        if (!w) {
+
+          if (!Object.keys(errors).length) {
+            errors['md-required'] = true;
+          }
+
+          var msg = _.map(errors, function(val,key){
+            return me.errors[key];
+          }).join(',');
+
+          return me.showSimpleToast(msg);
+        }
 
         $http.get('/api/krc/' + w).success(function(data) {
           me.writeSearchedWords(w);
           me.data = data;
-        }).error(function(){
-          me.data = [];
-          me.showSimpleToast();
+        }).error(function(data, res){
+          console.log(w.length);
+          if(res == 404) {
+            me.data = [];
+            me.showSimpleToast('Žodis nerastas');
+          }
+          else if(res == 400){
+            me.showSimpleToast('Pasitikrintike įvestą žodį');
+          }
+          else if(res == 500){
+            me.showSimpleToast('Serverio klaida');
+          }
         });
 
       },
@@ -62,10 +104,10 @@ angular.module('stklcApp')
 
       },
 
-      showSimpleToast: function(){
+      showSimpleToast: function(phrase){
         $mdToast.show(
           $mdToast.simple()
-            .content('Žodis nerastas!')
+            .content(phrase)
             .position(me.getToastPosition())
             .hideDelay(2000)
         );
@@ -108,7 +150,7 @@ angular.module('stklcApp')
         me.kirciuoti(word);
         me.closeSideNav();
         console.log(word);
-      }
+      },
 
     });
 
