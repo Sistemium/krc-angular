@@ -21,6 +21,22 @@ angular.module('stklcApp').controller('KrcCtrl', [
       }
     });
 
+    $scope.$on('$viewContentLoaded', function() {
+
+      _.each($document.find('md-content'),function (el) {
+
+        var elem = angular.element(el);
+
+        if (elem.hasClass('scrollBind')) {
+          me.scrollTopElement = elem;
+          var scrollBind = elem.bind('scroll', function (ev) {
+            $scope.$apply(me.scrollTop = ev.target.scrollTop);
+          });
+        }
+      });
+
+    });
+
     $scope.$watchCollection('ctrl.history',function (newHistory){
       newHistory && newHistory.length && localStorage.setItem('history',JSON.stringify(newHistory));
     });
@@ -138,6 +154,10 @@ angular.module('stklcApp').controller('KrcCtrl', [
         me.kirciuoti(word);
         me.closeSideNav();
         $uiViewScroll($document.find('body'));
+      },
+
+      scrollTopClick: function () {
+        me.scrollTopElement[0].scrollTop = 0;
       }
 
     });

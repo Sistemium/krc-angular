@@ -12,9 +12,9 @@ div(layout-fill)
       md-toolbar.md-toolbar-tools.md-accent(hide-gt-md='')
         h1 Istorija
         span(flex='')
-        md-button(ng-click='ctrl.closeSideNav()' hide-gt-md='')
+        md-button(ng-click='ctrl.closeSideNav()')
           | Uždaryti
-      md-content
+      md-content(style='height: 595px')
         div(layout='column')
           md-button.left-align(ng-repeat='history in ctrl.history track by $index' ng-click='ctrl.historyClicked(history)')
             a.md-title {{ history }}
@@ -22,8 +22,10 @@ div(layout-fill)
           md-button.md-raised.md-primary.md-hue-2(ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length' flex='80')
             | Trintri istoriją
 
-    md-content(flex)
+    md-content.scrollBind(flex='' layout-fill style='height:620px')
       md-subheader.md-primary Kirčiavimo programa
+        md-button(aria-label="Scroll to top" ng-if="ctrl.scrollTop" ng-click="ctrl.scrollTopClick()")
+          md-icon(md-svg-icon="content:clear")
       md-content(layout-padding)
         form(name='wordInputForm' ng-submit='ctrl.kirciuoti()' layout='column' layout-align='center center')
 
