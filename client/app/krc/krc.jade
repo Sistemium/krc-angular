@@ -7,8 +7,9 @@ div(layout-fill)
       md-is-locked-open="$mdMedia('gt-md')"
       layout='column'
       md-is-open="ctrl.isSideNavOpen"
+      layout-fill
     )
-      md-toolbar.md-toolbar-tools.md-accent
+      md-toolbar.md-toolbar-tools.md-accent(hide-gt-md='')
         h1 Istorija
         span(flex='')
         md-button(ng-click='ctrl.closeSideNav()' hide-gt-md='')
@@ -45,7 +46,7 @@ div(layout-fill)
                   | Žodžio ilgis turi būti mažiau, nei 30 simbolių
 
           div
-            md-button.w360.md-raised.md-primary.md-hue-2(type='submit' ng-disabled-="!ctrl.wordInput")
+            md-button.w360.md-raised.md-primary.md-hue-2(type='submit')
               | Kirčiuoti
 
           div(layout='column' layout-align='center center' layout-padding)

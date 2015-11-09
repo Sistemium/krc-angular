@@ -22,8 +22,13 @@ angular.module('stklcApp')
       me.subNavs = navs || [];
     };
 
+    $scope.setLeftPart = function(part) {
+     me.leftPart = part;
+    };
+
     $scope.$on('$stateChangeSuccess', function() {
       $scope.setSubNavs();
+      $scope.setLeftPart();
     });
 
   }]);

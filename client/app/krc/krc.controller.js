@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('stklcApp').controller('KrcCtrl', [
-    '$http', '$scope', '$mdToast', '$mdSidenav', '$window',
-  function ($http, $scope, $mdToast, $mdSidenav, $window) {
+    '$http', '$scope', '$mdToast', '$mdSidenav', '$window', '$uiViewScroll', '$document',
+  function ($http, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document) {
 
     var toastPosition = {
       bottom: false,
@@ -129,9 +129,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
       setWord: function (word) {
         me.wordInput = word;
         setTimeout(function(){
-          _.each($scope.wordInputForm.word.$viewChangeListeners,function(l){
-            l();
-          });
+          _.each($scope.wordInputForm.word.$viewChangeListeners, _.attempt);
         },100);
       },
 
@@ -139,6 +137,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
         me.setWord(word);
         me.kirciuoti(word);
         me.closeSideNav();
+        $uiViewScroll($document.find('body'));
       }
 
     });
@@ -146,6 +145,10 @@ angular.module('stklcApp').controller('KrcCtrl', [
     $scope.setSubNavs([{
       name: 'history', title: 'Istorija', clickFn: me.toggleLeft, class: 'hide-gt-md'
     }]);
+
+    $scope.setLeftPart({
+      title: 'Istorija', class: 'hide-md hide-sm'
+    });
 
   }
 ]);

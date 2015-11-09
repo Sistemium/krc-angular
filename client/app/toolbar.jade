@@ -1,8 +1,10 @@
 md-toolbar
-  .md-toolbar-tools
+  .md-toolbar-tools(style="padding-left:0px !important")
+    div.md-whiteframe-z2.toolbar-left-part(ng-if='ctrl.leftPart' ng-class='ctrl.leftPart.class')
+      p(style='text-align: center') {{ ctrl.leftPart.title }}
     md-menu
       md-button.md-icon-button(aria-label='Open demo menu' ng-click='$mdOpenMenu($event)')
-        md-icon(md-menu-origin='' md-svg-icon='navigation:menu')
+        md-icon.menuIcon(md-menu-origin='' md-svg-icon='navigation:menu')
       md-menu-content(width=4)
         md-menu-item(ng-repeat='item in ctrl.navs' ui-sref="{{item.sref}}" ui-sref-active="active")
           md-button
@@ -12,3 +14,4 @@ md-toolbar
     span.flex
     md-button.md-primary(ng-repeat="nav in ctrl.subNavs" ng-click="nav.clickFn()" ng-class="nav.class")
       | {{nav.title}}
+
