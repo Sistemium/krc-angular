@@ -1,12 +1,33 @@
 'use strict';
+var request = require('request')
+  , cheerio = require('cheerio')  /* HTML parser */
+  , redis = require('redis')
+  , redisClient = redis.createClient();
 
-exports.index = function(req, res, next){
+var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1'; /* alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text */
+
+exports.index = function(req, res){
   console.log('\nWord typed:', req.params.word);
-  var request = require('request');
-  var cheerio = require('cheerio');  /* HTML parser */
-  var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1'; /* alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text */
+
   var text =  req.params.word; /* Viena for testing */
   text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();  /* uppercase first letter lowercase other*/
+
+  redisClient.get(text, function (err, response) {
+    if (err) {
+      console.log(err);
+    }
+    if (!response) {
+      sendRequest(res, text);
+    } else if (response === '404') {
+      // send failMsg
+    } else {
+      res.send(JSON.parse(response));
+    }
+  });
+};
+
+function sendRequest (res, text) {
+
   request({
     uri: link,
     method: 'POST',
@@ -29,8 +50,7 @@ exports.index = function(req, res, next){
     var arrLen = stressArray.length;
     var failMsg = 'Sorry, we cannot find Your word! Please check the spelling of the word.';
 
-    if(arrLen != 0){
-
+    function formWordStructure(stressArray) {
       stressArray.forEach(function (item){
         var mtch = item.match(regexp);
         if(mtch != null) {
@@ -42,8 +62,14 @@ exports.index = function(req, res, next){
           wordApi.push(jsonObj);
         }
       });
+    }
+
+    if(arrLen != 0){
+
+      formWordStructure(stressArray);
 
       if (wordApi.length) {
+        redisClient.set(text, JSON.stringify(wordApi));
         res.status(200).json(wordApi);
       } else {
         res.status(404).send(failMsg);
@@ -51,12 +77,12 @@ exports.index = function(req, res, next){
 
     }
     else{
-      wordApi[0] = text; /* if text was not found write word to first array position */
-      var checkIfEmpty = false;
-      console.log('You\'ve got', checkIfEmpty, 'value. Please check the spelling of the word', '\''+wordApi[0]+'\' \n');
+      console.log('You\'ve got', false, 'value. Please check the spelling of the word', '\''+text+'\' \n');
+      // write to redis incorrect text
+      redisClient.set(text, "404");
       res.status(404).send(failMsg);
     }
 
   });
-};
+}
 
