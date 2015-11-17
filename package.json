@@ -17,6 +17,7 @@
     "lodash": "~3.10.1",
     "method-override": "~1.0.0",
     "morgan": "~1.0.0",
+    "redis": "^2.3.0",
     "request": "^2.64.0",
     "serve-favicon": "~2.0.1"
   },
