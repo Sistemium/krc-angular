@@ -30,27 +30,22 @@ md-chips.md-readonly md-chip {
     min-width: 360px;
   }
 }
-
+/*
 .menuIcon{
   position: absolute;
   top: 16px;
   right: 9px;
-}
-
+} */
 
 .fixed-bottom {
   position: fixed;
-  bottom: 0px;
-  right: 0px;
-  z-index: 1000;
+  bottom:0;
+  left:0;
+  z-index:9999;
 }
 
 md-backdrop, md-backdrop + md-sidenav {
   position: fixed !important;
-}
-
-md-sidenav {
-  padding-bottom: 40px;
 }
 
 .disableScroll {
@@ -97,4 +92,14 @@ md-menu-item.active {
 md-menu-item.active md-icon {
   color: rgb(255, 64, 129);
 }
+
+.custom-class{
+
+}
+
+#left-nav{
+  margin: 10px;
+  padding-bottom:10px;
+}
+
 
