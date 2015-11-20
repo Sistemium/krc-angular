@@ -8,16 +8,6 @@ var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1'; /* alternative http:
 
 exports.index = function(req, res){
   console.log('\nWord typed:', req.params.word);
-<<<<<<< HEAD
-  var request = require('request');
-  var redis = require('redis'),
-    client = redis.createClient();
-  var cheerio = require('cheerio');  /* HTML parser */
-  var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1'; /* alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text */
-  var text =  req.params.word; /* Viena for testing */
-  text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();  /* uppercase first letter lowercase other*/
-
-=======
 
   var text =  req.params.word; /* Viena for testing */
   text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();  /* uppercase first letter lowercase other*/
@@ -37,7 +27,6 @@ exports.index = function(req, res){
 };
 
 function sendRequest (res, text) {
->>>>>>> redis
 
   request({
     uri: link,
@@ -90,7 +79,7 @@ function sendRequest (res, text) {
     else{
       console.log('You\'ve got', false, 'value. Please check the spelling of the word', '\''+text+'\' \n');
       // write to redis incorrect text
-      redisClient.set(text, "404");
+      //redisClient.set(text, "404");  /* If not found don't write to redis */
       res.status(404).send(failMsg);
     }
 
