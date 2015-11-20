@@ -1,11 +1,12 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./thing.controller');
+var controller = require('./strp.controller');
 
 var router = express.Router();
 
 router.get('/', controller.index);
+
 
 
 module.exports = router;
