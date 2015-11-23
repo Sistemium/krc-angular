@@ -103,4 +103,14 @@ md-menu-item.active md-icon {
   margin-right: 2px;
 }
 
+.md-button.sandwich{
+  height: 26px;
+  width: 30px;
+  border-radius: 0;
+  margin-right: 15px;
+}
+
+
+
+
 
