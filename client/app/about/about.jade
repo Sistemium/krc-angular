@@ -1,4 +1,27 @@
-md-content.scrollBind.md-whiteframe-z2(flex, style='margin: 10px')
-  md-subheader.md-primary(hide-sm) Apie programą
+md-content.md-whiteframe-z2(style='margin: 10px)
+  md-content.scrollBind(layout='column' style='overflow: hidden')
+    md-subheader.md-primary Apie programą
+    div(layout='row')
+      div.mainText
+        p(style="font-size: 18px") Kuriama programa yra atviro kodo ir yra palaikoma UAB
+          |"Sistemium" įmone. Pagarba kuriant kirčiavimo programą kompuiteriniam lingvistikos centrui.
+        p(style="font-size: 18px") Naudojamos technologijos: AngularJS, Angular Material, NodeJS. Programa optimizuota prie Google Chrome
+          |naršyklės.
+        div(hide-gt-md hide-gt-lg)
+          span(style='padding-right: 5px; padding-bottom: 10px; font-size: 18px') Nuoroda į programos kodą:
+          iframe(
+            seamless
+            src="https://ghbtns.com/github-btn.html?user=sistemium&repo=krc-angular&type=fork&count=true"
+            frameborder="0"
+            scrolling="auto"
+            width="176px"
+            height="20px"
+          )
+      div(flex-offset='15' hide-md hide-sm)
+      div(hide-sm  hide-md style='overflow: hidden')
+        span.about(id="forkongithub")
+          a(href="https://github.com/Sistemium/krc-angular" target="_blank")
+            |Fork me on GitHub
 
-  p Programa sukurta UAB "Sistemium" įmone.
+
+
