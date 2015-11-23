@@ -1,17 +1,15 @@
-md-toolbar.md-small-tall()
-  .md-toolbar-tools
-    //div.md-whiteframe-z2.toolbar-left-part(ng-if='ctrl.leftPart' ng-class='ctrl.leftPart.class')
-    //  p(style='text-align: center') {{ ctrl.leftPart.title }}
-    md-menu
-      md-button.md-icon-button(aria-label='Open demo menu' ng-click='$mdOpenMenu($event)')
-        md-icon.menuIcon( md-svg-icon='navigation:menu')
-      md-menu-content(width=4)
-        md-menu-item(ng-repeat='item in ctrl.navs' ui-sref="{{item.sref}}" ui-sref-active="active")
-          md-button
-            md-icon(md-menu-align-target='' md-svg-icon='{{item.icon}}')
-            span {{item.title}}
-    h1 Kirčiavimas internetu
-    span.flex
-    md-button.md-primary(ng-repeat="nav in ctrl.subNavs" ng-click="nav.clickFn()" ng-class="nav.class")
-      | {{nav.title}}
+md-toolbar.md-small-tall.md-toolbar-tools
+  md-menu(style='margin:0 !important')
+    md-button.md-icon-button(aria-label='Open demo menu' ng-click='$mdOpenMenu()' md-no-ink)
+      md-icon.menuIcon( md-svg-icon='navigation:menu' style='position:absolute; top: 17px; right: 4px;')
+    md-menu-content(width=4)
+      md-menu-item(ng-repeat='item in ctrl.navs' ui-sref="{{item.sref}}" ui-sref-active="active")
+        md-button
+          md-icon(md-menu-align-target='' md-svg-icon='{{item.icon}}')
+          span {{item.title}}
+  h1(show-sm, hide-gt-sm) KRČ
+  h3(hide-sm) Kirčiavimas internetu
+  span.flex
+  md-button.md-primary(ng-repeat="nav in ctrl.subNavs" ng-click="nav.clickFn()" ng-class="nav.class")
+    | {{nav.title}}
 
