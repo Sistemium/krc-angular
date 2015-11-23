@@ -25,12 +25,21 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-  
+
   if ('production' === env) {
+    app.set('redisdb', config.redis.production);
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));
     app.set('appPath', path.join(config.root, 'public'));
     app.use(morgan('dev'));
+  }
+
+  if('development' === env) {
+    app.set('redisdb', config.redis.development);
+  }
+
+  if('test' === env) {
+    app.set('redisdb', config.redis.test);
   }
 
   if ('development' === env || 'test' === env) {

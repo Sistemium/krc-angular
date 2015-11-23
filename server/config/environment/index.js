@@ -24,26 +24,17 @@ var all = {
   // Server IP
   ip: process.env.IP || '0.0.0.0',
 
-  // Should we populate the DB with sample data?
-  seedDB: false,
-
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
     session: 'stklc-secret'
   },
 
-  // List of user roles
-  userRoles: ['guest', 'user', 'admin'],
-
-  // MongoDB connection options
-  mongo: {
-    options: {
-      db: {
-        safe: true
-      }
-    }
+  // Redis connection options
+  redis: {
+    production: 0,
+    development: 1,
+    test: 2
   }
-
 };
 
 // Export the config object based on the NODE_ENV

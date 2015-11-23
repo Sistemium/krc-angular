@@ -13,11 +13,10 @@ module.exports = {
             process.env.PORT ||
             8080,
 
-  // MongoDB connection options
-  mongo: {
-    uri:    process.env.MONGOLAB_URI ||
-            process.env.MONGOHQ_URL ||
-            process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
-            'mongodb://localhost/stklc'
+  // Redis connection options
+  redis: {
+    host: process.env.REDIS_HOST || 'HOST',
+    port: process.env.REDIS_PORT || 'PORT',
+    url: process.env.REDIS_URL || 'URL'
   }
 };

@@ -3,10 +3,8 @@
 // Development specific configuration
 // ==================================
 module.exports = {
-  // MongoDB connection options
-  mongo: {
-    uri: 'mongodb://localhost/stklc-dev'
-  },
+  // Redis connection options
+  redis: {
 
-  seedDB: true
+  }
 };
