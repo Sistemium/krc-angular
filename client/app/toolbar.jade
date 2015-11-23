@@ -1,13 +1,13 @@
-md-toolbar.md-small-tall.md-toolbar-tools
+md-toolbar.md-small-tall.md-toolbar-tools(style='padding-left:0px !important')
   md-menu(style='margin:0 !important')
-    md-button.md-icon-button(aria-label='Open demo menu' ng-click='$mdOpenMenu()' md-no-ink)
-      md-icon.menuIcon( md-svg-icon='navigation:menu' style='position:absolute; top: 17px; right: 4px;')
+    md-button.md-icon-button.sandwich(aria-label='Open menu' ng-click='$mdOpenMenu()' md-no-ink)
+      md-icon.menuIcon( md-svg-icon='navigation:menu' style='position: absolute; top: 11px; right: -7px;')
     md-menu-content(width=4)
       md-menu-item(ng-repeat='item in ctrl.navs' ui-sref="{{item.sref}}" ui-sref-active="active")
         md-button
           md-icon(md-menu-align-target='' md-svg-icon='{{item.icon}}')
           span {{item.title}}
-  h1(show-sm, hide-gt-sm) KRČ
+  h3(show-sm, hide-gt-sm) KRČ
   h3(hide-sm) Kirčiavimas internetu
   span.flex
   md-button.md-primary(ng-repeat="nav in ctrl.subNavs" ng-click="nav.clickFn()" ng-class="nav.class")
