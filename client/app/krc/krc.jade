@@ -8,15 +8,13 @@ div(layout-fill)
       md-is-open="ctrl.isSideNavOpen"
       layout-fill
     )
-      md-toolbar.md-toolbar-tools(hide-gt-md='' layout-margin layout-padding flex style='padding-bot: 10px')
+      md-toolbar.md-toolbar-tools(layout-padding md-tall)
         h1 Istorija
         span(flex='')
-        md-button(ng-click='ctrl.closeSideNav()')
+        md-button(ng-click='ctrl.closeSideNav()' hide-gt-md='')
           | Uždaryti
       md-content
         div(layout='column')
-          md-content.md-toolbar-tools(hide-sm, hide-md)
-            strong.md-headline Istorija
           md-button(ng-if='ctrl.history.length < 1') Istorija tuščia
           md-button.left-align(ng-repeat='history in ctrl.history track by $index' ng-click='ctrl.historyClicked(history)' md-no-ink='')
             a.md-title {{ history }}
