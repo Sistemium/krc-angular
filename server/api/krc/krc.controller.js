@@ -21,7 +21,14 @@ exports.index = function(req, res){
     } else if (response === '404') {
       // send failMsg
     } else {
-      res.send(JSON.parse(response));
+
+      try {
+        var parsed = JSON.parse(response);
+        res.send(parsed);
+      } catch (e) {
+        sendRequest(res, text);
+      }
+
     }
   });
 };
