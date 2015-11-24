@@ -11,7 +11,8 @@
     "angular-sanitize": ">=1.2.*",
     "angular-material": ">=1.0.0-rc4",
     "lodash": "~3.10.0",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "components-font-awesome": "latest"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
