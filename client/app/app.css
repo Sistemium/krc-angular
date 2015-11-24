@@ -99,7 +99,6 @@ md-menu-item.active md-icon {
 
 #left-nav{
   margin: 10px;
-  padding-bottom:10px;
   margin-right: 2px;
 }
 
@@ -113,9 +112,37 @@ md-menu-item.active md-icon {
 .menuIcon{
   position: relative;
   top:-3px;
-  right: -11px;
+  right: -8px;
+}
+
+.empty-history{
+  position: relative;
+  outline: none;
+  border: 0;
+  display: inline-block;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0 6px;
+  margin: 6px 8px;
+  line-height: 36px;
+  min-height: 36px;
+  background: transparent;
+  white-space: nowrap;
+  min-width: 88px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  font-style: inherit;
+  font-variant: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: default;
+  overflow: hidden;
 }
 
 
-
-
+.trinti-istorija{
+  margin-bottom: 20px;
+}
