@@ -1,8 +1,7 @@
 'use strict';
 var request = require('request')
   , cheerio = require('cheerio')  /* HTML parser */
-  , redis = require('redis')
-  , redisClient = redis.createClient();
+  , redisClient = require('../../config/redis').redisClient;
 
 var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1';
 /* alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text */
@@ -91,7 +90,7 @@ function sendRequest(res, text) {
       formWordStructure(stressArray);
 
       if (wordApi.length) {
-        redisClient.HSET(WORDS_HASH, text, JSON.stringify(wordApi), redis.print);
+        redisClient.HSET(WORDS_HASH, text, JSON.stringify(wordApi));
         res.status(200).json(wordApi);
       } else {
         res.status(404).send(failMsg);
@@ -102,7 +101,7 @@ function sendRequest(res, text) {
       console.log('You\'ve got', false, 'value. Please check the spelling of the word', '\'' + text + '\' \n');
       // write to redis incorrect text
       //redisClient.set(text, "404");  /* If not found don't write to redis */
-      redisClient.SADD(NOT_FOUND_SET, text, redis.print);
+      redisClient.SADD(NOT_FOUND_SET, text);
       res.status(404).send(failMsg);
     }
 
