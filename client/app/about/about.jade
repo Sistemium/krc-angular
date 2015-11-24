@@ -1,13 +1,15 @@
 md-content.wrapper.md-whiteframe-z2
-  md-content.scrollBind(layout='column')
+  md-content.scrollBind
     md-subheader.md-primary Apie programą
-    div(layout='row')
+    div(flex)
       div.mainText
         p Kuriama programa yra atviro kodo ir yra palaikoma UAB
           |"Sistemium" įmone. Pagarba kuriant kirčiavimo programą kompuiteriniam lingvistikos centrui.
         p Naudojamos technologijos: AngularJS, Angular Material, NodeJS.
           | Programa optimizuota prie Google Chrome naršyklės.
-        span(style='margin-right: 10px') Nuoroda i projektą:
-        a.button-git(href="https://github.com/Sistemium/krc-angular" targer="_blank") krc-angular
+        span(style='margin-right: 10px')
+          |Nuoroda į projektą:
+        a.button-git(href="https://github.com/Sistemium/krc-angular" targer="_blank")
+          span krc-angular
           i(class="fa fa-github fa-lg git-button")
 
