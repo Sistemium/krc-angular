@@ -15,11 +15,11 @@ div(layout-fill)
           | Uždaryti
       md-content
         div(layout='column')
-          md-button(ng-if='ctrl.history.length < 1') Istorija tuščia
+          div.empty-history(ng-if='ctrl.history.length < 1') Istorija tuščia
           md-button.left-align(ng-repeat='history in ctrl.history track by $index' ng-click='ctrl.historyClicked(history)' md-no-ink='')
             a.md-title {{ history }}
         div(layout-align='center' layout='center')
-          md-button.md-raised.md-primary.md-hue-2(ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length' flex='80')
+          md-button.md-raised.md-primary.md-hue-2.trinti-istorija(ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length' flex='80')
             | Trintri istoriją
 
     md-content.scrollBind.md-whiteframe-z2(flex layout-fill, style='margin: 10px')
@@ -44,6 +44,7 @@ div(layout-fill)
               div(
                 ng-messages='wordInputForm.word.$error'
                 role='alert'
+                style='opacity: 1'
               )
                 .my-message(ng-message='md-maxlength')
                   | Žodžio ilgis turi būti mažiau, nei 30 simbolių
