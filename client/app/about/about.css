@@ -66,6 +66,7 @@
 }
 .button-git{
   padding: 0 5px;
+  padding-top: 4px;
   text-shadow: 0 1px 0 rgba(255,255,255,.9);
   background-color: #eee;
   background-image: -webkit-linear-gradient(top,#fcfcfc,#eee);
@@ -81,8 +82,6 @@
   border: 1px solid #d5d5d5;
   border-radius: 3px;
   text-decoration: none;
-  top: 50px;
-
 }
 
 a:visited{
@@ -95,5 +94,5 @@ a:visited{
 .git-button{
   float: left;
   padding-right: 5px;
-  line-height:25px !important
+  line-height:21px !important
 }
