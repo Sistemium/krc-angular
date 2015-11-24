@@ -80,7 +80,6 @@ angular.module('stklcApp').controller('KrcCtrl', [
           me.writeSearchedWords(w);
           me.data = data;
         }).error(function(data, res){
-          console.log(w.length);
           if(res == 404) {
             me.data = [];
             me.showSimpleToast('Žodis nerastas');
