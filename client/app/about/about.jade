@@ -1,39 +1,13 @@
-md-content.md-whiteframe-z2(style='margin: 10px')
-  md-content.scrollBind(layout='column' style='overflow: hidden')
+md-content.wrapper.md-whiteframe-z2
+  md-content.scrollBind(layout='column')
     md-subheader.md-primary Apie programą
     div(layout='row')
       div.mainText
-        p(style="font-size: 18px") Kuriama programa yra atviro kodo ir yra palaikoma UAB
+        p Kuriama programa yra atviro kodo ir yra palaikoma UAB
           |"Sistemium" įmone. Pagarba kuriant kirčiavimo programą kompuiteriniam lingvistikos centrui.
-        p(style="font-size: 18px") Naudojamos technologijos: AngularJS, Angular Material, NodeJS.
+        p Naudojamos technologijos: AngularJS, Angular Material, NodeJS.
           | Programa optimizuota prie Google Chrome naršyklės.
-        div(hide-gt-md hide-gt-lg)
-          span(style='padding-right: 5px; padding-bottom: 10px; font-size: 18px') Nuoroda į programos kodą:
-          iframe(
-            seamless
-            src="https://ghbtns.com/github-btn.html?user=sistemium&repo=krc-angular&type=fork&count=true"
-            frameborder="0"
-            scrolling="auto"
-            width="176px"
-            height="20px"
-          )
-          span
-            a(
-              class="github-button"
-              href="https://github.com/sistemium/krc-angular/fork"
-              data-icon="octicon-repo-forked"
-              data-style="mega"
-              data-count-href="/sistemium/krc-angular/network"
-              data-count-api="/repos/sistemium/krc-angular#forks_count"
-              data-count-aria-label="# forks on GitHub"
-              aria-label="Fork sistemium/krc-angular on GitHub"
-            ) Fork
-      div(flex-offset='15' hide-md hide-sm)
-      div(hide-sm  hide-md style='overflow: hidden')
-        span.about(id="forkongithub")
-          a(href="https://github.com/Sistemium/krc-angular" target="_blank")
-            |Fork me on GitHub
-
-script(async defer id="github-bjs" src="https://buttons.github.io/buttons.js")
-
+        span(style='margin-right: 10px') Nuoroda i projektą:
+        a.button-git(href="https://github.com/Sistemium/krc-angular" targer="_blank") krc-angular
+          i(class="fa fa-github fa-lg git-button")
 
