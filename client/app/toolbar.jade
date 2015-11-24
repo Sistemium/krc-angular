@@ -1,7 +1,7 @@
 md-toolbar.md-small-tall.md-toolbar-tools(style='padding-left:0px !important')
-  md-menu(style='margin:0 !important')
+  md-menu
     md-button.md-icon-button.sandwich(aria-label='Open menu' ng-click='$mdOpenMenu()' md-no-ink)
-      md-icon.menuIcon( md-svg-icon='navigation:menu' style='position: absolute; top: 11px; right: -7px;')
+      md-icon.menuIcon( md-svg-icon='navigation:menu')
     md-menu-content(width=4)
       md-menu-item(ng-repeat='item in ctrl.navs' ui-sref="{{item.sref}}" ui-sref-active="active")
         md-button

@@ -110,6 +110,11 @@ md-menu-item.active md-icon {
   margin-right: 15px;
 }
 
+.menuIcon{
+  position: relative;
+  top:-3px;
+  right: -11px;
+}
 
 
 
