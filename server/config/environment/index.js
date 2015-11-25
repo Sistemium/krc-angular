@@ -31,9 +31,9 @@ var all = {
 
   // Redis connection options
   redis: {
-    production: 0,
-    development: 1,
-    test: 2
+    production: process.env.REDIS_DATABASE || 0,
+    development: process.env.REDIS_DATABASE || 1,
+    test: process.env.REDIS_DATABASE || 2
   }
 };
 
