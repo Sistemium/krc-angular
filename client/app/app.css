@@ -1,6 +1,7 @@
 /**
  * App-wide Styles
  */
+@import '../bower_components/components-font-awesome/css/font-awesome.min.css';
 
 .viewport {
   padding-bottom: 40px;
