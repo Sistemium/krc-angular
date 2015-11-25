@@ -15,8 +15,8 @@ module.exports = {
 
   // Redis connection options
   redis: {
-    host: process.env.REDIS_HOST || 'HOST',
-    port: process.env.REDIS_PORT || 'PORT',
-    url: process.env.REDIS_URL || 'URL'
+    host: process.env.REDIS_HOST, // || host string
+    port: process.env.REDIS_PORT, // || port
+    url: process.env.REDIS_URL, // || url
   }
 };
