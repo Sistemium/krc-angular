@@ -31,34 +31,19 @@ md-chips.md-readonly md-chip {
     min-width: 360px;
   }
 }
-/*
-.menuIcon{
-  position: absolute;
-  top: 16px;
-  right: 9px;
-} */
 
-.fixed-bottom {
-  position: fixed;
-  bottom:0;
-  left:0;
-  z-index:9999;
-}
+/*md-backdrop, md-backdrop + md-sidenav {*/
+  /*z-index: 90 !important;*/
+/*}*/
 
-md-backdrop, md-backdrop + md-sidenav {
-  position: fixed !important;
-}
-
-.disableScroll {
-  overflow: hidden;
-  position: fixed;
-  right: 0px;
-  left: 0px;
-}
-
-md-icon:hover{
-  color: #ee4545;
-}
+/*.disableScroll {*/
+    /*overflow: hidden;*/
+    /*position: fixed;*/
+    /*right: 0px;*/
+    /*left: 0px;*/
+    /*top: 0px;*/
+    /*bottom: 0px;*/
+/*}*/
 
 md-input-container.md-has-icon.icon-right {
   padding-left: 0px;
@@ -72,6 +57,9 @@ md-input-container.md-has-icon.icon-right md-icon {
 
 .md-button.left-align > a{
   text-transform: none;
+}
+.md-button:hover{
+ color: black;
 }
 
 .left-align {
@@ -94,9 +82,6 @@ md-menu-item.active md-icon {
   color: rgb(255, 64, 129);
 }
 
-.custom-class{
-
-}
 
 #left-nav{
   margin: 10px;
@@ -146,4 +131,47 @@ md-menu-item.active md-icon {
 
 .trinti-istorija{
   margin-bottom: 20px;
+}
+
+.cust-small-tall{
+  height: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  z-index: 9999;
+}
+
+
+/* Gray screen overlaying toolbar. Not working on Ipad */
+
+div > md-backdrop {
+  position: fixed;
+  right: 0px;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+}
+
+/* for Computers. Effect: cannot swipe the main window */
+
+body{
+  overflow: hidden;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+
+/* Disabling scrolling on Ipad when sidenav is opened */
+
+.scrollDisable{
+  overflow-y:hidden;
+  height:100%;
+}
+
+md-sidenav:focus {
+
+  border:1px solid black;
+
 }
