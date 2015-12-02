@@ -31,4 +31,8 @@ angular.module('stklcApp')
       $scope.setLeftPart();
     });
 
+    $scope.disableScroll = function(arg) {
+      $scope.scrollDisabled = !!arg;
+    };
+
   }]);
