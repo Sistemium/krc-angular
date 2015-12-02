@@ -60,8 +60,9 @@ angular.module('stklcApp').controller('KrcCtrl', [
         history: JSON.parse(localStorage.getItem('history')) || [],
 
         kirciuoti: function (word) {
-
-          var w = _.capitalize ((word || me.wordInput || '').toLowerCase());
+          var w = (word || me.wordInput);
+          w = w.trim();
+          w = _.capitalize ((w || '').toLowerCase());
           var errors = angular.copy($scope.wordInputForm.word.$error);
 
           if (!w) {
