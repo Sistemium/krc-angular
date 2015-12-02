@@ -51,7 +51,7 @@
 
 <!-- Add your site or application content here -->
 
-<div ng-controller="MainCtrl as ctrl">
+<div ng-controller="MainCtrl as ctrl"  resize style="max-height:{{ windowHeight }}px">
   <ng-include src="'app/toolbar.html'"></ng-include>
 
   <md-content ui-view class="viewport"></md-content>
