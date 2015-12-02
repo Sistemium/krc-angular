@@ -4,7 +4,7 @@ var request = require('request')
   , redisClient = require('../../config/redis').redisClient;
 
 var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1';
-/* alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text */
+// alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text
 var WORDS_HASH = 'kirtis_found_words';
 var NOT_FOUND_SET = 'kirtis_not_found_words';
 
@@ -12,9 +12,9 @@ exports.index = function (req, res) {
   console.log('\nWord typed:', req.params.word);
 
   var text = req.params.word;
-  /* Viena for testing */
+  // Viena for testing
   text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-  /* uppercase first letter lowercase other*/
+  // uppercase first letter lowercase other
 
   redisClient.HGET(WORDS_HASH, text, function (err, response) {
     if (err) {
