@@ -18,7 +18,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
       var resizeBind = w.bind('resize', function () {
         if (me.isSideNavOpen) {
-          me.closeSideNav();
+          me.closeSideNavForHistWord();
         }
       });
 
@@ -165,7 +165,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
         historyClicked: function (word) {
           me.setWord(word);
           me.kirciuoti(word);
-          me.closeSideNav();
+          me.closeSideNavForHistWord();
           $uiViewScroll($document.find('body'));
         },
 
