@@ -198,7 +198,6 @@ angular.module('stklcApp').controller('KrcCtrl', [
       scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
         scope.windowHeight = newValue.h;
         scope.windowWidth = newValue.w;
-        console.log(newValue.h, newValue.w);
       }, true);
 
       angular.element($window).bind('resize', function () {
