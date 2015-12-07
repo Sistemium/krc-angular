@@ -169,3 +169,10 @@ body{
   overflow-y:hidden;
   height:100%;
 }
+
+#delete:hover{
+  color: red;
+
+}
+
+
