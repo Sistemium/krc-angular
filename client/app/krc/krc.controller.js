@@ -116,7 +116,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
             $mdToast.simple()
               .content(phrase)
               .position(me.getToastPosition())
-              .hideDelay(2000)
+              .hideDelay(1500)
           );
         },
 
