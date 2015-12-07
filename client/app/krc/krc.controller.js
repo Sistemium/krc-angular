@@ -139,6 +139,10 @@ angular.module('stklcApp').controller('KrcCtrl', [
           $mdSidenav('left-nav').close();
         },
 
+        closeSideNavForHistWord: function () {
+          $mdSidenav('left-nav').close();
+        },
+
         deleteHistory: function () {
           localStorage.removeItem('history');
           me.history = [];
