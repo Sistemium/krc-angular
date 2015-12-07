@@ -31,7 +31,22 @@ angular.module('stklcApp', [
   })
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/krc');
 
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
+  })
+  .controller('bodyController', function($scope) {
+    $scope.disableScroll = function(arg) {
+      $scope.scrollDisabled = !!arg;
+    };
+  })
+  .directive('includeReplace', function () {
+    return {
+      require: 'ngInclude',
+      restrict: 'A',
+      link: function (scope, el, attrs) {
+        el.replaceWith(el.children());
+      }
+    };
   });
+;

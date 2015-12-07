@@ -1,0 +1,82 @@
+{
+
+  "Gimine":{
+    "mot.gim.": "Moteriška giminė",
+    "vyr.gim.": "Vyriška giminė",
+    "bevrd.gim.": "Bevardė giminė"
+  },
+
+  "Linksnis":{
+    "V.": "Vardininkas",
+    "K.": "Kilmininkas",
+    "N.": "Naudininkas",
+    "G.": "Galininkas",
+    "Įn.": "Įnagininkas",
+    "Vt.": "Vietininkas",
+    "Š.": "Šauksmininkas"
+  },
+
+  "Skacius":{
+    "vnsk.": "Vienaskaita",
+    "dgs.": "Daugiskaita"
+  },
+
+  "Veiksmazodis":{
+    "Laikas":{
+      "būs.l." : "Būsimasis laikas",
+      "būt.kart.l.": "Būtasis kartinis laikas",
+      "būt.d.l.": "Būtasis dažninis laikas",
+      "būt.l." : "Būtasis laikas",
+      "esam.l.": "Esamasis laikas"
+    },
+    "Grazintinumas":{
+      "nesngr.": "Nesangrąžinis",
+      "sngr.": "Sangrąžinis"
+    },
+    "Nuosaka":{
+      "Ties.": "Tiesioginė",
+      "Tar.": "Tariamoji",
+      "Liep.": "Liepiamoji"
+    },
+    "Asmuo":{
+      "Iasm.": "Pirmas asmuo",
+      "IIasm.": "Antras asmuo",
+      "IIIasm.": "Trečias asmuo"
+    }
+  },
+
+  "Ivardis":{
+    "įvardž": "Įvardžiuotinė forma",
+    "neįvardž": "Neįvardžiuotinė forma"
+  },
+
+  "Rusis":{
+    "neveik.r.":"Neveikiamoji rūšis",
+    "veik.r.":"Veikiamoji rūšis"
+  },
+
+  "NotSure":{
+    "sutrmp.": "Sutrumpinimas",
+    "T.": "Tikrinis daiktavardis"
+
+  },
+
+  "Formos":{
+    "dktv.": "Daiktavardis",
+    "bdvr.": "Būdvardis",
+    "vksm.": "Veiksmažodis",
+    "dlv.": "Dalyvis",
+    "psdlv.": "Pusdalyvis",
+    "padlv.": "Padalyvis",
+    "būdn.": "Būdinys",
+    "įvrd.": "Įvardis",
+    "sktv.": "Skaitvardis",
+    "prvks.": "Prieveiksmis",
+    "prlnks.": "Prielinksnis",
+    "jngt.": "Jungtukas",
+    "dll.": "Dalelytė",
+    "jstk.": "Jaustukas",
+    "ištk.": "Ištiktukas"
+  }
+
+}

@@ -1,3 +1,9 @@
+md-toolbar
+  .md-toolbar-tools
+    h1(ng-repeat='nav in ctrl.navs') {{ nav.title }}
+
+div.viewport(ui-view)
+
 md-toolbar.fixed-bottom(layout='row' layout-align="center center" id='footer')
   .md-subhead
     | © UAB Sistemium 2015

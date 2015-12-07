@@ -82,7 +82,7 @@ module.exports = function (grunt) {
       },
       jade: {
         files: [
-          '<%= yeoman.client %>/{app,components}/*',
+          '<%= yeoman.client %>/{app,components}/*.jade',
           '<%= yeoman.client %>/{app,components}/**/*.jade'],
         tasks: ['jade']
       },
@@ -230,7 +230,7 @@ module.exports = function (grunt) {
       target: {
         src: '<%= yeoman.client %>/index.html',
         ignorePath: '<%= yeoman.client %>/',
-        exclude: ['/json3/', '/es5-shim/']
+        exclude: ['/json3/', '/es5-shim/', '/font-awesome/']
       }
     },
 
@@ -382,6 +382,12 @@ module.exports = function (grunt) {
             'package.json',
             'server/**/*'
           ]
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.client %>/bower_components/components-font-awesome/fonts/',
+          dest: '<%= yeoman.dist %>/public/fonts',
+          src: ['*.*']
         }]
       },
       styles: {
@@ -436,8 +442,8 @@ module.exports = function (grunt) {
       dist: [
         'babel',
         'jade',
-        'imagemin',
-        'svgmin'
+        //'imagemin',
+        //'svgmin'
       ]
     },
 

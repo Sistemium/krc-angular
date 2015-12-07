@@ -1,6 +1,7 @@
 /**
  * App-wide Styles
  */
+@import '../bower_components/components-font-awesome/css/font-awesome.min.css';
 
 .viewport {
   padding-bottom: 40px;
@@ -31,33 +32,18 @@ md-chips.md-readonly md-chip {
   }
 }
 
+/*md-backdrop, md-backdrop + md-sidenav {*/
+  /*z-index: 90 !important;*/
+/*}*/
 
-
-.fixed-bottom {
-  position: fixed;
-  bottom: 0px;
-  right: 0px;
-  z-index: 1000;
-}
-
-md-backdrop, md-backdrop + md-sidenav {
-  position: fixed !important;
-}
-
-md-sidenav {
-  padding-bottom: 60px;
-}
-
-.disableScroll {
-  overflow: hidden;
-  position: fixed;
-  right: 0px;
-  left: 0px;
-}
-
-md-icon:hover{
-  color: #ee4545;
-}
+/*.disableScroll {*/
+    /*overflow: hidden;*/
+    /*position: fixed;*/
+    /*right: 0px;*/
+    /*left: 0px;*/
+    /*top: 0px;*/
+    /*bottom: 0px;*/
+/*}*/
 
 md-input-container.md-has-icon.icon-right {
   padding-left: 0px;
@@ -72,6 +58,9 @@ md-input-container.md-has-icon.icon-right md-icon {
 .md-button.left-align > a{
   text-transform: none;
 }
+.md-button:hover{
+ color: black;
+}
 
 .left-align {
   text-align: left;
@@ -84,3 +73,106 @@ md-input-container.md-has-icon.icon-right md-icon {
 .word {
   margin-bottom: 7px;
 }
+
+md-menu-item.active {
+  color: rgb(255, 64, 129);
+}
+
+md-menu-item.active md-icon {
+  color: rgb(255, 64, 129);
+}
+
+
+#left-nav{
+  margin: 10px;
+  margin-right: 2px;
+}
+
+.md-button.sandwich{
+  height: 26px;
+  width: 30px;
+  border-radius: 0;
+  margin-right: 15px;
+}
+
+.menuIcon{
+  position: relative;
+  top:-3px;
+  right: -8px;
+}
+
+.empty-history{
+  position: relative;
+  outline: none;
+  border: 0;
+  display: inline-block;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0 6px;
+  margin: 20px 8px;
+  line-height: 36px;
+  min-height: 36px;
+  background: transparent;
+  white-space: nowrap;
+  min-width: 88px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  font-style: inherit;
+  font-variant: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: default;
+  overflow: hidden;
+}
+
+
+.trinti-istorija{
+  margin-bottom: 20px;
+}
+
+.cust-small-tall{
+  height: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  z-index: 9999;
+}
+
+
+/* Gray screen overlaying toolbar. Not working on Ipad */
+
+div > md-backdrop {
+  position: fixed;
+  right: 0px;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+}
+
+/* for Computers. Effect: cannot swipe the main window */
+
+body{
+  overflow: hidden;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+
+/* Disabling scrolling on Ipad when sidenav is opened */
+
+.scrollDisable{
+  overflow-y:hidden;
+  height:100%;
+}
+
+#delete:hover{
+  color: red;
+
+}
+
+
