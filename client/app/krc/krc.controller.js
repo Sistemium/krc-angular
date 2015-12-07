@@ -60,6 +60,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
         history: JSON.parse(localStorage.getItem('history')) || [],
 
         kirciuoti: function (word) {
+          $document.find('input')[0].blur();
           var w = (word || me.wordInput);
           w = w.trim();
           w = _.capitalize ((w || '').toLowerCase());
