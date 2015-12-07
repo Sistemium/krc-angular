@@ -16,7 +16,9 @@ div(layout-fill resize flex)
           | Uždaryti
       md-content
         div(layout='column')
-          div.empty-history(ng-if='ctrl.history.length < 1') Istorija tuščia
+          div.empty-history(ng-if='ctrl.history.length < 1') Čia bus rodoma sukirčiuotų
+            p žodžių istorija
+
           md-button.md-flat.left-align(ng-repeat='history in ctrl.history track by $index' ng-click='ctrl.historyClicked(history)' md-no-ink='')
             a.md-title {{ history }}
         div(layout-align='center' layout='center')
