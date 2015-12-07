@@ -35,21 +35,23 @@ div(layout-fill resize flex)
           div
             md-input-container.w360.icon-right
               label Sukirčiuoti žodį
-              input(
+              input#inputWord(
                 ng-model='ctrl.wordInput'
                 md-minlength='1'
-                md-maxlength='30'
+                md-maxlength='27'
                 name='word'
                 aria-label='Sukirčiuoti žodį'
+                autocomplete='off'
+                maxlength='30'
               )
-              md-icon(md-svg-icon="content:clear" ng-show="wordInputForm.word.$viewValue" ng-click="ctrl.clearInput()")
+              md-icon#delete(md-svg-icon="content:clear" ng-show="wordInputForm.word.$viewValue" ng-click="ctrl.clearInput()")
               div(
                 ng-messages='wordInputForm.word.$error'
                 role='alert'
                 style='opacity: 1'
               )
                 .my-message(ng-message='md-maxlength')
-                  | Žodžio ilgis turi būti mažiau, nei 30 simbolių
+                  | Žodžio ilgis turi būti mažiau, nei 27 simbolių
 
           div
             md-button.w360.md-raised.md-primary.md-hue-2(type='submit')
