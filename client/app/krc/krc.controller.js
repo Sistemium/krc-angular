@@ -129,7 +129,10 @@ angular.module('stklcApp').controller('KrcCtrl', [
         },
 
         toggleLeft: function () {
-          $mdSidenav('left-nav').toggle();
+          $document.find('input')[0].blur();
+          setTimeout(function(){
+            $mdSidenav('left-nav').toggle()
+          }, 350);
         },
 
         closeSideNav: function () {
