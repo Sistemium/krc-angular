@@ -150,6 +150,9 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
         clearInput: function () {
           me.setWord('');
+          setTimeout(function(){
+            $document.find('input')[0].focus();
+          }, 1000);
         },
 
         setWord: function (word) {
