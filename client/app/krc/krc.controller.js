@@ -62,10 +62,9 @@ angular.module('stklcApp').controller('KrcCtrl', [
         kirciuoti: function (word) {
           $document.find('input')[0].blur();
           var w = (word || me.wordInput);
-          w = w.trim();
           w = _.capitalize ((w || '').toLowerCase());
+          w = w.trim();
           var errors = angular.copy($scope.wordInputForm.word.$error);
-
           if (!w) {
 
             if (!Object.keys(errors).length) {
