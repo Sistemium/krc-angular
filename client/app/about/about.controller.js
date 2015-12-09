@@ -8,7 +8,7 @@ angular.module('stklcApp')
     angular.extend(me,{
 
       login_reverse: '@bau',
-      name_reverse: '.mimetsis',
+      name_reverse: '.muimetsis',
       domain_reverse: 'moc',
 
       sendEmail:  function() {
