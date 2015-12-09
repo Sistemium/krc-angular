@@ -6,12 +6,16 @@ md-content.wrapper.md-whiteframe-z2(style='height: {{windowHeight-85}}px')
         p Kuriama programa yra atviro kodo ir yra palaikoma UAB
           |„Sistemium“ įmone. Pagarba kuriant kirčiavimo programą kompuiteriniam lingvistikos centrui.
         p Naudojamos technologijos: AngularJS, Angular Material, NodeJS.
-          | Programa optimizuota prie Google Chrome naršyklės.
-        span(style='margin-right: 10px')
-          |Nuoroda į projektą:
-        a.button-git(
-          href="https://github.com/Sistemium/krc-angular"
-          target="_blank"
-        )
-          span krc-angular
-          i(class="fa fa-github fa-lg git-button")
+          | Programa optimizuota prie Google Chrome, Safari naršyklių.
+        p Turite idėjų arba pastebėjote klaidų? Kviečiame pranešti mums &#8239;
+          a(href='' ng-click="ctrl.sendEmail()")
+            |el. paštu
+        p
+          span(style='margin-right: 10px')
+            |Nuoroda į projektą:
+          a.button-git(
+            href="https://github.com/Sistemium/krc-angular"
+            target="_blank"
+          )
+            span krc-angular
+            i(class="fa fa-github fa-lg git-button")
