@@ -17,18 +17,20 @@ exports.index = function (req, res) {
   var failmsg = 'You\'ve got '+ false +' value. Please check the spelling of the word "' + text +'"';
 
   redisClient.HGET(WORDS_HASH, text, function (err, response) {
+
     if (err) {
       console.log(err);
     }
-    if (!response) {
+
+    if(!response) {
       redisClient.SISMEMBER(NOT_FOUND_SET, text, function (err, r) {
         if (err) {
           console.log(err);
         }
 
         if (r === 1) {
-          console.log('Word was written to NOT_FOUND_SET');
-          res.status(404).send('Word not found');
+          console.log('Word found in a database.\nGetting word', text, 'from', NOT_FOUND_SET, 'database at', dateTime );
+          res.status(404).send(failmsg);
         } else {
           sendRequest(res, text);
         }
@@ -37,6 +39,7 @@ exports.index = function (req, res) {
       try {
         var parsed = JSON.parse(response);
         res.send(parsed);
+        console.log('Word found in a database.\nGetting word', text, 'from', WORDS_HASH, 'database at', dateTime);
       } catch (e) {
         sendRequest(res, text);
       }
@@ -46,7 +49,6 @@ exports.index = function (req, res) {
 };
 
 function sendRequest(res, text) {
-
   request({
     uri: link,
     method: 'POST',
