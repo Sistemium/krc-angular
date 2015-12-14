@@ -74,6 +74,7 @@ function sendRequest(res, text) {
     function formWordStructure(stressArray) {
       stressArray.forEach(function (item) {
         var mtch = item.match(regexp);
+
         if (mtch != null) {
           var smth = mtch[2].split(' ');
           var jsonObj = {};
