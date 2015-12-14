@@ -75,11 +75,11 @@ md-input-container.md-has-icon.icon-right md-icon {
 }
 
 md-menu-item.active {
-  color: rgb(255, 64, 129);
+  color: black;
 }
 
 md-menu-item.active md-icon {
-  color: rgb(255, 64, 129);
+  color: #3f51b5;
 }
 
 
@@ -172,6 +172,10 @@ body{
 
 #delete:hover{
   color: red;
+}
+
+.testClass{
+  color: black;
 
 }
 
