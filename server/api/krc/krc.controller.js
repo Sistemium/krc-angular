@@ -1,7 +1,7 @@
 'use strict';
-var request = require('request')
-  , cheerio = require('cheerio')  /* HTML parser */
-  , redisClient = require('../../config/redis').redisClient;
+var request = require('request'),
+    cheerio = require('cheerio'),  /* HTML parser */
+    redisClient = require('../../config/redis').redisClient;
 
 var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1';
 // alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text
