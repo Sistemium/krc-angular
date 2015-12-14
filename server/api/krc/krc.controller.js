@@ -94,24 +94,47 @@ function sendRequest(res, text) {
       });
     }
 
+    // Writing a searched (found and not found) words to redis database if they're not in the database already
+
     if (arrLen != 0) {
 
       formWordStructure(stressArray);
 
       if (wordApi.length) {
-        redisClient.HSET(WORDS_HASH, text, JSON.stringify(wordApi));
-        res.status(200).json(wordApi);
-      } else {
-        res.status(404).send(failMsg);
+
+        redisClient.HSET(WORDS_HASH, text, JSON.stringify(wordApi),function (err, r) {
+
+          if (r === 1) {
+            console.log('Word found. \nWord', text, 'added to', WORDS_HASH, 'database', 'on', dateTime);
+          }
+
+          else{
+            console.log('Error occurred while writing to a database', WORDS_HASH);
+          }
+
+          res.status(200).json(wordApi);
+
+        });
       }
 
     }
     else {
-      console.log('You\'ve got', false, 'value. Please check the spelling of the word', '\'' + text + '\' \n');
-      // write to redis incorrect text
-      //redisClient.set(text, "404");  /* If not found don't write to redis */
-      redisClient.SADD(NOT_FOUND_SET, text);
-      res.status(404).send(failMsg);
+
+      redisClient.SADD(NOT_FOUND_SET, text,function (err, r) {
+
+        if (r === 1) {
+          console.log('Word not found.\nWord', text, 'added to', NOT_FOUND_SET, 'database on', dateTime);
+        }
+
+        else {
+          console.log('Error occurred while writing to a database', NOT_FOUND_SET);
+        }
+
+        var failmsg = 'You\'ve got '+ false +' value. Please check the spelling of the word "' + text +'"';
+
+        res.status(404).send(failmsg);
+
+      });
     }
 
   });
