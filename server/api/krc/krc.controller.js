@@ -83,6 +83,14 @@ function sendRequest(res, text) {
           jsonObj.state = smth;
           wordApi.push(jsonObj);
         }
+
+        else {
+          var jsonObj = {};
+          jsonObj.word = stressArray.join(' ').match(regexpNoState).join('');
+          jsonObj.class = 'dktv.'; /* Not sure, but fits well */
+          wordApi.push(jsonObj);
+        }
+
       });
     }
 
