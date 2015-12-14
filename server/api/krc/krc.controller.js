@@ -64,14 +64,12 @@ function sendRequest(res, text) {
       return res.status(500).send('The server is down. Please try later.');
     }
 
-    var stressArray = stressedWord.split('\r\n');
-    /* turning string to a string array */
-    stressArray.splice(-1, 1);
-    /* deleting the last array elem. which is empty string */
+    var stressArray = stressedWord.split('\r\n'); /* turning string to a string array */
+    stressArray.splice(-1, 1); /* deleting the last array elem. which is empty string */
     var regexp = /^[^ ]+[ ]([^ ]+) \(([^)]+)/;
-    var wordApi = [];
-    var arrLen = stressArray.length;
-    var failMsg = 'Sorry, we cannot find Your word! Please check the spelling of the word.';
+    var regexpNoState = /[^\d.\s][^()]/g;
+    var wordApi = [];  // stressed word state and etc
+    var arrLen = stressArray.length;  /* Count of stressed word found. ex. Viena 15*/
 
     function formWordStructure(stressArray) {
       stressArray.forEach(function (item) {
