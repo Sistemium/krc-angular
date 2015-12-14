@@ -7,6 +7,7 @@ var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1';
 // alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text
 var WORDS_HASH = 'kirtis_found_words';
 var NOT_FOUND_SET = 'kirtis_not_found_words';
+var dateTime =  Date();
 
 exports.index = function (req, res) {
   console.log('\nWord typed:', req.params.word);
