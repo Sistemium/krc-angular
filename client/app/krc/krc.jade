@@ -18,7 +18,6 @@ div(layout-fill resize flex)
         div(layout='column')
           div.empty-history(ng-if='ctrl.history.length < 1') Čia bus rodoma sukirčiuotų
             p žodžių istorija
-
           md-button.md-flat.left-align(ng-repeat='history in ctrl.history track by $index' ng-click='ctrl.historyClicked(history)' md-no-ink='')
             a.md-title {{ history }}
         div(layout-align='center' layout='center')
@@ -26,7 +25,7 @@ div(layout-fill resize flex)
             | Trintri istoriją
 
     md-content.md-whiteframe-z2(flex layout-fill, style='margin: 10px; height: {{ windowHeight-85 }}px', ng-class="{scrollDisable: scrollDisabled}")
-      md-subheader.md-primary(hide-sm) Kirčiavimo programa
+      md-subheader.md-primary(hide-xs) Kirčiavimo programa
         //div
         //  md-icon(md-svg-icon="maps:navigation" aria-label="Scroll to top" ng-if="ctrl.scrollTop" ng-click="ctrl.scrollTopClick()" flex-offset-md='55' flex-offset-gt-sm='85')
       md-content(layout-padding)
@@ -43,7 +42,7 @@ div(layout-fill resize flex)
                 autocomplete='off'
                 maxlength='30'
               )
-              md-icon#delete(md-svg-icon="content:clear" ng-show="wordInputForm.word.$viewValue" ng-click="ctrl.clearInput()")
+              md-icon.md-icon-float#delete(md-svg-icon="content:clear" ng-show="wordInputForm.word.$viewValue" ng-click="ctrl.clearInput()")
               div(
                 ng-messages='wordInputForm.word.$error'
                 role='alert'
