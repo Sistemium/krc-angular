@@ -121,7 +121,8 @@ angular.module('stklcApp').controller('KrcCtrl', [
             $mdToast.simple()
               .content(phrase)
               .position(me.getToastPosition())
-              .hideDelay(1500)
+              .hideDelay(1700)
+              .theme("")
           );
         },
 
