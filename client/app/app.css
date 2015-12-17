@@ -32,18 +32,61 @@ md-chips.md-readonly md-chip {
   }
 }
 
-/*md-backdrop, md-backdrop + md-sidenav {*/
-  /*z-index: 90 !important;*/
-/*}*/
+@media only screen and (min-width: 600px) and (max-width: 959px) {
+  .toolbar-custom-class {
+    min-height: 64px;
+    height: 64px;
+    max-height: 64px;
+  }
 
-/*.disableScroll {*/
-    /*overflow: hidden;*/
-    /*position: fixed;*/
-    /*right: 0px;*/
-    /*left: 0px;*/
-    /*top: 0px;*/
-    /*bottom: 0px;*/
-/*}*/
+  md-toast{
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    max-height: 60px;
+  }
+
+  .md-toast-content{
+    width: 25%;
+    top: 7px;
+    position: fixed;
+    right: 8px;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 599px) {
+  .toolbar-custom-class {
+    min-height: 58px;
+    height: 58px;
+    max-height: 58px;
+  }
+
+  .istorija-button{
+    font-weight: 200;
+    font-size: 15px;
+  }
+
+  md-toast{
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    max-height: 60px;
+  }
+
+  .md-toast-content{
+    width: 30%;
+    top: 4px;
+    position: fixed;
+    right: 8px;
+  }
+
+}
+
+md-input-container.md-has-icon > label {
+ left: 0px;
+}
+
+
 
 md-input-container.md-has-icon.icon-right {
   padding-left: 0px;
