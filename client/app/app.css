@@ -93,7 +93,7 @@ md-input-container.md-has-icon.icon-right {
 }
 
 md-input-container.md-has-icon.icon-right md-icon {
-  right: 3px;
+  right: 0px;
   left: inherit;
   cursor: pointer;
 }
@@ -140,8 +140,8 @@ md-menu-item.active md-icon {
 
 .menuIcon{
   position: relative;
-  top:-3px;
-  right: -8px;
+  top: 1px;
+  right: -6px;
 }
 
 .empty-history{
