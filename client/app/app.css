@@ -214,12 +214,13 @@ body{
 }
 
 #delete:hover{
-  color: red;
+  color: #dd2c00;
 }
 
-.testClass{
-  color: black;
-
+md-toast .md-toast-content{
+  background-color: #383434;
+  border: 1px solid black;
+  text-align: center;
 }
 
 
