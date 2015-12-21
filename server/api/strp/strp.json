@@ -18,7 +18,7 @@
 
   "Skacius":{
     "vnsk.": "Vienaskaita",
-    "dgs.": "Daugiskaita"
+    "dgsk.": "Daugiskaita"
   },
 
   "Veiksmazodis":{
@@ -46,8 +46,15 @@
   },
 
   "Ivardis":{
-    "įvardž": "Įvardžiuotinė forma",
-    "neįvardž": "Neįvardžiuotinė forma"
+    "įvardž.": "Įvardžiuotinė forma",
+    "neįvardž.": "Neįvardžiuotinė forma"
+  },
+
+  "Skaitvardis":{
+    "kiekin.":"kiekinis",
+    "daugin.": "dauginis",
+    "kuopin.": "kuopinis",
+    "kelintin.": "kelintinis"
   },
 
   "Rusis":{
@@ -55,7 +62,7 @@
     "veik.r.":"Veikiamoji rūšis"
   },
 
-  "NotSure":{
+  "kiti":{
     "sutrmp.": "Sutrumpinimas",
     "T.": "Tikrinis daiktavardis"
 
