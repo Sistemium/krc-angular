@@ -1,4 +1,4 @@
-md-toolbar.md-small-tall.md-toolbar-tools(style='padding-left:0px')
+md-toolbar.md-small-tall.md-toolbar-tools.toolbar-custom-class( style='padding-left:0px')
   md-menu
     md-button.md-icon-button.sandwich(aria-label='Open menu' ng-click='$mdOpenMenu()' md-no-ink)
       md-icon.menuIcon( md-svg-icon='navigation:menu' style='color: white')
@@ -7,9 +7,9 @@ md-toolbar.md-small-tall.md-toolbar-tools(style='padding-left:0px')
         md-button
           md-icon(md-menu-align-target='' md-svg-icon='{{item.icon}}')
           span {{item.title}}
-  h5(show-sm, hide-gt-sm, hide-md, style='font-weight: 500') Kirčiavimas internetu
-  h3(hide-sm style='color: white') Kirčiavimas internetu
+  h3(style='color: white' hide-xs) Kirčiavimas internetu
+  h4(style='color: white; font-weight: 400' show-xs hide-gt-xs) Kirčiavimas internetu
   span.flex
-  md-button.md-primary(ng-repeat="nav in ctrl.subNavs" ng-click="nav.clickFn()" ng-class="nav.class" md-no-ink)
+  md-button.md-primary.istorija-button(ng-repeat="nav in ctrl.subNavs" ng-click="nav.clickFn()" ng-class="nav.class" md-no-ink)
     | {{nav.title}}
 

@@ -50,6 +50,11 @@ angular.module('stklcApp').controller('KrcCtrl', [
         w.unbind('resize', resizeBind);
       });
 
+      $scope.$watch("orientationchange", function () {
+        console.log("The orientation of the screen is: " + screen.orientation.type);
+      });
+
+
       angular.extend (me, {
 
         errors: {
@@ -116,7 +121,8 @@ angular.module('stklcApp').controller('KrcCtrl', [
             $mdToast.simple()
               .content(phrase)
               .position(me.getToastPosition())
-              .hideDelay(1500)
+              .hideDelay(1700)
+              .theme("")
           );
         },
 

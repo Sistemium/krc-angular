@@ -16,7 +16,7 @@
   color:#fff
 }
 
-#forkongithub a::before,#forkongithub a::after{
+#forkongithub a:before,#forkongithub a:after{
   content: "";
   width: 100%;
   display: block;
@@ -27,7 +27,7 @@
   background: #fff
 }
 
-#forkongithub a::after{
+#forkongithub a:after{
   bottom: 1px;
   top: auto
 }
@@ -90,10 +90,9 @@
   line-height:21px !important
 }
 
-a:hover{
+a:hover, a:active{
   color: #4078C0;
 }
-
 
 
 
