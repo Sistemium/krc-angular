@@ -209,6 +209,11 @@ angular.module('stklcApp').controller('KrcCtrl', [
         },
 
 
+        unShortState: function (smth) {
+
+          console.log(smth);
+          return (_.get(me.dictPlain, smth));
+
         }
 
       });
