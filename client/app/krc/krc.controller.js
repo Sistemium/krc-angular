@@ -188,6 +188,27 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
         scrollTopClick: function () {
           me.scrollTopElement[0].scrollTop = 0;
+        },
+
+        formPlainDict : function () {
+          me.dictPlain = {};
+
+          var makePlainDict = function (obj){
+            _.forOwn(obj, function(val, key) {
+              if (typeof(val) === 'object'){
+                makePlainDict(val);
+              }
+              else{
+                me.dictPlain[key] = val;
+              }
+            });
+          };
+
+          makePlainDict(me.strp);
+
+        },
+
+
         }
 
       });
