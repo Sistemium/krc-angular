@@ -32,6 +32,13 @@ md-chips.md-readonly md-chip {
   }
 }
 
+@media only screen and (min-width: 960px){
+  md-tooltip{
+    font-size: 12px;
+  }
+
+}
+
 @media only screen and (min-width: 600px) and (max-width: 959px) {
   .toolbar-custom-class {
     min-height: 64px;
@@ -51,6 +58,9 @@ md-chips.md-readonly md-chip {
     top: 7px;
     position: fixed;
     right: 8px;
+  }
+  md-tooltip{
+    font-size: 12px;
   }
 }
 
@@ -226,4 +236,87 @@ md-toast .md-toast-content{
 
 .istorija-button{
   top:1px;
+}
+
+.footer-text{
+  color: white;
+  font-weight: 400;
+}
+
+.footer-main-text{
+  color: white;
+}
+
+/* custom classes for md-tooltip */
+
+
+md-tooltip{
+  position:absolute;
+  z-index:100;
+  overflow:scroll;
+  pointer-events:none;
+  border-radius:4px;
+  font-weight:500;
+  font-size:14px
+}
+
+
+md-tooltip .md-content{
+  position:relative;
+  white-space: nowrap;
+  overflow: auto;
+  text-overflow: clip;
+  -webkit-transform-origin:center top;
+  transform-origin:center top;
+  -webkit-transform: none;
+  transform: none;
+  opacity: 0;
+  height: 30px;
+  line-height:30px;
+  padding-left:10px;  /* ostavit */
+  padding-right:10px; /* ostavit */
+}
+
+/*show*/
+
+md-tooltip.md-show{
+  transition: none !important;
+  will-change: auto !important;
+  pointer-events: auto !important; /* WARNING */
+}
+
+md-tooltip .md-content.md-show,md-tooltip .md-content.md-show-add-active{
+  -webkit-transform: none;
+  transform: none;
+  opacity:1;
+  -webkit-transform-origin:center bottom;
+  transform-origin:center top;
+}
+
+
+md-tooltip .md-content.md-show-add{
+  transition: none !important;
+  transition-duration:.0s;
+  -webkit-transform: none !important;
+  transform: none !important;
+}
+
+/*hide*/
+
+
+md-tooltip .md-content.md-show-remove{
+  transition: none !important;
+  transition-duration:.0s;
+  display: none;
+}
+
+md-tooltip.md-hide{
+  transition: none !important;
+  display: none;
+}
+
+md-tooltip .md-content.md-show-remove.md-show-remove-active{
+  -webkit-transform: scale(4.5) !important;
+  transform: scale(4.5) !important;
+  opacity:1;
 }
