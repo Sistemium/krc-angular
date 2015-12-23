@@ -63,5 +63,7 @@ div(layout-fill resize flex)
                   | &nbsp;
                   em ({{ item.class }})
                 md-chips.md-readonly(ng-model='item.state' readonly='true')
-                  md-chip-template.data
-                    | {{$chip}}
+                  md-chip-template(style='padding: 4px')
+                    span {{$chip}}
+                    md-tooltip.no-animate(md-delay='1' md-autohide='true')
+                      |{{ctrl.unShortState($chip)}}
