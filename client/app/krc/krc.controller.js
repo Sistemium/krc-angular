@@ -22,6 +22,17 @@ angular.module('stklcApp').controller('KrcCtrl', [
         }
       });
 
+
+      // getting strp vocabulary, geting plain voc.
+
+      $http.get('/api/strp/').success(function (data) {
+        me.strp = data;
+        me.formPlainDict();
+      }).error(function (data, res) {
+        console.log(res, 'Not found path');
+      });
+
+
       $scope.$on('$viewContentLoaded', function () {
 
         _.each($document.find('md-content'), function (el) {
