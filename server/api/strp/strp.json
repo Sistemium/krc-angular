@@ -3,6 +3,7 @@
   "Gimine":{
     "mot.gim.": "Moteriška giminė",
     "vyr.gim.": "Vyriška giminė",
+    "bendr.gim.": "Bendroji giminė",
     "bevrd.gim.": "Bevardė giminė"
   },
 
@@ -34,9 +35,9 @@
       "sngr.": "Sangrąžinis"
     },
     "Nuosaka":{
-      "Ties.": "Tiesioginė",
-      "Tar.": "Tariamoji",
-      "Liep.": "Liepiamoji"
+      "Ties.": "Tiesioginė nuosaka",
+      "Tar.": "Tariamoji nuosaka",
+      "Liep.": "Liepiamoji nuosaka"
     },
     "Asmuo":{
       "Iasm.": "Pirmas asmuo",
@@ -51,10 +52,10 @@
   },
 
   "Skaitvardis":{
-    "kiekin.":"kiekinis",
-    "daugin.": "dauginis",
-    "kuopin.": "kuopinis",
-    "kelintin.": "kelintinis"
+    "kiekin.":"Kiekinis",
+    "daugin.": "Dauginis",
+    "kuopin.": "Kuopinis",
+    "kelintin.": "Kelintinis"
   },
 
   "Rusis":{
@@ -62,7 +63,7 @@
     "veik.r.":"Veikiamoji rūšis"
   },
 
-  "kiti":{
+  "Kiti":{
     "sutrmp.": "Sutrumpinimas",
     "T.": "Tikrinis daiktavardis"
 
