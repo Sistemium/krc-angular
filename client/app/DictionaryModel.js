@@ -29,8 +29,6 @@ angular.module('stklcApp')
 
     };
 
-    console.log ('DictionaryModel init');
-
     me.dictPlain = {};
 
     return $http.get('/api/strp/').success(function (data) {
