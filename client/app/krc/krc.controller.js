@@ -2,7 +2,8 @@
 
 angular.module('stklcApp').controller('KrcCtrl', [
     '$http', '$scope', '$mdToast', '$mdSidenav', '$window', '$uiViewScroll', '$document',
-    function ($http, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document) {
+    'DictionaryModel',
+    function ($http, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document, DictionaryModel) {
 
       var toastPosition = {
         bottom: false,
@@ -22,16 +23,12 @@ angular.module('stklcApp').controller('KrcCtrl', [
         }
       });
 
+      me.dictPlain = DictionaryModel.dictPlain;
 
-      // getting strp vocabulary, geting plain voc.
 
-      $http.get('/api/strp/').success(function (data) {
-        me.strp = data;
-        me.formPlainDict();
-      }).error(function (data, res) {
-        console.log(res, 'Not found path');
-      });
-
+      if (DictionaryModel.errorStatus) {
+        console.log ('DictionaryModel error:', DictionaryModel.errorStatus);
+      }
 
       $scope.$on('$viewContentLoaded', function () {
 
@@ -188,24 +185,6 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
         scrollTopClick: function () {
           me.scrollTopElement[0].scrollTop = 0;
-        },
-
-        formPlainDict : function () {
-          me.dictPlain = {};
-
-          var makePlainDict = function (obj){
-            _.forOwn(obj, function(val, key) {
-              if (typeof(val) === 'object'){
-                makePlainDict(val);
-              }
-              else{
-                me.dictPlain[key] = val;
-              }
-            });
-          };
-
-          makePlainDict(me.strp);
-
         },
 
 
