@@ -7,7 +7,12 @@ angular.module('stklcApp').config(['$stateProvider', function ($stateProvider){
       url: '/krc',
       templateUrl: 'app/krc/krc.html',
       controller: 'KrcCtrl',
-      controllerAs: 'ctrl'
+      controllerAs: 'ctrl',
+      resolve: {
+        DictionaryModel: ['DictionaryModel', function (DictionaryModel) {
+          return DictionaryModel;
+        }]
+      }
     })
 
     .state('about', {
