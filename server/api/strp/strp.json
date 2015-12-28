@@ -1,6 +1,6 @@
 {
 
-  "Gimine":{
+  "Giminė":{
     "mot.gim.": "Moteriška giminė",
     "vyr.gim.": "Vyriška giminė",
     "bendr.gim.": "Bendroji giminė",
@@ -17,12 +17,12 @@
     "Š.": "Šauksmininkas"
   },
 
-  "Skacius":{
+  "Skaičius":{
     "vnsk.": "Vienaskaita",
     "dgsk.": "Daugiskaita"
   },
 
-  "Veiksmazodis":{
+  "Veiksmažodis":{
     "Laikas":{
       "būs.l." : "Būsimasis laikas",
       "būt.kart.l.": "Būtasis kartinis laikas",
@@ -30,7 +30,7 @@
       "būt.l." : "Būtasis laikas",
       "esam.l.": "Esamasis laikas"
     },
-    "Grazintinumas":{
+    "Grąžintinumas":{
       "nesngr.": "Nesangrąžinis",
       "sngr.": "Sangrąžinis"
     },
@@ -46,7 +46,7 @@
     }
   },
 
-  "Ivardis":{
+  "Įvardis":{
     "įvardž.": "Įvardžiuotinė forma",
     "neįvardž.": "Neįvardžiuotinė forma"
   },
@@ -58,7 +58,7 @@
     "kelintin.": "Kelintinis"
   },
 
-  "Rusis":{
+  "Rušis":{
     "neveik.r.":"Neveikiamoji rūšis",
     "veik.r.":"Veikiamoji rūšis"
   },
@@ -69,7 +69,7 @@
 
   },
 
-  "Formos":{
+  "Kalbos dalis":{
     "dktv.": "Daiktavardis",
     "bdvr.": "Būdvardis",
     "vksm.": "Veiksmažodis",
