@@ -247,13 +247,19 @@ md-toast .md-toast-content{
   color: white;
 }
 
+.md-chips:not(.md-readonly) {
+  cursor: default;
+}
+
+
+
 /* custom classes for md-tooltip */
 
 
 md-tooltip{
   position:absolute;
   z-index:100;
-  overflow:scroll;
+  overflow:hidden;
   pointer-events:none;
   border-radius:4px;
   font-weight:500;
@@ -264,7 +270,7 @@ md-tooltip{
 md-tooltip .md-content{
   position:relative;
   white-space: nowrap;
-  overflow: auto;
+  overflow: hidden;
   text-overflow: clip;
   -webkit-transform-origin:center top;
   transform-origin:center top;
