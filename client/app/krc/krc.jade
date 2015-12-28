@@ -56,14 +56,16 @@ div(layout-fill resize flex)
               | Kirčiuoti
 
           div(layout='column' layout-align='center center' layout-padding)
-            div(ng-repeat='item in ctrl.data' layout-padding)
+            div(ng-repeat='item in ctrl.data track by $index' layout-padding)
               div.center-align
                 div.word
-                  strong {{ item.word }}
-                  | &nbsp;
-                  em ({{ item.class }})
+                  strong {{ ::item.word }}
+                    |&nbsp;
+                  em ({{ ::item.class }})
+                   md-tooltip
+                    |{{ ::ctrl.unShortState(item.class) }}
                 md-chips.md-readonly(ng-model='item.state' readonly='true')
                   md-chip-template(style='padding: 4px')
                     span {{$chip}}
                     md-tooltip.no-animate(md-delay='1' md-autohide='true')
-                      |{{ctrl.unShortState($chip)}}
+                      |{{ ::ctrl.unShortState($chip) }}
