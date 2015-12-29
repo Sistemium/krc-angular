@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('stklcApp').controller('KrcCtrl', [
-    '$http', '$scope', '$mdToast', '$mdSidenav', '$window', '$uiViewScroll', '$document',
+    'WordService', '$scope', '$mdToast', '$mdSidenav', '$window', '$uiViewScroll', '$document',
     'DictionaryModel',
-    function ($http, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document, DictionaryModel) {
+    function (WordService, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document, DictionaryModel) {
 
       var toastPosition = {
         bottom: false,
