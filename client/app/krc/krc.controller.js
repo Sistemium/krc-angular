@@ -46,9 +46,6 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
       });
 
-      $scope.$watchCollection('ctrl.history', function (newHistory) {
-        newHistory && newHistory.length && localStorage.setItem('history', JSON.stringify(newHistory));
-      });
 
       $scope.$watch('ctrl.isSideNavOpen', function (nv, ov) {
         $scope.disableScroll(nv && !ov);
@@ -63,6 +60,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
       });
 
 
+
       angular.extend (me, {
 
         errors: {
@@ -70,7 +68,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
           'md-required': 'Žodis neįvestas'
         },
 
-        history: JSON.parse(localStorage.getItem('history')) || [],
+        history: WordService.history,
 
         kirciuoti: function (word) {
           $document.find('input')[0].blur();
@@ -91,8 +89,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
             return me.showSimpleToast(msg);
           }
 
-          $http.get('/api/krc/' + w).success(function (data) {
-            me.writeSearchedWords(w);
+          WordService.getWordData(w).success(function (data) {
             me.data = data;
           }).error(function (data, res) {
             if (res == 404) {
@@ -104,21 +101,6 @@ angular.module('stklcApp').controller('KrcCtrl', [
             }
             else if (res == 500) {
               me.showSimpleToast('Serverio klaida');
-            }
-          });
-
-        },
-
-        writeSearchedWords: function (searchedWord) {
-          me.duplicationRemover(searchedWord);
-          me.history.unshift(searchedWord);
-          me.history = _.take(me.history, 20);
-        },
-
-        duplicationRemover: function (wordToCheck) {
-          me.history.forEach(function (item, idx) {
-            if (wordToCheck == item) {
-              me.history.splice(idx, 1);
             }
           });
 
@@ -157,19 +139,16 @@ angular.module('stklcApp').controller('KrcCtrl', [
           $mdSidenav('left-nav').close();
         },
 
-        deleteHistory: function () {
-          localStorage.removeItem('history');
-          me.history = [];
-        },
+        deleteHistory: WordService.clearHistory,
 
         clearInput: function () {
-          me.setWord('');
+          me.callCountWordChars('');
           setTimeout(function(){
             $document.find('input')[0].focus();
           }, 1000);
         },
 
-        setWord: function (word) {
+        callCountWordChars: function (word) {
           me.wordInput = word;
           setTimeout(function () {
             _.each($scope.wordInputForm.word.$viewChangeListeners, _.attempt);
@@ -177,7 +156,8 @@ angular.module('stklcApp').controller('KrcCtrl', [
         },
 
         historyClicked: function (word) {
-          me.setWord(word);
+          me.wordInput = word;
+          me.callCountWordChars(word);
           me.kirciuoti(word);
           me.closeSideNavForHistWord();
           $uiViewScroll($document.find('body'));
@@ -189,10 +169,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
 
         unShortState: function (smth) {
-
-          console.log(smth);
-          return (_.get(me.dictPlain, smth));
-
+          return _.get(me.dictPlain, smth);
         }
 
       });
