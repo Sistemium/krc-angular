@@ -56,7 +56,7 @@ div(layout-fill resize flex)
               | Kirčiuoti
 
           div(layout='column' layout-align='center center' layout-padding)
-            div(ng-repeat='item in ctrl.data track by $index' layout-padding)
+            div(ng-repeat='item in ctrl.data' layout-padding)
               div.center-align
                 div.word
                   strong {{ ::item.word }}
