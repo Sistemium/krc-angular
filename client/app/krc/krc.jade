@@ -21,7 +21,7 @@ div(layout-fill resize flex)
           md-button.md-flat.left-align(ng-repeat='history in ctrl.history track by $index' ng-click='ctrl.historyClicked(history)' md-no-ink='')
             a.md-title {{ history }}
         div(layout-align='center' layout='center')
-          md-button.md-raised.md-primary.md-hue-2.trinti-istorija(ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length' flex='80')
+          md-button.md-raised.md-primary.md-hue-2.trinti-istorija(ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length')
             | Trintri istoriją
 
     md-content.md-whiteframe-z2(flex layout-fill, style='margin: 10px; height: {{ windowHeight-85 }}px', ng-class="{scrollDisable: scrollDisabled}")
