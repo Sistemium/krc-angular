@@ -4,7 +4,7 @@ div(layout-fill resize flex)
 
     md-sidenav.md-sidenav-left.md-whiteframe-z2#left-nav(
       md-component-id='left-nav'
-      md-is-locked-open="$mdMedia('gt-md')"
+      md-is-locked-open="$mdMedia('gt-sm')"
       md-is-open="ctrl.isSideNavOpen"
       style='height: {{ windowHeight-85 }}px'
       ng-class = "{openedSideNav: scrollDisabled}"
@@ -12,7 +12,7 @@ div(layout-fill resize flex)
       md-toolbar.md-toolbar-tools.cust-small-tall(layout-padding)
         h1(style='color: white') Istorija
         span(flex='')
-        md-button(ng-click='ctrl.closeSideNav()' hide-gt-md='')
+        md-button(ng-click='ctrl.closeSideNav()' hide-gt-sm='')
           | Uždaryti
       md-content
         div(layout='column')
