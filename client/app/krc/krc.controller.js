@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('stklcApp').controller('KrcCtrl', [
-    'WordService', '$scope', '$mdToast', '$mdSidenav', '$window', '$uiViewScroll', '$document',
+    'WordService', '$scope', '$mdToast', '$mdSidenav', '$window', '$uiViewScroll', '$document', '$filter',
+    '$http', '$q',
     'DictionaryModel',
-    function (WordService, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document, DictionaryModel) {
+    function (WordService, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document, $filter, $http, $q, DictionaryModel) {
 
       var toastPosition = {
         bottom: false,
@@ -60,6 +61,27 @@ angular.module('stklcApp').controller('KrcCtrl', [
       });
 
 
+      $scope.$watch('ctrl.wordInput', function (nv, ov) {
+        if (nv && nv !== ov) {
+          me.kirciuoti();
+        }
+      });
+
+      //var accentlessRe = function (text) {
+      //
+      //  var to = ['ą','č','ęė','į','š','ųū','ž'],
+      //    from = 'aceisuz';
+      //
+      //  var re = new RegExp ('['+from+']','ig');
+      //
+      //  var atext = text.replace(re,function(m){
+      //    return '[' + m + to[from.indexOf(m)] + ']';
+      //  });
+      //
+      //  return new RegExp ('^'+atext,'i');
+      //
+      //};
+
 
       angular.extend (me, {
 
@@ -72,7 +94,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
         kirciuoti: function (word) {
           $document.find('input')[0].blur();
-          var w = (word || me.wordInput);
+          var w = (word || me.wordInput || me.searchText);
           w = _.capitalize ((w || '').toLowerCase());
           w = w.trim();
           var errors = angular.copy($scope.wordInputForm.word.$error);
@@ -92,14 +114,17 @@ angular.module('stklcApp').controller('KrcCtrl', [
           WordService.getWordData(w).success(function (data) {
             me.data = data;
           }).error(function (data, res) {
+            console.log(res);
             if (res == 404) {
               me.data = [];
               me.showSimpleToast('Žodis nerastas');
             }
             else if (res == 400) {
+              me.data = [];
               me.showSimpleToast('Pasitikrintike įvestą žodį');
             }
             else if (res == 500) {
+              me.data = [];
               me.showSimpleToast('Serverio klaida');
             }
           });
@@ -149,14 +174,14 @@ angular.module('stklcApp').controller('KrcCtrl', [
         },
 
         callCountWordChars: function (word) {
-          me.wordInput = word;
+          me.searchText = word;
           setTimeout(function () {
             _.each($scope.wordInputForm.word.$viewChangeListeners, _.attempt);
           }, 100);
         },
 
         historyClicked: function (word) {
-          me.wordInput = word;
+          me.searchText = word;
           me.callCountWordChars(word);
           me.kirciuoti(word);
           me.closeSideNavForHistWord();
