@@ -170,6 +170,23 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
         unShortState: function (smth) {
           return _.get(me.dictPlain, smth);
+        },
+
+        getSuggestions: function (text) {
+
+          if (!text) {
+            me.suggestions = [];
+            return [];
+          }
+
+          var q = $q.defer();
+
+          $http.get('api/zodynas/'+text).success(function(res){
+            q.resolve(res);
+          });
+
+          return q.promise;
+
         }
 
       });
