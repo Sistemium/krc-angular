@@ -92,18 +92,22 @@ md-chips.md-readonly md-chip {
 
 }
 
-md-input-container.md-has-icon > label {
- left: 0px;
+md-autocomplete md-input-container.md-has-icon > label {
+ left: 0;
 }
 
-md-input-container.md-has-icon.icon-right {
-  padding-left: 0px;
+md-autocomplete.icon-right md-input-container.md-has-icon {
+  padding-left: 0;
 }
 
-md-input-container.md-has-icon.icon-right md-icon {
-  right: 0px;
+md-input-container.md-has-icon.icon-right md-icon,
+md-input-container.md-has-icon md-icon {
+  right: 0;
   left: inherit;
   cursor: pointer;
+  float: right;
+  top: 6px;
+  position: absolute;
 }
 
 .md-button.left-align > a{
@@ -327,4 +331,12 @@ md-tooltip .md-content.md-show-remove.md-show-remove-active{
 
 .hideSearchWords{
   display: none;
+}
+
+/* md-autocomplete */
+
+
+
+md-autocomplete[md-floating-label] md-autocomplete-wrap {
+  height: 90px;
 }
