@@ -9,10 +9,11 @@ var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1';
 var WORDS_HASH = 'kirtis_found_words';
 var NOT_FOUND_SET = 'kirtis_not_found_words';
 
+var debug = require('debug') ('krc:controller');
 
 exports.index = function (req, res) {
 
-  console.log('\nWord typed:', req.params.word);
+  debug('Word typed:', req.params.word);
 
   var text = req.params.word; // Viena for testing
   text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); // uppercase first letter lowercase other
@@ -31,7 +32,7 @@ exports.index = function (req, res) {
         }
 
         if (r === 1) {
-          console.log('Word found in a database.\nGetting word', text, 'from', NOT_FOUND_SET, 'database at', Date() );
+          debug('Word found in a database.\nGetting word', text, 'from', NOT_FOUND_SET, 'database at', Date() );
           res.status(404).send(failmsg);
         } else {
           sendRequest(res, text);
@@ -41,7 +42,7 @@ exports.index = function (req, res) {
       try {
         var parsed = JSON.parse(response);
         res.send(parsed);
-        console.log('Word found in a database.\nGetting word', text, 'from', WORDS_HASH, 'database at', Date());
+        debug('Word found in a database.\nGetting word', text, 'from', WORDS_HASH, 'database at', Date());
       } catch (e) {
         sendRequest(res, text);
       }
@@ -107,11 +108,11 @@ function sendRequest(res, text) {
         redisClient.HSET(WORDS_HASH, text, JSON.stringify(wordApi),function (err, r) {
 
           if (r === 1) {
-            console.log('Word found. \nWord', text, 'added to', WORDS_HASH, 'database', 'on', Date());
+            debug('Word found. \nWord', text, 'added to', WORDS_HASH, 'database', 'on', Date());
           }
 
           else{
-            console.log('Error occurred while writing to a database', WORDS_HASH);
+            debug('Error occurred while writing to a database', WORDS_HASH);
           }
 
           res.status(200).json(wordApi);
@@ -125,11 +126,11 @@ function sendRequest(res, text) {
       redisClient.SADD(NOT_FOUND_SET, text,function (err, r) {
 
         if (r === 1) {
-          console.log('Word not found.\nWord', text, 'added to', NOT_FOUND_SET, 'database on', Date());
+          debug('Word not found.\nWord', text, 'added to', NOT_FOUND_SET, 'database on', Date());
         }
 
         else {
-          console.log('Error occurred while writing to a database', NOT_FOUND_SET);
+          debug('Error occurred while writing to a database', NOT_FOUND_SET);
         }
 
         var failmsg = 'You\'ve got '+ false +' value. Please check the spelling of the word "' + text +'"';
