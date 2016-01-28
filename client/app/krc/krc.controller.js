@@ -13,10 +13,13 @@ angular.module('stklcApp').controller('KrcCtrl', [
         right: true
       };
 
+      var ua = new UAParser();
+      $scope.deviceInfo = ua.getOS()['name'];
+      console.log($scope.deviceInfo);
+
       var me = this;
       var localStorage = window.localStorage;
       var w = angular.element($window);
-
 
       var resizeBind = w.bind('resize', function () {
         if (me.isSideNavOpen) {
@@ -52,35 +55,16 @@ angular.module('stklcApp').controller('KrcCtrl', [
         $scope.disableScroll(nv && !ov);
       });
 
+
       $scope.$on('$destroy', function () {
         w.unbind('resize', resizeBind);
       });
-
-      $scope.$watch("orientationchange", function () {
-        console.log("The orientation of the screen is: " + screen.orientation.type);
-      });
-
 
       $scope.$watch('ctrl.wordInput', function (nv, ov) {
         if (nv && nv !== ov) {
           me.kirciuoti();
         }
       });
-
-      //var accentlessRe = function (text) {
-      //
-      //  var to = ['ą','č','ęė','į','š','ųū','ž'],
-      //    from = 'aceisuz';
-      //
-      //  var re = new RegExp ('['+from+']','ig');
-      //
-      //  var atext = text.replace(re,function(m){
-      //    return '[' + m + to[from.indexOf(m)] + ']';
-      //  });
-      //
-      //  return new RegExp ('^'+atext,'i');
-      //
-      //};
 
 
       angular.extend (me, {
@@ -97,7 +81,15 @@ angular.module('stklcApp').controller('KrcCtrl', [
           var w = (word || me.wordInput || me.searchText);
           w = _.capitalize ((w || '').toLowerCase());
           w = w.trim();
+
           var errors = angular.copy($scope.wordInputForm.word.$error);
+
+          if(errors.maxlength){
+            me.clearInput();
+            return me.showSimpleToast(me.errors['md-maxlength']);
+          }
+
+
           if (!w) {
 
             if (!Object.keys(errors).length) {
@@ -170,7 +162,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
           me.callCountWordChars('');
           setTimeout(function(){
             $document.find('input')[0].focus();
-          }, 1000);
+          }, 1);
         },
 
         callCountWordChars: function (word) {
