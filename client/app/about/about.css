@@ -65,16 +65,14 @@
   margin: 10px;
 }
 .button-git{
-  padding: 0 5px;
-  padding-top: 4px;
+  padding: 1px 2px;
   text-shadow: 0 1px 0 rgba(255,255,255,.9);
   background-color: #eee;
   background-image: -webkit-linear-gradient(top,#fcfcfc,#eee);
   background-image: -moz-linear-gradient(top,#fcfcfc,#eee);
   background-image: linear-gradient(to bottom,#fcfcfc,#eee);
   display: inline-block;
-  height: 25px;
-  font-weight: 500;
+  font-weight: 400;
   color: #333;
   white-space: nowrap;
   vertical-align: middle;
@@ -93,8 +91,4 @@
 a:hover, a:active{
   color: #4078C0;
 }
-
-
-
-
 
