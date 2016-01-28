@@ -1,7 +1,6 @@
 div(layout-fill resize flex)
 
   div(layout='row' layout-fill)
-
     md-sidenav.md-sidenav-left.md-whiteframe-z2#left-nav(
       md-component-id='left-nav'
       md-is-locked-open="$mdMedia('gt-sm')"
@@ -28,6 +27,7 @@ div(layout-fill resize flex)
       md-subheader.md-primary(hide-xs) Kirčiavimo programa
         //div
         //  md-icon(md-svg-icon="maps:navigation" aria-label="Scroll to top" ng-if="ctrl.scrollTop" ng-click="ctrl.scrollTopClick()" flex-offset-md='55' flex-offset-gt-sm='85')
+
       md-content(layout-padding)
         form(name='wordInputForm' ng-submit='ctrl.kirciuoti()' layout='column' layout-align='center center')
           div
@@ -88,3 +88,4 @@ div(layout-fill resize flex)
                     span {{$chip}}
                     md-tooltip.no-animate(md-delay='1' md-autohide='true')
                       |{{ ::ctrl.unShortState($chip) }}
+
