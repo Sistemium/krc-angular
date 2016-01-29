@@ -101,7 +101,7 @@ md-autocomplete.icon-right md-input-container.md-has-icon {
 }
 
 md-input-container.md-has-icon.icon-right md-icon,
-md-input-container.md-has-icon md-icon {
+.md-has-icon md-input-container md-icon {
   right: 0;
   left: inherit;
   cursor: pointer;
