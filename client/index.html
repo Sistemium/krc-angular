@@ -51,6 +51,15 @@
 <![endif]-->
 
 <!-- Add your site or application content here -->
+<p class="hideSearchWords">
+
+  <strong><b>Kirčiavimo programa</b></strong> pritaikyta mobiliesiems įrenginiams.
+  <strong><b>Žodžių kirčiavimas internetu</b></strong>
+  <strong><b>Kirčiuoklė</b></strong>
+  <strong><b>Lithuanian Accentuator</b></strong>
+  <strong><b>Kirčiavimas internete, Kirciavimas internetu, Kirtis, kirtis, kirciuokle Sukirciuoti Sukirčiuoti</b></strong>
+
+</p>
 
 <div ng-controller="MainCtrl as ctrl"  resize style="max-height:{{ windowHeight }}px">
   <ng-include src="'app/toolbar.html'"></ng-include>
@@ -94,6 +103,7 @@
 <script src="bower_components/angular-material/angular-material.js"></script>
 <script src="bower_components/lodash/lodash.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/ua-parser-js/src/ua-parser.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -101,8 +111,9 @@
 <!-- build:js(.tmp) app/app.js -->
 <script src="app/app.js"></script>
 <!-- injector:js -->
-<script src="app/DictionaryModel.js"></script>
 <script src="app/about/about.controller.js"></script>
+<script src="app/http_modules/DictionaryModel.js"></script>
+<script src="app/http_modules/WordService.js"></script>
 <script src="app/krc/krc.controller.js"></script>
 <script src="app/main.controller.js"></script>
 <script src="app/routes.js"></script>

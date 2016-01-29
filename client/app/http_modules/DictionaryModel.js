@@ -39,5 +39,4 @@ angular.module('stklcApp')
       console.log(res, 'Not found path');
     }).promise;
 
-  }])
-;
+  }]);

@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('stklcApp').controller('KrcCtrl', [
-    '$http', '$scope', '$mdToast', '$mdSidenav', '$window', '$uiViewScroll', '$document',
+    'WordService', '$scope', '$mdToast', '$mdSidenav', '$window', '$uiViewScroll', '$document', '$filter',
+    '$http', '$q',
     'DictionaryModel',
-    function ($http, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document, DictionaryModel) {
+    function (WordService, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document, $filter, $http, $q, DictionaryModel) {
 
       var toastPosition = {
         bottom: false,
@@ -12,10 +13,13 @@ angular.module('stklcApp').controller('KrcCtrl', [
         right: true
       };
 
+      var ua = new UAParser();
+      $scope.deviceInfo = ua.getOS()['name'];
+      console.log($scope.deviceInfo);
+
       var me = this;
       var localStorage = window.localStorage;
       var w = angular.element($window);
-
 
       var resizeBind = w.bind('resize', function () {
         if (me.isSideNavOpen) {
@@ -46,20 +50,20 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
       });
 
-      $scope.$watchCollection('ctrl.history', function (newHistory) {
-        newHistory && newHistory.length && localStorage.setItem('history', JSON.stringify(newHistory));
-      });
 
       $scope.$watch('ctrl.isSideNavOpen', function (nv, ov) {
         $scope.disableScroll(nv && !ov);
       });
 
+
       $scope.$on('$destroy', function () {
         w.unbind('resize', resizeBind);
       });
 
-      $scope.$watch("orientationchange", function () {
-        console.log("The orientation of the screen is: " + screen.orientation.type);
+      $scope.$watch('ctrl.wordInput', function (nv, ov) {
+        if (nv && nv !== ov) {
+          me.kirciuoti();
+        }
       });
 
 
@@ -70,14 +74,22 @@ angular.module('stklcApp').controller('KrcCtrl', [
           'md-required': 'Žodis neįvestas'
         },
 
-        history: JSON.parse(localStorage.getItem('history')) || [],
+        history: WordService.history,
 
         kirciuoti: function (word) {
           $document.find('input')[0].blur();
-          var w = (word || me.wordInput);
+          var w = (word || me.wordInput || me.searchText);
           w = _.capitalize ((w || '').toLowerCase());
           w = w.trim();
+
           var errors = angular.copy($scope.wordInputForm.word.$error);
+
+          if(errors.maxlength){
+            me.clearInput();
+            return me.showSimpleToast(me.errors['md-maxlength']);
+          }
+
+
           if (!w) {
 
             if (!Object.keys(errors).length) {
@@ -91,34 +103,21 @@ angular.module('stklcApp').controller('KrcCtrl', [
             return me.showSimpleToast(msg);
           }
 
-          $http.get('/api/krc/' + w).success(function (data) {
-            me.writeSearchedWords(w);
+          WordService.getWordData(w).success(function (data) {
             me.data = data;
           }).error(function (data, res) {
+            console.log(res);
             if (res == 404) {
               me.data = [];
               me.showSimpleToast('Žodis nerastas');
             }
             else if (res == 400) {
+              me.data = [];
               me.showSimpleToast('Pasitikrintike įvestą žodį');
             }
             else if (res == 500) {
+              me.data = [];
               me.showSimpleToast('Serverio klaida');
-            }
-          });
-
-        },
-
-        writeSearchedWords: function (searchedWord) {
-          me.duplicationRemover(searchedWord);
-          me.history.unshift(searchedWord);
-          me.history = _.take(me.history, 20);
-        },
-
-        duplicationRemover: function (wordToCheck) {
-          me.history.forEach(function (item, idx) {
-            if (wordToCheck == item) {
-              me.history.splice(idx, 1);
             }
           });
 
@@ -157,27 +156,25 @@ angular.module('stklcApp').controller('KrcCtrl', [
           $mdSidenav('left-nav').close();
         },
 
-        deleteHistory: function () {
-          localStorage.removeItem('history');
-          me.history = [];
-        },
+        deleteHistory: WordService.clearHistory,
 
         clearInput: function () {
-          me.setWord('');
+          me.callCountWordChars('');
           setTimeout(function(){
             $document.find('input')[0].focus();
-          }, 1000);
+          }, 1);
         },
 
-        setWord: function (word) {
-          me.wordInput = word;
+        callCountWordChars: function (word) {
+          me.searchText = word;
           setTimeout(function () {
             _.each($scope.wordInputForm.word.$viewChangeListeners, _.attempt);
           }, 100);
         },
 
         historyClicked: function (word) {
-          me.setWord(word);
+          me.searchText = word;
+          me.callCountWordChars(word);
           me.kirciuoti(word);
           me.closeSideNavForHistWord();
           $uiViewScroll($document.find('body'));
@@ -189,16 +186,30 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
 
         unShortState: function (smth) {
+          return _.get(me.dictPlain, smth);
+        },
 
-          console.log(smth);
-          return (_.get(me.dictPlain, smth));
+        getSuggestions: function (text) {
+
+          if (!text) {
+            me.suggestions = [];
+            return [];
+          }
+
+          var q = $q.defer();
+
+          $http.get('api/zodynas/'+text).success(function(res){
+            q.resolve(res);
+          });
+
+          return q.promise;
 
         }
 
       });
 
       $scope.setSubNavs([{
-        name: 'history', title: 'Istorija', clickFn: me.toggleLeft, class: 'hide-gt-md'
+        name: 'history', title: 'Istorija', clickFn: me.toggleLeft, class: 'hide-gt-sm'
       }]);
 
       $scope.setLeftPart({

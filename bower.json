@@ -2,17 +2,18 @@
   "name": "stklc",
   "version": "0.0.0",
   "dependencies": {
-    "angular": ">=1.2.*",
-    "json3": "~3.3.1",
-    "es5-shim": "~3.0.1",
+    "angular": ">=1.4.*",
+    "json3": ">=3.3.1",
+    "es5-shim": ">=3.0.1",
     "angular-resource": ">=1.2.*",
     "angular-cookies": ">=1.2.*",
     "angular-messages": ">=1.2.*",
     "angular-sanitize": ">=1.2.*",
-    "angular-material": ">=1.0.0",
+    "angular-material": ">=1.0.1",
     "lodash": "~3.10.0",
-    "angular-ui-router": "~0.2.15",
-    "components-font-awesome": "latest"
+    "angular-ui-router": "latest",
+    "components-font-awesome": "latest",
+    "ua-parser-js": ">=0.7.10"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",

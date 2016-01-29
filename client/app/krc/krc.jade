@@ -1,10 +1,9 @@
 div(layout-fill resize flex)
 
   div(layout='row' layout-fill)
-
     md-sidenav.md-sidenav-left.md-whiteframe-z2#left-nav(
       md-component-id='left-nav'
-      md-is-locked-open="$mdMedia('gt-md')"
+      md-is-locked-open="$mdMedia('gt-sm')"
       md-is-open="ctrl.isSideNavOpen"
       style='height: {{ windowHeight-85 }}px'
       ng-class = "{openedSideNav: scrollDisabled}"
@@ -12,7 +11,7 @@ div(layout-fill resize flex)
       md-toolbar.md-toolbar-tools.cust-small-tall(layout-padding)
         h1(style='color: white') Istorija
         span(flex='')
-        md-button(ng-click='ctrl.closeSideNav()' hide-gt-md='')
+        md-button(ng-click='ctrl.closeSideNav()' hide-gt-sm='')
           | Uždaryti
       md-content
         div(layout='column')
@@ -21,42 +20,62 @@ div(layout-fill resize flex)
           md-button.md-flat.left-align(ng-repeat='history in ctrl.history track by $index' ng-click='ctrl.historyClicked(history)' md-no-ink='')
             a.md-title {{ history }}
         div(layout-align='center' layout='center')
-          md-button.md-raised.md-primary.md-hue-2.trinti-istorija(ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length' flex='80')
+          md-button.md-raised.md-primary.md-hue-2.trinti-istorija(ng-click='ctrl.deleteHistory()' ng-if='ctrl.history.length')
             | Trintri istoriją
 
     md-content.md-whiteframe-z2(flex layout-fill, style='margin: 10px; height: {{ windowHeight-85 }}px', ng-class="{scrollDisable: scrollDisabled}")
       md-subheader.md-primary(hide-xs) Kirčiavimo programa
         //div
         //  md-icon(md-svg-icon="maps:navigation" aria-label="Scroll to top" ng-if="ctrl.scrollTop" ng-click="ctrl.scrollTopClick()" flex-offset-md='55' flex-offset-gt-sm='85')
+
       md-content(layout-padding)
         form(name='wordInputForm' ng-submit='ctrl.kirciuoti()' layout='column' layout-align='center center')
           div
-            md-input-container.w360.icon-right
-              label Sukirčiuoti žodį
-              input#inputWord(
-                ng-model='ctrl.wordInput'
-                md-minlength='1'
-                md-maxlength='27'
-                name='word'
-                aria-label='Sukirčiuoti žodį'
-                autocomplete='off'
-                maxlength='30'
-              )
+
+            md-autocomplete.w360.icon-right.md-has-icon(
+              md-input-name="word"
+              md-input-id="inputWord"
+              md-selected-item="ctrl.wordInput"
+              md-search-text="ctrl.searchText"
+              md-items="item in ctrl.getSuggestions(ctrl.searchText)"
+              md-item-text="item"
+              md-floating-label="Sukirčiuoti žodį"
+              md-autofocus="true"
+              md-no-cache="true"
+              md-input-minlength="1"
+              md-input-maxlength="30"
+            )
+              md-item-template
+                span(md-highlight-text="ctrl.searchText" md-highlight-flags="ig")
+                  |{{item}}
               md-icon.md-icon-float#delete(md-svg-icon="content:clear" ng-show="wordInputForm.word.$viewValue" ng-click="ctrl.clearInput()")
-              div(
-                ng-messages='wordInputForm.word.$error'
-                role='alert'
-                style='opacity: 1'
-              )
-                .my-message(ng-message='md-maxlength')
-                  | Žodžio ilgis turi būti mažiau, nei 27 simbolių
+
+            //md-input-container.w360.icon-right
+            //  label Sukirčiuoti žodį
+            //  input#inputWord(
+            //    ng-model='ctrl.wordInput'
+            //    md-minlength='1'
+            //    md-maxlength='27'
+            //    name='word'
+            //    aria-label='Sukirčiuoti žodį'
+            //    autocomplete='off'
+            //    maxlength='30'
+            //  )
+            //  md-icon.md-icon-float#delete(md-svg-icon="content:clear" ng-show="wordInputForm.word.$viewValue" ng-click="ctrl.clearInput()")
+            //  div(
+            //    ng-messages='wordInputForm.word.$error'
+            //    role='alert'
+            //    style='opacity: 1'
+            //  )
+            //    .my-message(ng-message='md-maxlength')
+            //      | Žodžio ilgis turi būti mažiau, nei 27 simbolių
 
           div
             md-button.w360.md-raised.md-primary.md-hue-2(type='submit')
               | Kirčiuoti
 
           div(layout='column' layout-align='center center' layout-padding)
-            div(ng-repeat='item in ctrl.data track by $index' layout-padding)
+            div(ng-repeat='item in ctrl.data' layout-padding)
               div.center-align
                 div.word
                   strong {{ ::item.word }}
@@ -69,3 +88,4 @@ div(layout-fill resize flex)
                     span {{$chip}}
                     md-tooltip.no-animate(md-delay='1' md-autohide='true')
                       |{{ ::ctrl.unShortState($chip) }}
+

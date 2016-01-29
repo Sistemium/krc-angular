@@ -92,20 +92,22 @@ md-chips.md-readonly md-chip {
 
 }
 
-md-input-container.md-has-icon > label {
- left: 0px;
+md-autocomplete md-input-container.md-has-icon > label {
+ left: 0;
 }
 
-
-
-md-input-container.md-has-icon.icon-right {
-  padding-left: 0px;
+md-autocomplete.icon-right md-input-container.md-has-icon {
+  padding-left: 0;
 }
 
-md-input-container.md-has-icon.icon-right md-icon {
-  right: 0px;
+md-input-container.md-has-icon.icon-right md-icon,
+.md-has-icon md-input-container md-icon {
+  right: 0;
   left: inherit;
   cursor: pointer;
+  float: right;
+  top: 6px;
+  position: absolute;
 }
 
 .md-button.left-align > a{
@@ -184,6 +186,7 @@ md-menu-item.active md-icon {
 
 .trinti-istorija{
   margin-bottom: 20px;
+  width: 80%;
 }
 
 .cust-small-tall{
@@ -266,7 +269,6 @@ md-tooltip{
   font-size:14px
 }
 
-
 md-tooltip .md-content{
   position:relative;
   white-space: nowrap;
@@ -325,4 +327,16 @@ md-tooltip .md-content.md-show-remove.md-show-remove-active{
   -webkit-transform: scale(4.5) !important;
   transform: scale(4.5) !important;
   opacity:1;
+}
+
+.hideSearchWords{
+  display: none;
+}
+
+/* md-autocomplete */
+
+
+
+md-autocomplete[md-floating-label] md-autocomplete-wrap {
+  height: 90px;
 }
