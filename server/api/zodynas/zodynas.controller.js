@@ -25,7 +25,7 @@ exports.index = function(req, res) {
   var response = [];
   var accentuatedWordsSplit;
 
-  redisClient.ZRANGEBYLEX([DICTIONARY_KEY, '[' + word, '[' + word + 'ž', 'LIMIT', '0', '20' ],
+  redisClient.ZRANGEBYLEX([DICTIONARY_KEY, '[' + word, '[' + word + 'ž', 'LIMIT', '0', '60' ],
     function (err, accentlessWords) {
 
       if (err) throw err;
@@ -62,6 +62,7 @@ exports.index = function(req, res) {
           throw err;
         } else {
           var sorted = _.uniq(response).sort(lcompare);
+          sorted.splice(40);
           res.json(sorted);
         }
       });
