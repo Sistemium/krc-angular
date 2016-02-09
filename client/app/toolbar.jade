@@ -8,12 +8,7 @@ md-toolbar.md-small-tall.md-toolbar-tools.toolbar-custom-class( style='padding-l
           md-icon(md-menu-align-target='' md-svg-icon='{{item.icon}}')
           span {{item.title}}
   h3.footer-main-text Kirčiavimas internetu
-    p.hideSearchWords
-      strong
-        | Kirciavimas, Kirčiavimas, internetu, internete,
-        | programa, Ipad, Iphone, Ipod, andorid, mobilioji programa,
-        | Sukirciuoti, Sukirčiuoti, Nemokamai, be reklamos, kirtis, Kirtis,
-        | Kirčiuoklė, Kirciuokle, kirtis.info
+
   span.flex
   md-button.md-primary.istorija-button(ng-repeat="nav in ctrl.subNavs" ng-click="nav.clickFn()" ng-class="nav.class" md-no-ink)
     | {{nav.title}}
