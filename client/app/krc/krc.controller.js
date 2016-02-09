@@ -60,6 +60,8 @@ angular.module('stklcApp').controller('KrcCtrl', [
         w.unbind('resize', resizeBind);
       });
 
+
+
       $scope.$watch('ctrl.wordInput', function (nv, ov) {
         if (nv && nv !== ov) {
           me.kirciuoti();
@@ -237,7 +239,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
         scope.$apply();
       });
     }
-  })
+  });
 
 
 
