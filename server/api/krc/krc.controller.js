@@ -6,15 +6,14 @@ var request = require('request'),
 
 var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1';
 // alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text
+
 var WORDS_HASH = 'kirtis_found_words';
 var NOT_FOUND_SET = 'kirtis_not_found_words';
-
 var debug = require('debug') ('krc:controller');
 
 exports.index = function (req, res) {
 
   debug('Word typed:', req.params.word);
-
   var text = req.params.word; // Viena for testing
   text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); // uppercase first letter lowercase other
   var failmsg = 'You\'ve got '+ false +' value. Please check the spelling of the word "' + text +'"';
@@ -31,8 +30,9 @@ exports.index = function (req, res) {
           console.log(err);
         }
 
+
         if (r === 1) {
-          debug('Word found in a database.\nGetting word', text, 'from', NOT_FOUND_SET, 'database at', Date() );
+          debug('Word found in a database.\nGetting word', text, 'from', NOT_FOUND_SET, 'database at', Date());
           res.status(404).send(failmsg);
         } else {
           sendRequest(res, text);
@@ -112,7 +112,7 @@ function sendRequest(res, text) {
           }
 
           else{
-            debug('Error occurred while writing to a database', WORDS_HASH);
+            console.log('Error occurred while writing to a database', WORDS_HASH);
           }
 
           res.status(200).json(wordApi);
@@ -130,7 +130,7 @@ function sendRequest(res, text) {
         }
 
         else {
-          debug('Error occurred while writing to a database', NOT_FOUND_SET);
+          console.log('Error occurred while writing to a database', NOT_FOUND_SET);
         }
 
         var failmsg = 'You\'ve got '+ false +' value. Please check the spelling of the word "' + text +'"';
