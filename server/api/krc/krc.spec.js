@@ -12,10 +12,10 @@ var test200 = [
 ];
 
 
-test404.forEach(function(item){
+test404.forEach(function (item) {
 
-  describe('Test for some wrong words from \'test404\' array \n GET /api/krc/'+item, function() {
-    it('Should return status 404', function(done) {
+  describe('Test for some wrong words from \'test404\' array \n GET /api/krc/' + item, function () {
+    it('Should return status 404', function (done) {
       request(app)
         .get('/api/krc/' + encodeURIComponent(item))
         .expect(404, done)
@@ -24,14 +24,14 @@ test404.forEach(function(item){
 
 });
 
-test200.forEach(function(item){
+test200.forEach(function (item) {
 
-  describe('Test for some proper words from \'test200\' array \n GET /api/krc/'+item.word, function() {
-    it('Should return status 200', function(done) {
+  describe('Test for some proper words from \'test200\' array \n GET /api/krc/' + item.word, function () {
+    it('Should return status 200', function (done) {
       request(app)
         .get('/api/krc/' + encodeURIComponent(item.word))
         .expect(200)
-        .end(function(err, res) {
+        .end(function (err, res) {
           if (err)
             return done(err);
           res.body.should.be.instanceof(Array);
@@ -47,12 +47,11 @@ test200.forEach(function(item){
 });
 
 
-
-  describe('Test for no words from GET /api/krc', function() {
-    it('Should return status 400', function(done) {
-      request(app)
-        .get('/api/krc/')
-        .expect(400, done)
-    });
+describe('Test for no words from GET /api/krc', function () {
+  it('Should return status 400', function (done) {
+    request(app)
+      .get('/api/krc/')
+      .expect(400, done)
   });
+});
 
