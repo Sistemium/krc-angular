@@ -15,7 +15,6 @@ var debug = require('debug') ('krc:zodynas.controller');
 var async = require ('async');
 var _ = require ('lodash');
 
-
 exports.index = function(req, res) {
 
   var word = req.params.word.toLowerCase();
