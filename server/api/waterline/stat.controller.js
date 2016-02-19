@@ -121,6 +121,8 @@ exports.index = function (req, res) {
 
   //scan();
 
+  res.end(JSON.stringify(ua));
+
 };
 
 
