@@ -61,6 +61,66 @@ exports.index = function (req, res) {
 
   statsSaver(req, 'usercount', {date: currDate}, {cnt: 1});
   statsSaver(req, 'browsercount', {browser: browserName}, {cnt: 1});
+
+  // Set of models
+  //console.log('Current models are: \n');
+  //Object.keys(req.app.models).forEach(function (a) {
+  //  console.log((a));
+  //});
+  //console.log('\n');
+
+
+  // Delete all models records
+  // DOES NOT WORKS PROPERTLY!!!!
+  //
+  //req.app.models.browser.destroy({}).exec(function (err, smth) {
+  //  if (err)
+  //    throw err;
+  //  //console.log(smth, 'ID was deleted');
+  //});
+
+
+  // Deleting key strings (works fine)
+  // equals to .destroy function
+  // more flexible because of match var
+
+  function scan() {
+    redisClient.scan(
+      cursor,
+      'MATCH', 'waterline:word:*',
+      'COUNT', '100',
+      function (err, res) {
+        if (err) throw err;
+
+        cursor = res[0];
+        keys.push(res[1]);
+
+        if (cursor === '0') {
+
+          keys = _.flattenDeep(keys);
+
+          // if nothing to delete console.log msg else delete
+
+          if (keys.length > 0) {
+            redisClient.DEL(keys, function (err, res) {
+              if (err) throw err;
+              console.log(res, 'records were deleted');
+            });
+          }
+          else {
+            console.log('There is nothing to delete');
+          }
+
+          return console.log('Iteration complete');
+        }
+
+        return scan();
+      }
+    );
+  }
+
+  //scan();
+
 };
 
 
