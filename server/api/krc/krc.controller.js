@@ -23,6 +23,9 @@ exports.index = function (req, res) {
   text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); // uppercase first letter lowercase other
   var failmsg = 'You\'ve got ' + false + ' value. Please check the spelling of the word "' + text + '"';
 
+  //Writing to redis word stats
+  stats.name(req, 'wordcount',{word: text},{cnt: 1});
+
   redisClient.HGET(WORDS_HASH, text, function (err, response) {
 
     if (err) {
