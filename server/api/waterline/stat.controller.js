@@ -57,6 +57,10 @@ exports.index = function (req, res) {
       });
 
   };
+
+
+  statsSaver(req, 'usercount', {date: currDate}, {cnt: 1});
+  statsSaver(req, 'browsercount', {browser: browserName}, {cnt: 1});
 };
 
 
