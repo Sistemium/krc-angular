@@ -2,7 +2,7 @@ doctype html
 html(lang='en')
 head
     meta(charset='utf-8')
-    title Page Not Found :(
+    title Puslapis nerastas :(
     style.
       ::-moz-selection {
       background: #b3d4fc;
@@ -121,13 +121,11 @@ head
   body
     .container
       h1
-        | Not found
+        | 404&nbsp;
         span :(
-      p Sorry, but the page you were trying to view does not exist.
-      p It looks like this was the result of either:
+      p Atsiprašome, bet ieškomas puslapis nerastas.
+      p Veikiausiai, problema atsirado dėl to, kad:
       ul
-        li a mistyped address
-        li an out-of-date link
-      script.
-        var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),GOOG_FIXURL_SITE = location.host;
-      script(src='//linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js')
+        li neteisingai įvestas puslapio adresas
+        li nuoroda yra pasenusi
+
