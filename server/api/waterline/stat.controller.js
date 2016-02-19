@@ -1,3 +1,13 @@
+'use strict';
+
+var UAParser = require('ua-parser-js');
+var moment = require('moment');
+var redisClient = require('../../config/redis').redisClient;
+var _ = require('lodash');
+var cursor = '0';
+var keys = [];
+
+
 module.exports.name = function (req, model, keys, data) {
 
   req.app.models[model].findOne(keys)
@@ -18,3 +28,10 @@ module.exports.name = function (req, model, keys, data) {
     });
 
 };
+
+
+exports.index = function (req, res) {
+};
+
+
+
