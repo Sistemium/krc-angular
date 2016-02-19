@@ -13,10 +13,6 @@ angular.module('stklcApp').controller('KrcCtrl', [
         right: true
       };
 
-      var ua = new UAParser();
-      $scope.deviceInfo = ua.getOS()['name'];
-      console.log($scope.deviceInfo);
-
       var me = this;
       var localStorage = window.localStorage;
       var w = angular.element($window);
@@ -61,7 +57,6 @@ angular.module('stklcApp').controller('KrcCtrl', [
       });
 
 
-
       $scope.$watch('ctrl.wordInput', function (nv, ov) {
         if (nv && nv !== ov) {
           me.kirciuoti();
@@ -86,7 +81,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
           var errors = angular.copy($scope.wordInputForm.word.$error);
 
-          if(errors.maxlength){
+          if (errors.maxlength) {
             me.clearInput();
             return me.showSimpleToast(me.errors['md-maxlength']);
           }
@@ -145,7 +140,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
         toggleLeft: function () {
           $document.find('input')[0].blur();
-          setTimeout(function(){
+          setTimeout(function () {
             $mdSidenav('left-nav').toggle()
           }, 350);
         },
@@ -162,7 +157,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
         clearInput: function () {
           me.callCountWordChars('');
-          setTimeout(function(){
+          setTimeout(function () {
             $document.find('input')[0].focus();
           }, 1);
         },
@@ -200,7 +195,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
           var q = $q.defer();
 
-          $http.get('api/zodynas/'+text).success(function(res){
+          $http.get('api/zodynas/' + text).success(function (res) {
             q.resolve(res);
           });
 
