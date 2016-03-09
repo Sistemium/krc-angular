@@ -19,11 +19,24 @@ module.exports = {
 
   }),
 
-  WordCollection: Waterline.Collection.extend({
-    identity: 'wordCount',
+  WordFoundCollection: Waterline.Collection.extend({
+    identity: 'foundWordCount',
     connection: 'myLocalRedis',
     attributes: {
-      word: {
+      date: {
+        type: 'string',
+        primaryKey: true
+      },
+      cnt: 'integer'
+    }
+
+  }),
+
+  WordNotFoundCollection: Waterline.Collection.extend({
+    identity: 'notFoundWordCount',
+    connection: 'myLocalRedis',
+    attributes: {
+      date: {
         type: 'string',
         primaryKey: true
       },
