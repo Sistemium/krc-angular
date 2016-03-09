@@ -1,0 +1,46 @@
+
+.viewport{
+  padding: 0px;
+  overflow: scroll;
+}
+
+
+
+.chart-container{
+  text-align: center;
+}
+
+.main-wrap{
+  margin: 3px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+.button-custom{
+  width: 98%;
+}
+
+@media screen and (max-width: 1000px) {
+
+  .custom-style{
+    margin: 3px;
+    padding: 3px;
+  }
+
+  div .charts-wrapper{
+    display: inline;
+    justify-content:center;
+    align-items:center;
+    width: 98%;
+  }
+
+}
+
+.charts-wrapper{
+  width: 65%;
+  margin: 0 auto;
+}
+
+.text{
+  text-align:center;
+}
