@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('stklcApp').config(['$stateProvider', function ($stateProvider){
+angular.module('stklcApp').config(['$stateProvider', function ($stateProvider) {
   $stateProvider
 
     .state('krc', {
@@ -28,5 +28,4 @@ angular.module('stklcApp').config(['$stateProvider', function ($stateProvider){
       controller: 'TestCtrl',
       controllerAs: 'ctrl'
     })
-  ;
 }]);
