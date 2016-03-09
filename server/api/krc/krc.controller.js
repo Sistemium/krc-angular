@@ -3,7 +3,7 @@ var request = require('request'),
   fs = require('fs'),
   cheerio = require('cheerio'), /* HTML parser */
   redisClient = require('../../config/redis').redisClient,
-  stats = require('../waterline/stat.controller'),
+  writeStats = require('../waterline/stat.controller'),
   moment = require('moment');
 
 var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1';
@@ -14,17 +14,13 @@ var NOT_FOUND_SET = 'kirtis_not_found_words';
 var debug = require('debug')('krc:controller');
 
 
-
 exports.index = function (req, res) {
 
-
+  var currDate = moment().format('YYYY/MM/DD');
   debug('Word typed:', req.params.word);
   var text = req.params.word; // Viena for testing
   text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); // uppercase first letter lowercase other
   var failmsg = 'You\'ve got ' + false + ' value. Please check the spelling of the word "' + text + '"';
-
-  //Writing to redis word stats
-  stats.name(req, 'wordcount',{word: text},{cnt: 1});
 
   redisClient.HGET(WORDS_HASH, text, function (err, response) {
 
@@ -33,11 +29,12 @@ exports.index = function (req, res) {
     }
 
     if (!response) {
+      //Writing to redis notfoundword stats
+      writeStats.name(req, 'notfoundwordcount', {date: currDate}, {cnt: 1});
       redisClient.SISMEMBER(NOT_FOUND_SET, text, function (err, r) {
         if (err) {
           console.log(err);
         }
-
 
         if (r === 1) {
           debug('Word found in a database.\nGetting word', text, 'from', NOT_FOUND_SET, 'database at', Date());
@@ -45,9 +42,12 @@ exports.index = function (req, res) {
         } else {
           sendRequest(res, text);
         }
+
       });
     } else {
       try {
+        //Writing to redis foundword stats
+        writeStats.name(req, 'foundwordcount', {date: currDate}, {cnt: 1});
         var parsed = JSON.parse(response);
         res.send(parsed);
         debug('Word found in a database.\nGetting word', text, 'from', WORDS_HASH, 'database at', Date());
@@ -82,8 +82,9 @@ function sendRequest(res, text) {
     var regexp = /^[^ ]+[ ]([^ ]+) \(([^)]+)/;
     var regexpNoState = /[^\d.\s][^()]/g;
     var wordApi = [];  // stressed word state and etc
-    var arrLen = stressArray.length;
     /* Count of stressed word found. ex. Viena 15*/
+    var arrLen = stressArray.length;
+
 
     function formWordStructure(stressArray) {
       stressArray.forEach(function (item) {
