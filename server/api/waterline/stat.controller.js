@@ -5,14 +5,13 @@ var moment = require('moment');
 var redisClient = require('../../config/redis').redisClient;
 var _ = require('lodash');
 var cursor = '0';
-var keys = [];
+var async = require('async');
 
 
 module.exports.name = function (req, model, keys, data) {
 
   req.app.models[model].findOne(keys)
     .then (function (foundRec) {
-      console.log(foundRec);
       if (!foundRec) {
         return req.app.models[model]
           .create (_.assignIn(keys, data))
@@ -34,14 +33,13 @@ exports.index = function (req, res) {
 
   var ua = UAParser(req.headers['user-agent']);
 
-  var currDate = moment().format('YYYY/MM/01');
+  var currDate = moment().format('YYYY/MM/DD');
   var browserName = ua.browser.name;
 
   var statsSaver = function (req, model, keys, data) {
 
     req.app.models[model].findOne(keys)
       .then (function (foundRec) {
-        console.log(foundRec);
         if (!foundRec) {
           return req.app.models[model]
             .create (_.assignIn(keys, data))
@@ -62,7 +60,8 @@ exports.index = function (req, res) {
   statsSaver(req, 'usercount', {date: currDate}, {cnt: 1});
   statsSaver(req, 'browsercount', {browser: browserName}, {cnt: 1});
 
-  // Set of models
+  // Set of models test
+
   //console.log('Current models are: \n');
   //Object.keys(req.app.models).forEach(function (a) {
   //  console.log((a));
@@ -70,24 +69,14 @@ exports.index = function (req, res) {
   //console.log('\n');
 
 
-  // Delete all models records
-  // DOES NOT WORKS PROPERTLY!!!!
-  //
-  //req.app.models.browser.destroy({}).exec(function (err, smth) {
-  //  if (err)
-  //    throw err;
-  //  //console.log(smth, 'ID was deleted');
-  //});
-
-
   // Deleting key strings (works fine)
   // equals to .destroy function
-  // more flexible because of match var
+  // more flexible because of match parameter
 
   function scan() {
     redisClient.scan(
       cursor,
-      'MATCH', 'waterline:word:*',
+      'MATCH', 'waterline:wordcount:*',
       'COUNT', '100',
       function (err, res) {
         if (err) throw err;
@@ -118,8 +107,6 @@ exports.index = function (req, res) {
       }
     );
   }
-
-  //scan();
 
   res.end(JSON.stringify(ua));
 
