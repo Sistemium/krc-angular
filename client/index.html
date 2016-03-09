@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width">
   <meta name="resource-type" content="document">
   <meta name="keywords"
-        content="kirčiavimas, kirtis, kirčiuoti, kirciuoti, mobilioji, aplikacija, kirciavimas, sukirčiuoti">
+        content="Kirčiavimas internetu, Kirčiuoklė, Lietuvių kalbos kirčiavimas">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <!--meta name="robots" content="index,follow"-->
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -26,12 +26,14 @@
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css({.tmp,client}) app/app.css -->
   <!-- injector:css -->
   <link rel="stylesheet" href="app/about/about.css">
   <link rel="stylesheet" href="app/app.css">
+  <link rel="stylesheet" href="app/stats/stats.css">
   <link rel="stylesheet" href="app/test/test.css">
   <!-- endinjector -->
   <!-- endbuild -->
@@ -67,7 +69,6 @@
 
   <md-content ui-view class="viewport"></md-content>
 
-  <div include-replace ng-include="'app/footer.html'"></div>
 </div>
 
 <script>
@@ -105,6 +106,8 @@
 <script src="bower_components/lodash/lodash.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/ua-parser-js/src/ua-parser.js"></script>
+<script src="bower_components/Chart.js/Chart.js"></script>
+<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
