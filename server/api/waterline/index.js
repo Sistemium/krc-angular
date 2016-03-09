@@ -6,6 +6,7 @@ var express = require('express'),
 
 
 router.get('/', controller.index);
+router.get('/getStats', controller.stats);
 
 module.exports = router;
 
