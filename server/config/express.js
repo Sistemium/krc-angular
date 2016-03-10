@@ -25,7 +25,7 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-  app.set('redisdb', config.redis[env]);
+  app.set('redisdb', config.redis.db);
 
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));

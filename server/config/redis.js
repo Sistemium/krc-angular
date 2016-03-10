@@ -17,3 +17,4 @@ exports.config = function (app) {
 };
 
 exports.redisClient = redisClient;
+

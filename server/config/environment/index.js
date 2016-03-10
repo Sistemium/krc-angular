@@ -6,9 +6,7 @@ var _ = require('lodash');
 var redisClient = require('../../config/redis').redisClient,
   redisAdapter = require('sails-redis');
 
-var port = redisClient.connection_options.port,
-  host = redisClient.connection_options.host,
-  connectionId = redisClient.connection_id;
+
 
 function requiredProcessEnv(name) {
   if (!process.env[name]) {
@@ -38,42 +36,9 @@ var all = {
 
   // Redis connection options
   redis: {
-    production: process.env.REDIS_DATABASE || 0,
-    development: process.env.REDIS_DATABASE || 1,
-    test: process.env.REDIS_DATABASE || 2
-  },
-
-  waterline: {
-    adapters: {
-      redis: redisAdapter
-    },
-
-    connections: {
-
-      myLocalRedis: {
-        adapter: 'redis',
-        port: port,
-        host: host,
-        password: null,
-        database: connectionId,
-        options: {
-          parser: 'hiredis',
-          return_buffers: false,
-          detect_buffers: false,
-          socket_nodelay: true,
-          no_ready_check: false,
-          enable_offline_queue: true
-        }
-
-      }
-
-    },
-
-    defaults: {
-      migrate: 'alter'
-    }
-
+    db: process.env.REDIS_DATABASE || 1
   }
+
 };
 
 // Export the config object based on the NODE_ENV
