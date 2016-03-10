@@ -3,11 +3,6 @@
 var path = require('path');
 var _ = require('lodash');
 
-var redisClient = require('../../config/redis').redisClient,
-  redisAdapter = require('sails-redis');
-
-
-
 function requiredProcessEnv(name) {
   if (!process.env[name]) {
     throw new Error('You must set the ' + name + ' environment variable');
@@ -32,11 +27,6 @@ var all = {
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
     session: 'stklc-secret'
-  },
-
-  // Redis connection options
-  redis: {
-    db: process.env.REDIS_DATABASE || 1
   }
 
 };
