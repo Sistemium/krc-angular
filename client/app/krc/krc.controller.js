@@ -14,7 +14,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
       };
 
       var me = this;
-      var localStorage = window.localStorage;
+
       var w = angular.element($window);
 
       var resizeBind = w.bind('resize', function () {
