@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stklcApp')
-  .controller('MainCtrl', ['$scope', '$http', function ($scope, $http) {
+  .controller('MainCtrl', ['$scope', '$http'  , function ($scope, $http) {
 
     var me = this;
 
@@ -18,18 +18,16 @@ angular.module('stklcApp')
 
     });
 
-    $scope.setSubNavs = function (navs) {
-      me.subNavs = navs || [];
+    $scope.setSubNavs = function (obj) {
+      me.subNavs = obj || [];
+      console.log(obj);
     };
 
-    $scope.setLeftPart = function (part) {
-      me.leftPart = part;
-    };
 
     $scope.$on('$stateChangeSuccess', function () {
       $scope.setSubNavs();
-      $scope.setLeftPart();
     });
+
 
     $scope.disableScroll = function (arg) {
       $scope.scrollDisabled = !!arg;
