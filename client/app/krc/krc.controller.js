@@ -206,6 +206,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
       });
 
       $scope.setSubNavs([
+        {name: 'krc', title: 'Istorija', clickFn: me.toggleLeft, class: 'hide-gt-sm'}
       ]);
 
     }
