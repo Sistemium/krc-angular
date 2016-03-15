@@ -2,9 +2,10 @@
 
 angular.module('stklcApp')
 
-  .controller('StatsCtrl', ['StatsModel', function (StatsModel) {
+  .controller('StatsCtrl', ['StatsModel', '$scope', function (StatsModel, $scope) {
 
     var me = this;
+
 
     angular.extend (me, {
 
@@ -15,12 +16,6 @@ angular.module('stklcApp')
           angular.extend (me,res);
         });
       },
-
-      scrolling: function(){
-
-
-      }
-
 
     });
 
