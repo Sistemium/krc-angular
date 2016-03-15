@@ -20,7 +20,6 @@ angular.module('stklcApp')
 
     $scope.setSubNavs = function (obj) {
       me.subNavs = obj || [];
-      console.log(obj);
     };
 
 
