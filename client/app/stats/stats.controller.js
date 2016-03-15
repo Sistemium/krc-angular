@@ -26,6 +26,11 @@ angular.module('stklcApp')
 
     me.getStats();
 
+    $scope.setSubNavs([
+      {name: 'krc', title: 'Ref. Stats', clickFn: me.getStats}
+    ]);
+
+
   }])
 ;
 
