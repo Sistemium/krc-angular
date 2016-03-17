@@ -1,10 +1,13 @@
-meta.defineType 'opr.word:STRING';
+grant connect to krc;
+grant dba to krc;
 
-meta.defineEntity 'opr.NotFoundWords', 'word';
-meta.defineEntity 'opr.FoundWords', 'word';
+meta.defineType 'krc.word:STRING';
 
-meta.createTable 'opr.NotFoundWords',0,1;
-meta.createTable 'opr.FoundWords',0,1;
+meta.defineEntity 'krc.NotFoundWord', 'word';
+meta.defineEntity 'krc.FoundWord', 'word';
 
-select * from opr.FoundWords
-select * from opr.NotFoundWords
+meta.createTable 'krc.NotFoundWord',0,1;
+meta.createTable 'krc.FoundWord',0,1;
+
+select * from krc.FoundWord
+select * from krc.NotFoundWord
