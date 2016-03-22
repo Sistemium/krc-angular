@@ -4,7 +4,9 @@ var request = require('request'),
   cheerio = require('cheerio'), /* HTML parser */
   redisClient = require('../../config/redis').redisClient,
   writeStats = require('../waterline/stat.controller'),
-  moment = require('moment');
+  moment = require('moment'),
+  http = require('http'),
+  config = require('../../config/environment');
 
 var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1';
 // alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text
@@ -16,11 +18,14 @@ var debug = require('debug')('krc:controller');
 
 exports.index = function (req, res) {
 
+
   var currDate = moment().format('YYYY/MM/DD');
   debug('Word typed:', req.params.word);
   var text = req.params.word; // Viena for testing
   text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); // uppercase first letter lowercase other
+
   var failmsg = 'You\'ve got ' + false + ' value. Please check the spelling of the word "' + text + '"';
+
 
   redisClient.HGET(WORDS_HASH, text, function (err, response) {
 
@@ -29,37 +34,45 @@ exports.index = function (req, res) {
     }
 
     if (!response) {
-      //Writing to redis notfoundword stats
-      writeStats.name(req, 'notfoundwordcount', {date: currDate}, {cnt: 1});
+
       redisClient.SISMEMBER(NOT_FOUND_SET, text, function (err, r) {
+
         if (err) {
           console.log(err);
         }
 
         if (r === 1) {
+          // If words are in the database
+          // Incrementing notfoundwordcount count, writing date
+          writeStats.name(req, 'notfoundwordcount', {date: currDate}, {cnt: 1});
+          // Writing not found word to amazon
+          writeToAmazon(text, 'notFoundWord');
           debug('Word found in a database.\nGetting word', text, 'from', NOT_FOUND_SET, 'database at', Date());
           res.status(404).send(failmsg);
         } else {
-          sendRequest(res, text);
+          sendRequest(res, text, req);
         }
 
       });
     } else {
       try {
-        //Writing to redis foundword stats
+        // If words are in the database
+        //Incrementing foundwordcount count, writing date
         writeStats.name(req, 'foundwordcount', {date: currDate}, {cnt: 1});
+        // Writing found word to amazon
+        writeToAmazon(text, 'foundWord');
         var parsed = JSON.parse(response);
         res.send(parsed);
         debug('Word found in a database.\nGetting word', text, 'from', WORDS_HASH, 'database at', Date());
       } catch (e) {
-        sendRequest(res, text);
+        sendRequest(res, text, req);
       }
 
     }
   });
 };
 
-function sendRequest(res, text) {
+function sendRequest(res, text, req) {
   request({
     uri: link,
     method: 'POST',
@@ -67,6 +80,10 @@ function sendRequest(res, text) {
       tekstas: text
     }
   }, function (error, response, body) {
+
+
+    // if else rewrite
+
     if (!error && response.statusCode == 200) {
       var $ = cheerio.load(body);
       var stressedWord = $('textarea').last().text();
@@ -74,6 +91,7 @@ function sendRequest(res, text) {
     else {
       return res.status(500).send('The server is down. Please try later.');
     }
+
 
     var stressArray = stressedWord.split('\r\n');
     /* turning string to a string array */
@@ -84,6 +102,7 @@ function sendRequest(res, text) {
     var wordApi = [];  // stressed word state and etc
     /* Count of stressed word found. ex. Viena 15*/
     var arrLen = stressArray.length;
+    var currDate = moment().format('YYYY/MM/DD');
 
 
     function formWordStructure(stressArray) {
@@ -113,6 +132,9 @@ function sendRequest(res, text) {
     // Writing a searched (found and not found) words to redis database if they're not in the database already
 
     if (arrLen != 0) {
+      // If words are NOT in the database
+      writeStats.name(req, 'foundwordcount', {date: currDate}, {cnt: 1});
+      writeToAmazon(text, 'foundWord');
 
       formWordStructure(stressArray);
 
@@ -136,10 +158,14 @@ function sendRequest(res, text) {
     }
     else {
 
+      // If words are NOT in the database
+      writeStats.name(req, 'notfoundwordcount', {date: currDate}, {cnt: 1});
+      writeToAmazon(text, 'notFoundWord');
+
       redisClient.SADD(NOT_FOUND_SET, text, function (err, r) {
 
         if (r === 1) {
-          debug('Word not found.\nWord', text, 'added to', NOT_FOUND_SET, 'database on', Date());
+          debug('Word was not found.\nWord', text, 'added to', NOT_FOUND_SET, 'database on', Date());
         }
 
         else {
@@ -154,5 +180,19 @@ function sendRequest(res, text) {
     }
 
   });
-}
+};
 
+function writeToAmazon(word, path) {
+  request({
+    uri: config.STAPI + path,
+    method: 'POST',
+    form: {
+      word: word
+    }
+
+  }, function (error) {
+    if (error) {
+      console.log('Word', word, 'wasn\'t written');
+    }
+  });
+}
