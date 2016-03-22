@@ -29,7 +29,7 @@ var all = {
     session: 'stklc-secret'
   },
 
-  stapiUrl: process.env.STAPI
+  STAPI: process.env.STAPI
 
 };
 
