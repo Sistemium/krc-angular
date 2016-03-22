@@ -1,6 +1,11 @@
 angular.module ('stklcApp')
-  .service ('StatsModel', function ($http) {
-    
+  .service ('StatsModel', function ($http, $window) {
+
+    var w = angular.element($window);
+
+
+    // Word count graph
+
     function seriesChartData(apiData, series) {
 
       var res = {
@@ -24,7 +29,8 @@ angular.module ('stklcApp')
 
     }
 
-    function noSeriesChartData(apiData, key) {
+    function noSeriesChartData(apiData, key, divider) {
+
 
       var res = {
         labels: [],
@@ -37,6 +43,47 @@ angular.module ('stklcApp')
         res.values.push (row.cnt);
 
       });
+
+
+      if (divider) {
+        var groupData = [];
+        var groupLabels = [];
+        var newLabels = [];
+        var cnt = 0;
+
+
+        // while res.values || res.labels, because res.values == res.labels
+
+        while ((res.values.length > 0)) {
+          groupData[cnt] = res.values.splice(0, divider);
+          groupLabels[cnt] = res.labels.splice(0, divider);
+          cnt++;
+        }
+
+
+        //Calculating the average and rounding.
+
+        groupData.forEach(function (values) {
+          res.values.push(Math.round(values.reduce(function (sum, a) {
+              return sum + a
+            }) / (values.length || 1)));
+        });
+
+        // Forming new labels
+        groupLabels.forEach(function (labels, idx, array) {
+
+          if (idx === array.length - 1) {
+            newLabels = [_.last(labels).slice(2, labels[0].length)];
+          } else {
+            newLabels = [_.head(labels).slice(2, labels[0].length)];
+          }
+
+          res.labels.push(newLabels);
+        })
+
+
+      }
+
       return res;
 
     }
@@ -45,13 +92,35 @@ angular.module ('stklcApp')
 
       return $http.get('api/stats/getStats')
         .then(function (json) {
-
           var result = {};
+          var labelSize = ((innerWidth * 1.6) / 100).toFixed();
           var data = json.data;
+          var divider;
+          resizeChart();
+
+          w.bind('resize', function () {
+            resizeChart();
+          });
+
+          function resizeChart() {
+
+            labelSize = ((innerWidth * 1.6) / 100).toFixed();
+            divider = Math.ceil((data.usercount.length) / labelSize);
+
+            if (divider > 1) {
+              result.userStats = noSeriesChartData(data.usercount, '', divider);
+              result.userStats.values = [result.userStats.values];
+
+            } else {
+              result.userStats = noSeriesChartData(data.usercount);
+              result.userStats.values = [result.userStats.values];
+            }
+
+          };
+
 
           result.browserStats = noSeriesChartData(data.browsercount, 'browser');
-          result.userStats = noSeriesChartData(data.usercount);
-          result.userStats.values = [result.userStats.values];
+
 
           _.each (data.foundwordcount, function (d) {
             d.foundCnt = d.cnt;
@@ -77,8 +146,7 @@ angular.module ('stklcApp')
 
           return result;
 
-        })
-        ;
+        });
     }
 
     return {
