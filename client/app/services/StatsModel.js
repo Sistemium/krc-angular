@@ -1,5 +1,5 @@
 angular.module ('stklcApp')
-  .service ('StatsModel', function ($http, $window) {
+  .service ('StatsModel',['$http', '$window', function ($http, $window) {
 
     var w = angular.element($window);
 
@@ -153,4 +153,4 @@ angular.module ('stklcApp')
       getStats: getStats
     };
 
-  });
+  }]);
