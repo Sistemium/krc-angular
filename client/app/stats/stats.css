@@ -16,10 +16,6 @@
   -webkit-user-select: none;
 }
 
-.button-custom{
-  width: 98%;
-}
-
 @media screen and (max-width: 1000px) {
 
   .custom-style{
@@ -46,7 +42,7 @@ div.charts-wrapper .md-subheader{
 
 
 .charts-wrapper{
-  width: 65%;
+  width: 70%;
   margin: 0 auto;
 }
 
