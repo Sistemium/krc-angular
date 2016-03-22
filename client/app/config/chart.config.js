@@ -7,17 +7,24 @@ angular.module('stklcApp')
     // Configure all charts
     ChartJsProvider.setOptions({
       colours: ['#FF5252', '#FFAAFF'],
-      pointDot: true,
-      responsive: true,
+      responsive: true
     });
-    // Configure all line charts
+    // Configure Line charts
     ChartJsProvider.setOptions('Line', {
-      scaleShowVerticalLines: true,
-      colours: ['#AA0330', '#1700AA']
+      colours: ['#1700AA'],
+      bezierCurve : false
     });
-    // Config pie chart
-    ChartJsProvider.setOptions('Doughnut', {
-      datasetFill: true
+    // Config Pie chart
+    ChartJsProvider.setOptions('Pie', {
+      colours: ['#5d48d6', '#e16d8d'],
+      segmentStrokeWidth: 0,
+      segmentStrokeColor: "#fff"
     });
+    // Config Bar chart
+    ChartJsProvider.setOptions('Bar', {
+      colours: ['#1700AA', '#AA0330'],
+      segmentStrokeWidth: 0
+    });
+
   }])
 ;
