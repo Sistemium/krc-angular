@@ -15,14 +15,14 @@ angular.module('stklcApp')
           me.showCharts = true;
           angular.extend (me,res);
         });
-      },
+      }
 
     });
 
     me.getStats();
 
     $scope.setSubNavs([
-      {name: 'krc', title: 'Ref. Stats', clickFn: me.getStats}
+      {name: 'krc', title: 'Refresh', clickFn: me.getStats}
     ]);
 
 
