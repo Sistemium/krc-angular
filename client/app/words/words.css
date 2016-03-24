@@ -1,0 +1,38 @@
+/* Styles go here */
+
+.virtualRepeatdemoVerticalUsage #vertical-container {
+  height: 600px;
+  width: 35%;
+  margin: 0 auto;
+}
+
+.selected {
+  background: gray;
+}
+
+.virtualRepeatdemoVerticalUsage .repeated-item {
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+  height: 40px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.virtualRepeatdemoVerticalUsage md-content {
+  margin: 16px;
+}
+
+@media screen and (max-width: 800px) {
+
+  .virtualRepeatdemoVerticalUsage #vertical-container {
+    height: 360px;
+    width: 100%;
+
+  }
+
+}
+
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+  background: rgb(182, 14, 189);
+  color: rgb(182, 14, 189);
+}
