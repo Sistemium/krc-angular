@@ -26,6 +26,7 @@ exports.index = function (req, res) {
 
   var failmsg = 'You\'ve got ' + false + ' value. Please check the spelling of the word "' + text + '"';
 
+  var deviceUUID = req.headers.deviceuuid;
 
   redisClient.HGET(WORDS_HASH, text, function (err, response) {
 
@@ -46,7 +47,7 @@ exports.index = function (req, res) {
           // Incrementing notfoundwordcount count, writing date
           writeStats.name(req, 'notfoundwordcount', {date: currDate}, {cnt: 1});
           // Writing not found word to amazon
-          writeToAmazon(text, 'notFoundWord');
+          writeToAmazon(text, 'notFoundWord',deviceUUID);
           debug('Word found in a database.\nGetting word', text, 'from', NOT_FOUND_SET, 'database at', Date());
           res.status(404).send(failmsg);
         } else {
@@ -60,7 +61,7 @@ exports.index = function (req, res) {
         //Incrementing foundwordcount count, writing date
         writeStats.name(req, 'foundwordcount', {date: currDate}, {cnt: 1});
         // Writing found word to amazon
-        writeToAmazon(text, 'foundWord');
+        writeToAmazon(text, 'foundWord',deviceUUID);
         var parsed = JSON.parse(response);
         res.send(parsed);
         debug('Word found in a database.\nGetting word', text, 'from', WORDS_HASH, 'database at', Date());
@@ -134,7 +135,7 @@ function sendRequest(res, text, req) {
     if (arrLen != 0) {
       // If words are NOT in the database
       writeStats.name(req, 'foundwordcount', {date: currDate}, {cnt: 1});
-      writeToAmazon(text, 'foundWord');
+      writeToAmazon(text, 'foundWord', deviceUUID);
 
       formWordStructure(stressArray);
 
@@ -160,7 +161,7 @@ function sendRequest(res, text, req) {
 
       // If words are NOT in the database
       writeStats.name(req, 'notfoundwordcount', {date: currDate}, {cnt: 1});
-      writeToAmazon(text, 'notFoundWord');
+      writeToAmazon(text, 'notFoundWord', deviceUUID);
 
       redisClient.SADD(NOT_FOUND_SET, text, function (err, r) {
 
@@ -180,14 +181,15 @@ function sendRequest(res, text, req) {
     }
 
   });
-};
+}
 
-function writeToAmazon(word, path) {
+function writeToAmazon(word, path, deviceUUID) {
   request({
     uri: config.STAPI + path,
     method: 'POST',
-    form: {
-      word: word
+    json: {
+      word: word,
+      deviceUUID: deviceUUID
     }
 
   }, function (error) {
