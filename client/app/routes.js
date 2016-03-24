@@ -27,5 +27,5 @@ angular.module('stklcApp').config(['$stateProvider', function ($stateProvider) {
       templateUrl: 'app/test/test.html',
       controller: 'TestCtrl',
       controllerAs: 'ctrl'
-    })
+    });
 }]);
