@@ -14,7 +14,8 @@
     "angular-ui-router": "latest",
     "components-font-awesome": "latest",
     "ua-parser-js": ">=0.7.10",
-    "angular-chart.js": "~0.8.8"
+    "angular-chart.js": "~0.8.8",
+    "node-uuid": "~1.4.7"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
