@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stklcApp')
-  .service('WordService',['$http',function($http){
+  .service('WordService',['$http', 'Device', function($http, Device){
 
     var me = this;
 
@@ -31,7 +31,11 @@ angular.module('stklcApp')
     };
 
     me.getWordData = function (word) {
-      var q = $http.get('/api/krc/' + word);
+      var q = $http.get('/api/krc/' + word,{
+        headers: {
+          deviceUUID: Device.uuid()
+        }
+      });
       return q.success(function(res){
         writeSearchedWords(word);
       });
