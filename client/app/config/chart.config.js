@@ -16,7 +16,18 @@ angular.module('stklcApp')
     });
     // Config Pie chart
     ChartJsProvider.setOptions('Pie', {
-      colours: ['#5d48d6', '#e16d8d'],
+      colours: [
+        '#7180b4',
+        '#4e4f8d',
+        '#4C97B1',
+        '#934A5F',
+        '#57648C',
+        '#7A6F88',
+        '#5D7085',
+        '#515151',
+        '#4A36C8',
+        '#B63457'
+      ],
       segmentStrokeWidth: 0,
       segmentStrokeColor: "#fff"
     });
