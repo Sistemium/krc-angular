@@ -118,12 +118,14 @@ exports.stats = function (req, res) {
   var responseData = {};
   var modelNames = Object.keys(req.app.models);
 
+
   async.each(modelNames, function (modelName, doneModel) {
 
     var primaryKey = req.app.models[modelName].primaryKey;
     var modelKey = 'waterline:' + modelName + ':' + primaryKey;
 
     responseData [modelName] = [];
+
 
     redisClient.SMEMBERS([modelKey], function (err, keys) {
 
@@ -148,12 +150,17 @@ exports.stats = function (req, res) {
         if (err) {
           return doneModel(err);
         }
-        responseData [modelName] = _.sortBy (responseData [modelName], primaryKey);
+
+        if (primaryKey != 'browser') {
+          responseData [modelName] = _.sortBy (responseData [modelName], primaryKey);
+        } else {
+          responseData [modelName] = _.sortBy (responseData [modelName], 'cnt');
+        }
+
         doneModel();
       });
 
     });
-
 
   }, function (err) {
 
