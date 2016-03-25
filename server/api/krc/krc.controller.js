@@ -47,7 +47,7 @@ exports.index = function (req, res) {
           // Incrementing notfoundwordcount count, writing date
           writeStats.name(req, 'notfoundwordcount', {date: currDate}, {cnt: 1});
           // Writing not found word to amazon
-          writeToAmazon(text, 'notFoundWord',deviceUUID);
+          writeToAmazon(text, 'notFoundWord', deviceUUID);
           debug('Word found in a database.\nGetting word', text, 'from', NOT_FOUND_SET, 'database at', Date());
           res.status(404).send(failmsg);
         } else {
@@ -61,7 +61,7 @@ exports.index = function (req, res) {
         //Incrementing foundwordcount count, writing date
         writeStats.name(req, 'foundwordcount', {date: currDate}, {cnt: 1});
         // Writing found word to amazon
-        writeToAmazon(text, 'foundWord',deviceUUID);
+        writeToAmazon(text, 'foundWord', deviceUUID);
         var parsed = JSON.parse(response);
         res.send(parsed);
         debug('Word found in a database.\nGetting word', text, 'from', WORDS_HASH, 'database at', Date());
