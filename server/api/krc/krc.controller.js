@@ -82,6 +82,7 @@ function sendRequest(res, text, req) {
     }
   }, function (error, response, body) {
 
+    var deviceUUID = req.headers.deviceuuid;
 
     // if else rewrite
 
