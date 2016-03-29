@@ -1,9 +1,6 @@
 angular.module ('stklcApp')
   .service ('StatsModel',['$http', '$window', function ($http, $window) {
 
-    var w = angular.element($window);
-
-
     // Word count graph
 
     function seriesChartData(apiData, series) {
@@ -93,18 +90,14 @@ angular.module ('stklcApp')
       return $http.get('api/stats/getStats')
         .then(function (json) {
           var result = {};
-          var labelSize = ((innerWidth * 1.6) / 100).toFixed();
+          var labelSize = ((innerWidth * 1.8) / 100).toFixed();
           var data = json.data;
           var divider;
           resizeChart();
 
-          w.bind('resize', function () {
-            resizeChart();
-          });
-
           function resizeChart() {
 
-            labelSize = ((innerWidth * 1.6) / 100).toFixed();
+            labelSize = ((innerWidth * 1.8) / 100).toFixed();
             divider = Math.ceil((data.usercount.length) / labelSize);
 
             if (divider > 1) {
