@@ -17,6 +17,8 @@ angular.module('stklcApp')
     // Config Pie chart
     ChartJsProvider.setOptions('Pie', {
       colours: [
+        '#e1c51e',
+        '#3d7e14',
         '#7180b4',
         '#4e4f8d',
         '#4C97B1',
