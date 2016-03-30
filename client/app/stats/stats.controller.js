@@ -11,9 +11,9 @@ angular.module('stklcApp')
 
       getStats: function () {
         me.showCharts = false;
-        StatsModel.getStats().then (function (res){
+        StatsModel.getStats().then (function (res) {
           me.showCharts = true;
-          angular.extend (me,res);
+          angular.extend (me, res);
         });
       }
 
