@@ -1,5 +1,5 @@
 angular.module ('stklcApp')
-  .service ('StatsModel',['$http', '$window', function ($http, $window) {
+  .service ('StatsModel', ['$http', '$window', function ($http) {
 
     // Word count graph
 
@@ -31,7 +31,8 @@ angular.module ('stklcApp')
 
       var res = {
         labels: [],
-        values: []
+        values: [],
+        percentage: []
       };
 
       _.each (apiData, function (row) {
@@ -40,6 +41,20 @@ angular.module ('stklcApp')
         res.values.push (row.cnt);
 
       });
+
+      //percentages for pie chart
+
+      if (key == 'browser') {
+
+        var total = res.values.reduce(function (a, b) {
+          return a + b;
+        });
+
+        res.values.forEach(function (elem, i) {
+          res.labels[i] +=' ' + ((elem / total) * 100).toFixed(1) + '%';
+        });
+      }
+
 
 
       if (divider) {
@@ -76,6 +91,7 @@ angular.module ('stklcApp')
           }
 
           res.labels.push(newLabels);
+
         })
 
 
@@ -109,11 +125,9 @@ angular.module ('stklcApp')
               result.userStats.values = [result.userStats.values];
             }
 
-          };
-
+          }
 
           result.browserStats = noSeriesChartData(data.browsercount, 'browser');
-
 
           _.each (data.foundwordcount, function (d) {
             d.foundCnt = d.cnt;
