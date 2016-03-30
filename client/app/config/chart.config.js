@@ -36,7 +36,11 @@ angular.module('stklcApp')
     // Config Bar chart
     ChartJsProvider.setOptions('Bar', {
       colours: ['#1700AA', '#AA0330'],
-      segmentStrokeWidth: 0
+      barShowStroke : true,
+      barStrokeWidth : 1,
+      barValueSpacing : 5,
+      scaleShowVerticalLines: false,
+      barDatasetSpacing : 1
     });
 
   }])
