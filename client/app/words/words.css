@@ -1,16 +1,10 @@
-/* Styles go here */
 
-.virtualRepeatdemoVerticalUsage #vertical-container {
-  height: 600px;
+.virtualRepeat #vertical-container {
   width: 35%;
   margin: 0 auto;
 }
 
-.selected {
-  background: gray;
-}
-
-.virtualRepeatdemoVerticalUsage .repeated-item {
+.virtualRepeat .repeated-item {
   border-bottom: 1px solid #ddd;
   box-sizing: border-box;
   height: 40px;
@@ -18,14 +12,9 @@
   text-align: center;
 }
 
-.virtualRepeatdemoVerticalUsage md-content {
-  margin: 16px;
-}
-
 @media screen and (max-width: 800px) {
 
-  .virtualRepeatdemoVerticalUsage #vertical-container {
-    height: 360px;
+  .virtualRepeat #vertical-container {
     width: 100%
   }
 
