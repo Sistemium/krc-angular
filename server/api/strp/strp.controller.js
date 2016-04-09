@@ -2,7 +2,7 @@
 var request = require('request');
 var fs = require('fs');
 
-exports.index = function(req, res){
+exports.index = function (req, res) {
   console.log('you\'re on strp page');
 
   fs.readFile('server/api/strp/strp.json', 'utf8', function (err, data) {

@@ -4,7 +4,7 @@ var path = require('path');
 var _ = require('lodash');
 
 function requiredProcessEnv(name) {
-  if(!process.env[name]) {
+  if (!process.env[name]) {
     throw new Error('You must set the ' + name + ' environment variable');
   }
   return process.env[name];
@@ -29,12 +29,8 @@ var all = {
     session: 'stklc-secret'
   },
 
-  // Redis connection options
-  redis: {
-    production: process.env.REDIS_DATABASE || 0,
-    development: process.env.REDIS_DATABASE || 1,
-    test: process.env.REDIS_DATABASE || 2
-  }
+  STAPI: process.env.STAPI
+
 };
 
 // Export the config object based on the NODE_ENV

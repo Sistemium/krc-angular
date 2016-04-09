@@ -7,7 +7,8 @@ angular.module('stklcApp', [
   'ngAnimate',
   'ngMessages',
   'ui.router',
-  'ngMaterial'
+  'ngMaterial',
+  'chart.js'
 ])
   .config(function($mdIconProvider) {
     $mdIconProvider

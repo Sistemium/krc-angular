@@ -1,0 +1,26 @@
+
+.virtualRepeat #vertical-container {
+  width: 35%;
+  margin: 0 auto;
+}
+
+.virtualRepeat .repeated-item {
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+  height: 40px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+
+  .virtualRepeat #vertical-container {
+    width: 100%
+  }
+
+}
+
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+  background: rgba(141, 0, 221, 0.5);
+  color: rgba(141, 0, 221, 0.5)
+}

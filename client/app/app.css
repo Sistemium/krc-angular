@@ -183,6 +183,10 @@ md-menu-item.active md-icon {
   overflow: hidden;
 }
 
+.md-content-style{
+  margin: 10px;
+}
+
 
 .trinti-istorija{
   margin-bottom: 20px;
@@ -239,6 +243,7 @@ md-toast .md-toast-content{
 
 .istorija-button{
   top:1px;
+  color: white;
 }
 
 .footer-text{

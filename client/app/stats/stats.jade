@@ -1,0 +1,33 @@
+md-content.wrapper.md-whiteframe-z2(style='height: {{windowHeight-85}}px')
+  md-content.scrollBind
+    div.main-wrap(layout="column")
+
+      div.charts-wrapper
+
+        div.custom-style(ng-if='ctrl.showCharts')
+          md-subheader.md-primary Words Count
+
+          canvas#bar.chart.chart-bar(
+            chart-data='ctrl.wordStats.series',
+            chart-labels='ctrl.wordStats.labels'
+            chart-series = "['Found' , 'Not Found']"
+          )
+
+        div.custom-style(ng-if='ctrl.showCharts')
+          md-subheader.md-primary Browser Count
+
+          canvas#pie.chart.chart-pie(
+            chart-data='ctrl.browserStats.values',
+            chart-labels='ctrl.browserStats.labels',
+            chart-legend = true
+          )
+
+        div.custom-style(ng-if='ctrl.showCharts')
+          md-subheader.md-primary User Count
+
+          canvas#line.chart.chart-line(
+            chart-data='ctrl.userStats.values',
+            chart-labels='ctrl.userStats.labels'
+          )
+
+

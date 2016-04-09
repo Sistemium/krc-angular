@@ -1,0 +1,12 @@
+md-content
+  md-tabs(md-dynamic-height='', md-border-bottom='', md-center-tabs='true', md-no-ink='')
+    md-tab(label='Found {{ctrl.foundWords.numItems}}')
+      div(class="virtualRepeat")
+        md-virtual-repeat-container#vertical-container(style='height: {{windowHeight-110}}px')
+          .repeated-item(md-virtual-repeat='item in ctrl.foundWords', md-on-demand='', flex='')
+            | {{item}}
+    md-tab(label='Not Found {{ctrl.notFoundWords.numItems}}')
+      div(class="virtualRepeat")
+        md-virtual-repeat-container#vertical-container(style='height: {{windowHeight-110}}px')
+          .repeated-item(md-virtual-repeat='item in ctrl.notFoundWords', md-on-demand='', flex='')
+            | {{item}}

@@ -12,11 +12,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <base href="/">
   <title>Kirčiavimas internetu</title>
+  <meta name="apple-itunes-app" content="app-id=1071057652">
   <meta name="description" content="Kirčiavimas internetu">
   <meta name="viewport" content="width=device-width">
   <meta name="resource-type" content="document">
   <meta name="keywords"
-        content="kirčiavimas, kirtis, kirčiuoti, kirciuoti, mobilioji, aplikacija, kirciavimas, sukirčiuoti">
+        content="Kirčiavimas internetu, Kirčiuoklė, Lietuvių kalbos kirčiavimas">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <!--meta name="robots" content="index,follow"-->
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -25,13 +26,15 @@
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css({.tmp,client}) app/app.css -->
   <!-- injector:css -->
   <link rel="stylesheet" href="app/about/about.css">
   <link rel="stylesheet" href="app/app.css">
-  <link rel="stylesheet" href="app/test/test.css">
+  <link rel="stylesheet" href="app/stats/stats.css">
+  <link rel="stylesheet" href="app/words/words.css">
   <!-- endinjector -->
   <!-- endbuild -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
@@ -66,7 +69,6 @@
 
   <md-content ui-view class="viewport"></md-content>
 
-  <div include-replace ng-include="'app/footer.html'"></div>
 </div>
 
 <script>
@@ -104,6 +106,9 @@
 <script src="bower_components/lodash/lodash.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/ua-parser-js/src/ua-parser.js"></script>
+<script src="bower_components/Chart.js/Chart.js"></script>
+<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+<script src="bower_components/node-uuid/uuid.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -112,12 +117,18 @@
 <script src="app/app.js"></script>
 <!-- injector:js -->
 <script src="app/about/about.controller.js"></script>
-<script src="app/http_modules/DictionaryModel.js"></script>
-<script src="app/http_modules/WordService.js"></script>
+<script src="app/config/chart.config.js"></script>
 <script src="app/krc/krc.controller.js"></script>
 <script src="app/main.controller.js"></script>
 <script src="app/routes.js"></script>
-<script src="app/test/test.controller.js"></script>
+<script src="app/services/Device.js"></script>
+<script src="app/services/DictionaryModel.js"></script>
+<script src="app/services/StatsModel.js"></script>
+<script src="app/services/WordService.js"></script>
+<script src="app/stats/stats.controller.js"></script>
+<script src="app/stats/stats.routes.js"></script>
+<script src="app/words/words.controller.js"></script>
+<script src="app/words/words.route.js"></script>
 <!-- endinjector -->
 <!-- endbuild -->
 
