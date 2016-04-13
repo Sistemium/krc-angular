@@ -110,23 +110,25 @@ angular.module('stklcApp').controller('KrcCtrl', [
 
           }
 
-          WordService.getWordData(w).success(function (data) {
-            me.data = data;
-          }).error(function (data, res) {
-            console.log(res);
-            if (res == 404) {
-              me.data = [];
-              me.showSimpleToast('Žodis nerastas');
-            }
-            else if (res == 400) {
-              me.data = [];
-              me.showSimpleToast('Pasitikrintike įvestą žodį');
-            }
-            else if (res == 500) {
-              me.data = [];
-              me.showSimpleToast('Serverio klaida');
-            }
-          });
+          if (w) {
+            WordService.getWordData(w).success(function (data) {
+              me.data = data;
+            }).error(function (data, res) {
+
+              if (res == 404) {
+                me.data = [];
+                me.showSimpleToast('Žodis nerastas');
+              }
+              else if (res == 400) {
+                me.data = [];
+                me.showSimpleToast('Pasitikrintike įvestą žodį');
+              }
+              else if (res == 500) {
+                me.data = [];
+                me.showSimpleToast('Serverio klaida');
+              }
+            });
+          }
 
         },
 
