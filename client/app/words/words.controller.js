@@ -81,12 +81,12 @@ angular.module('stklcApp')
 
         for (var i in obj.data) {
           if (obj.data[i].word.length > 30) {
-            this.loadedPages[pageNumber].push('The text is too long. No output');
-            this.loadedTime[pageNumber].push(obj.data[i].ts.slice(0, -4));
+            this.loadedPages[pageNumber].push('The text is too long. No output' + '|' + ' ' + obj.data[i].ts.slice(0, -4));
+            //this.loadedTime[pageNumber].push(obj.data[i].ts.slice(0, -4));
           }
           else {
-            this.loadedPages[pageNumber].push(obj.data[i].word);
-            this.loadedTime[pageNumber].push(obj.data[i].ts.slice(0, -4));
+            this.loadedPages[pageNumber].push(obj.data[i].word + ' ' + '|' + ' ' + obj.data[i].ts.slice(0, -4));
+            //this.loadedTime[pageNumber].push(obj.data[i].ts.slice(0, -4));
           }
         }
 
