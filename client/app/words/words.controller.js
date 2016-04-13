@@ -1,18 +1,30 @@
 'use strict';
 angular.module('stklcApp')
-  .controller('WordsCtrl', ['$timeout', '$http', function ($timeout, $http) {
-    // In this example, we set up our model using a plain object.
-    // Using a class works too. All that matters is that we implement
-    // getItemAtIndex and getLength.
+  .controller('WordsCtrl', ['$scope', '$http', function ($scope, $http) {
 
-    // In this example, we set up our model using a class.
-    // Using a plain object works too. All that matters
-    // is that we implement getItemAtIndex and getLength.
+
+    var me = this;
+
+    angular.extend (me, {
+
+      getWords(){
+        me.foundWords.fetchPage_(0);
+      }
+
+    });
+
+    $scope.setSubNavs([
+      {name: 'krc', title: 'Refresh', clickFn: me.getWords}
+    ]);
+
+
     var NotFoundWords = function () {
       /**
        * @type {!Object<?Array>} Data pages, keyed by page number (0-index).
+       * loading at the most 6 elems. All other elems are empty; 60 words * 40px = 2400px;
        */
-      this.loadedPages = {};
+      this.loadedPages = [];
+      this.loadedTime = [];
 
       /** @type {number} Total number of items. */
       this.numItems = 0;
@@ -20,41 +32,98 @@ angular.module('stklcApp')
       /** @const {number} Number of items to fetch per request. */
       this.PAGE_SIZE = 10;
 
+      /** Loaded pages status**/
+      this.loadArr = [];
+      this.keepItemsConst = 5;
+
       this.fetchNumItems_();
+
     };
+
 
     // Required.
     NotFoundWords.prototype.getItemAtIndex = function (index) {
+
       var pageNumber = Math.floor(index / this.PAGE_SIZE);
       var page = this.loadedPages[pageNumber];
 
-      if (page) {
+      if ((page) && (this.loadArr[pageNumber] == 'loaded')) {
+
         return page[index % this.PAGE_SIZE];
-      } else if (page !== null) {
+
+      } else if (this.loadArr[pageNumber] == 'deleted') {
+
         this.fetchPage_(pageNumber);
+        this.loadArr[pageNumber] = 'loaded';
+
+      } else if (page !== null) {
+
+        this.fetchPage_(pageNumber);
+
       }
+
     };
 
     // Required.
     NotFoundWords.prototype.getLength = function () {
+      // Getting total number of elements to show in viewport
       return this.numItems;
     };
 
+
     NotFoundWords.prototype.fetchPage_ = function (pageNumber) {
+
       // Set the page to null so we know it is already being fetched.
       this.loadedPages[pageNumber] = null;
-
-      // For demo purposes, we simulate loading more items with a timed
-      // promise. In real code, this function would likely contain an
-      // $http request.
 
       $http.get('https://api.sistemium.com/v4d/krc/notFoundWord?x-start-page:=' + (pageNumber + 1)).then(angular.bind(this, function (obj) {
         this.loadedPages[pageNumber] = [];
 
         for (var i in obj.data) {
-          this.loadedPages[pageNumber].push(obj.data[i].word);
+          if (obj.data[i].word.length > 30) {
+            this.loadedPages[pageNumber].push('The text is too long. No output');
+            this.loadedTime[pageNumber].push(obj.data[i].ts.slice(0, -4));
+          }
+          else {
+            this.loadedPages[pageNumber].push(obj.data[i].word);
+            this.loadedTime[pageNumber].push(obj.data[i].ts.slice(0, -4));
+          }
         }
+
+        this.loadArr[pageNumber] = 'loaded';
+
+        // Counting how many pages are loaded
+        if (this.loadArr) {
+          var cnt = 0;
+          this.loadArr.forEach(function (i) {
+            if (i === 'loaded') {
+              cnt++;
+            }
+          });
+        }
+
+
+        // If loaded pages count > 5, then delete arr elems by if statement;
+
+        if (cnt > 5) {
+
+          if ((this.loadArr[pageNumber] == 'loaded') && (this.loadArr[pageNumber - 1] == 'loaded')) {
+
+            _.fill(this.loadArr, 'deleted', 0, ((pageNumber + 1) - this.keepItemsConst));
+            _.fill(this.loadedPages, [], 0, ((pageNumber + 1) - this.keepItemsConst));
+
+          }
+
+          else if ((this.loadArr[pageNumber] == 'loaded') && (this.loadArr[pageNumber - 1] == 'deleted')) {
+
+            _.fill(this.loadArr, 'deleted', (pageNumber + this.keepItemsConst), this.loadArr.length);
+            _.fill(this.loadedPages, [], (pageNumber + this.keepItemsConst), this.loadedPages.length);
+
+          }
+        }
+
       }));
+
     };
 
     NotFoundWords.prototype.fetchNumItems_ = function () {
@@ -64,19 +133,18 @@ angular.module('stklcApp')
         $http.get('https://api.sistemium.com/v4d/krc/notFoundWord?agg:=1').then(angular.bind(this, function (obj) {
           this.numItems = obj.headers('X-Aggregate-Count');
         }));
-      }
 
+      }
     };
 
-
     this.notFoundWords = new NotFoundWords();
-
 
     var FoundWords = function () {
       /**
        * @type {!Object<?Array>} Data pages, keyed by page number (0-index).
+       * loading at the most 6 elems. All other elems are empty; 60 words * 40px = 2400px;
        */
-      this.loadedPages = {};
+      this.loadedPages = [];
 
       /** @type {number} Total number of items. */
       this.numItems = 0;
@@ -84,8 +152,14 @@ angular.module('stklcApp')
       /** @const {number} Number of items to fetch per request. */
       this.PAGE_SIZE = 10;
 
+      /** Loaded pages status**/
+      this.loadArr = [];
+      this.keepItemsConst = 5;
+
       this.fetchNumItems_();
+
     };
+
 
     // Required.
     FoundWords.prototype.getItemAtIndex = function (index) {
@@ -93,45 +167,95 @@ angular.module('stklcApp')
       var pageNumber = Math.floor(index / this.PAGE_SIZE);
       var page = this.loadedPages[pageNumber];
 
-      if (page) {
+      if ((page) && (this.loadArr[pageNumber] == 'loaded')) {
+
         return page[index % this.PAGE_SIZE];
-      } else if (page !== null) {
+
+      } else if (this.loadArr[pageNumber] == 'deleted') {
+
         this.fetchPage_(pageNumber);
+        this.loadArr[pageNumber] = 'loaded';
+
+      } else if (page !== null) {
+
+        this.fetchPage_(pageNumber);
+
       }
+
     };
 
     // Required.
     FoundWords.prototype.getLength = function () {
+      // Getting total number of elements to show in viewport
       return this.numItems;
     };
 
+
     FoundWords.prototype.fetchPage_ = function (pageNumber) {
+
       // Set the page to null so we know it is already being fetched.
       this.loadedPages[pageNumber] = null;
 
       $http.get('https://api.sistemium.com/v4d/krc/foundWord?x-start-page:=' + (pageNumber + 1)).then(angular.bind(this, function (obj) {
         this.loadedPages[pageNumber] = [];
+
         for (var i in obj.data) {
-          this.loadedPages[pageNumber].push(obj.data[i].word);
+
+          this.loadedPages[pageNumber].push(obj.data[i].word + ' ' + '|' + ' ' + obj.data[i].ts.slice(0, -4));
+
         }
+
+        this.loadArr[pageNumber] = 'loaded';
+
+        // Counting how many pages are loaded
+        if (this.loadArr) {
+          var cnt = 0;
+          this.loadArr.forEach(function (i) {
+            if (i === 'loaded') {
+              cnt++;
+            }
+          });
+        }
+
+
+        // If loaded pages count > 5, then delete arr elems by if statement;
+
+        if (cnt > 5) {
+
+          if ((this.loadArr[pageNumber] == 'loaded') && (this.loadArr[pageNumber - 1] == 'loaded')) {
+
+            _.fill(this.loadArr, 'deleted', 0, ((pageNumber + 1) - this.keepItemsConst));
+            _.fill(this.loadedPages, [], 0, ((pageNumber + 1) - this.keepItemsConst));
+
+          }
+
+          else if ((this.loadArr[pageNumber] == 'loaded') && (this.loadArr[pageNumber - 1] == 'deleted')) {
+
+            _.fill(this.loadArr, 'deleted', (pageNumber + this.keepItemsConst), this.loadArr.length);
+            _.fill(this.loadedPages, [], (pageNumber + this.keepItemsConst), this.loadedPages.length);
+
+          }
+
+        }
+
       }));
+
     };
 
-    // Getting total number of elements to show in viewport
-
     FoundWords.prototype.fetchNumItems_ = function () {
+
       if (this.numItems == 0) {
+
         $http.get('https://api.sistemium.com/v4d/krc/foundWord?agg:=1').then(angular.bind(this, function (obj) {
           this.numItems = obj.headers('X-Aggregate-Count');
         }));
-      }
 
+      }
     };
 
     this.foundWords = new FoundWords();
 
+  }]);
 
-  }
-  ]);
 
 
