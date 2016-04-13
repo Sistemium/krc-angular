@@ -225,7 +225,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
   ])
 
   .directive('resize', function ($window) {
-    return function (scope, element) {
+    return function (scope) {
       var w = $window;
       scope.getWindowDimensions = function () {
         return {
@@ -233,7 +233,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
           'w': w.innerWidth
         };
       };
-      scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
+      scope.$watch(scope.getWindowDimensions, function (newValue) {
         scope.windowHeight = newValue.h;
         scope.windowWidth = newValue.w;
       }, true);
