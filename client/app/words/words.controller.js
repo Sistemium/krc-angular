@@ -7,7 +7,7 @@ angular.module('stklcApp')
 
     angular.extend (me, {
 
-      getWords(){
+      getWords: function (){
         me.foundWords.fetchPage_(0);
       }
 
