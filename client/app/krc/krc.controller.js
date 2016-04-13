@@ -137,8 +137,8 @@ angular.module('stklcApp').controller('KrcCtrl', [
             $mdToast.simple()
               .content(phrase)
               .position(me.getToastPosition())
-              .hideDelay(1700)
-              .theme("")
+              .hideDelay(2000)
+              .theme('')
           );
         },
 
