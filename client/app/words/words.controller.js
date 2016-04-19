@@ -7,6 +7,7 @@ angular.module('stklcApp')
 
     angular.extend (me, {
 
+
       getWords: function () {
         me.foundWords.loadedPages = [];
         me.notFoundWords.loadedPages = [];
