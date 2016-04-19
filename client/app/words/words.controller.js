@@ -7,13 +7,30 @@ angular.module('stklcApp')
 
     angular.extend (me, {
 
-
       getWords: function () {
         me.foundWords.loadedPages = [];
         me.notFoundWords.loadedPages = [];
+
+        $http.get('https://api.sistemium.com/v4d/krc/foundWord?agg:=1').then(angular.bind(me, function (obj) {
+          me.foundWords.numItems = obj.headers('X-Aggregate-Count');
+        }));
+
+        $http.get('https://api.sistemium.com/v4d/krc/notFoundWord?agg:=1').then(angular.bind(me, function (obj) {
+          me.notFoundWords.numItems = obj.headers('X-Aggregate-Count');
+        }));
+
       }
 
     });
+
+    $scope.$watch('selectedIndex', function (currNum) {
+      if (currNum == 1) {
+        me.foundWords.loadedPages = [];
+      } else if (currNum == 0) {
+        me.notFoundWords.loadedPages = [];
+      }
+    });
+
 
     $scope.setSubNavs([
       {name: 'krc', title: 'Refresh', clickFn: me.getWords}
