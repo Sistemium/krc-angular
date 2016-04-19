@@ -67,25 +67,33 @@ angular.module('stklcApp').controller('KrcCtrl', [
       angular.extend (me, {
 
         errors: {
-          'md-maxlength': 'Žodžio ilgis per didelis',
-          'md-required': 'Žodis neįvestas'
+          'maxlength': 'Žodžio ilgis per didelis',
+          'md-required': 'Žodis neįvestas',
+          'md-space': 'Galima sukirčiuoti tik vieną žodį'
         },
 
         history: WordService.history,
 
         kirciuoti: function (word) {
+
           $document.find('input')[0].blur();
           var w = (word || me.wordInput || me.searchText);
           w = _.capitalize ((w || '').toLowerCase());
           w = w.trim();
-
           var errors = angular.copy($scope.wordInputForm.word.$error);
 
-          if (errors.maxlength) {
-            me.clearInput();
-            return me.showSimpleToast(me.errors['md-maxlength']);
+          /* checking for spaces in written word*/
+
+          var spaceRegex = /\s/g;
+          var checkSpace = w.search(spaceRegex);
+
+          if (checkSpace > 0) {
+            w = '';
+            errors['md-space'] = true;
           }
 
+
+          /* if w is null or w length > 30 */
 
           if (!w) {
 
@@ -94,29 +102,33 @@ angular.module('stklcApp').controller('KrcCtrl', [
             }
 
             var msg = _.map(errors, function (val, key) {
+              me.searchText = '';
               return me.errors[key];
             }).join(',');
 
             return me.showSimpleToast(msg);
+
           }
 
-          WordService.getWordData(w).success(function (data) {
-            me.data = data;
-          }).error(function (data, res) {
-            console.log(res);
-            if (res == 404) {
-              me.data = [];
-              me.showSimpleToast('Žodis nerastas');
-            }
-            else if (res == 400) {
-              me.data = [];
-              me.showSimpleToast('Pasitikrintike įvestą žodį');
-            }
-            else if (res == 500) {
-              me.data = [];
-              me.showSimpleToast('Serverio klaida');
-            }
-          });
+          if (w) {
+            WordService.getWordData(w).success(function (data) {
+              me.data = data;
+            }).error(function (data, res) {
+
+              if (res == 404) {
+                me.data = [];
+                me.showSimpleToast('Žodis nerastas');
+              }
+              else if (res == 400) {
+                me.data = [];
+                me.showSimpleToast('Pasitikrintike įvestą žodį');
+              }
+              else if (res == 500) {
+                me.data = [];
+                me.showSimpleToast('Serverio klaida');
+              }
+            });
+          }
 
         },
 
@@ -125,8 +137,8 @@ angular.module('stklcApp').controller('KrcCtrl', [
             $mdToast.simple()
               .content(phrase)
               .position(me.getToastPosition())
-              .hideDelay(1700)
-              .theme("")
+              .hideDelay(2000)
+              .theme('')
           );
         },
 
@@ -213,7 +225,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
   ])
 
   .directive('resize', function ($window) {
-    return function (scope, element) {
+    return function (scope) {
       var w = $window;
       scope.getWindowDimensions = function () {
         return {
@@ -221,7 +233,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
           'w': w.innerWidth
         };
       };
-      scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
+      scope.$watch(scope.getWindowDimensions, function (newValue) {
         scope.windowHeight = newValue.h;
         scope.windowWidth = newValue.w;
       }, true);

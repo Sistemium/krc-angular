@@ -106,14 +106,14 @@ angular.module ('stklcApp')
       return $http.get('api/stats/getStats')
         .then(function (json) {
           var result = {};
-          var labelSize = ((innerWidth * 1.8) / 100).toFixed();
+          var labelSize = ((innerWidth * 1.5) / 100).toFixed();
           var data = json.data;
           var divider;
           resizeChart();
 
           function resizeChart() {
 
-            labelSize = ((innerWidth * 1.8) / 100).toFixed();
+            labelSize = ((innerWidth * 1.5) / 100).toFixed();
             divider = Math.ceil((data.usercount.length) / labelSize);
 
             if (divider > 1) {

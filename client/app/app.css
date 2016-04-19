@@ -8,10 +8,14 @@
 }
 
 .browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.whiteIstorija {
+  color: white;
 }
 
 md-chips.md-readonly md-chip {
@@ -32,8 +36,8 @@ md-chips.md-readonly md-chip {
   }
 }
 
-@media only screen and (min-width: 960px){
-  md-tooltip{
+@media only screen and (min-width: 960px) {
+  md-tooltip {
     font-size: 12px;
   }
 
@@ -46,20 +50,21 @@ md-chips.md-readonly md-chip {
     max-height: 64px;
   }
 
-  md-toast{
+  md-toast {
     position: fixed;
     top: 0px;
     bottom: 0px;
     max-height: 60px;
   }
 
-  .md-toast-content{
+  .md-toast-content {
     width: 25%;
     top: 7px;
     position: fixed;
     right: 8px;
   }
-  md-tooltip{
+
+  md-tooltip {
     font-size: 12px;
   }
 }
@@ -71,19 +76,19 @@ md-chips.md-readonly md-chip {
     max-height: 58px;
   }
 
-  .istorija-button{
+  .istorija-button {
     font-weight: 200;
     font-size: 15px;
   }
 
-  md-toast{
+  md-toast {
     position: fixed;
     top: 0px;
     bottom: 0px;
     max-height: 60px;
   }
 
-  .md-toast-content{
+  .md-toast-content {
     width: 30%;
     top: 4px;
     position: fixed;
@@ -93,7 +98,7 @@ md-chips.md-readonly md-chip {
 }
 
 md-autocomplete md-input-container.md-has-icon > label {
- left: 0;
+  left: 0;
 }
 
 md-autocomplete.icon-right md-input-container.md-has-icon {
@@ -102,7 +107,7 @@ md-autocomplete.icon-right md-input-container.md-has-icon {
 
 md-input-container.md-has-icon.icon-right md-icon,
 .md-has-icon md-input-container md-icon {
-  right: 0;
+  right: 0px;
   left: inherit;
   cursor: pointer;
   float: right;
@@ -110,11 +115,12 @@ md-input-container.md-has-icon.icon-right md-icon,
   position: absolute;
 }
 
-.md-button.left-align > a{
+.md-button.left-align > a {
   text-transform: none;
 }
-.md-button:hover{
- color: black;
+
+.md-button:hover {
+  color: black;
 }
 
 .left-align {
@@ -137,26 +143,25 @@ md-menu-item.active md-icon {
   color: #3f51b5;
 }
 
-
-#left-nav{
+#left-nav {
   margin: 10px;
   margin-right: 2px;
 }
 
-.md-button.sandwich{
+.md-button.sandwich {
   height: 26px;
   width: 30px;
   border-radius: 0;
   margin-right: 15px;
 }
 
-.menuIcon{
+.menuIcon {
   position: relative;
   top: 1px;
   right: -6px;
 }
 
-.empty-history{
+.empty-history {
   position: relative;
   outline: none;
   border: 0;
@@ -183,23 +188,21 @@ md-menu-item.active md-icon {
   overflow: hidden;
 }
 
-.md-content-style{
+.md-content-style {
   margin: 10px;
 }
 
-
-.trinti-istorija{
+.trinti-istorija {
   margin-bottom: 20px;
   width: 80%;
 }
 
-.cust-small-tall{
+.cust-small-tall {
   height: 50px;
   min-height: 50px;
   max-height: 50px;
   z-index: 9999;
 }
-
 
 /* Gray screen overlaying toolbar. Not working on Ipad */
 
@@ -214,7 +217,7 @@ div > md-backdrop {
 
 /* for Computers. Effect: cannot swipe the main window */
 
-body{
+body {
   overflow: hidden;
   position: fixed;
   top: 0px;
@@ -223,35 +226,34 @@ body{
   right: 0px;
 }
 
-
 /* Disabling scrolling on Ipad when sidenav is opened */
 
-.scrollDisable{
-  overflow-y:hidden;
-  height:100%;
+.scrollDisable {
+  overflow-y: hidden;
+  height: 100%;
 }
 
-#delete:hover{
+#delete:hover {
   color: #dd2c00;
 }
 
-md-toast .md-toast-content{
+md-toast .md-toast-content {
   background-color: #383434;
   border: 1px solid black;
   text-align: center;
 }
 
-.istorija-button{
-  top:1px;
+.istorija-button {
+  top: 1px;
   color: white;
 }
 
-.footer-text{
+.footer-text {
   color: white;
   font-weight: 400;
 }
 
-.footer-main-text{
+.footer-main-text {
   color: white;
 }
 
@@ -259,88 +261,81 @@ md-toast .md-toast-content{
   cursor: default;
 }
 
-
-
 /* custom classes for md-tooltip */
 
-
-md-tooltip{
-  position:absolute;
-  z-index:100;
-  overflow:hidden;
-  pointer-events:none;
-  border-radius:4px;
-  font-weight:500;
-  font-size:14px
+md-tooltip {
+  position: absolute;
+  z-index: 100;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px
 }
 
-md-tooltip .md-content{
-  position:relative;
+md-tooltip .md-content {
+  position: relative;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
-  -webkit-transform-origin:center top;
-  transform-origin:center top;
+  -webkit-transform-origin: center top;
+  transform-origin: center top;
   -webkit-transform: none;
   transform: none;
   opacity: 0;
   height: 30px;
-  line-height:30px;
-  padding-left:10px;  /* ostavit */
-  padding-right:10px; /* ostavit */
+  line-height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /*show*/
 
-md-tooltip.md-show{
+md-tooltip.md-show {
   transition: none !important;
   will-change: auto !important;
   pointer-events: auto !important; /* WARNING */
 }
 
-md-tooltip .md-content.md-show,md-tooltip .md-content.md-show-add-active{
+md-tooltip .md-content.md-show, md-tooltip .md-content.md-show-add-active {
   -webkit-transform: none;
   transform: none;
-  opacity:1;
-  -webkit-transform-origin:center bottom;
-  transform-origin:center top;
+  opacity: 1;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center top;
 }
 
-
-md-tooltip .md-content.md-show-add{
+md-tooltip .md-content.md-show-add {
   transition: none !important;
-  transition-duration:.0s;
+  transition-duration: .0s;
   -webkit-transform: none !important;
   transform: none !important;
 }
 
 /*hide*/
 
-
-md-tooltip .md-content.md-show-remove{
+md-tooltip .md-content.md-show-remove {
   transition: none !important;
-  transition-duration:.0s;
+  transition-duration: .0s;
   display: none;
 }
 
-md-tooltip.md-hide{
+md-tooltip.md-hide {
   transition: none !important;
   display: none;
 }
 
-md-tooltip .md-content.md-show-remove.md-show-remove-active{
+md-tooltip .md-content.md-show-remove.md-show-remove-active {
   -webkit-transform: scale(4.5) !important;
   transform: scale(4.5) !important;
-  opacity:1;
+  opacity: 1;
 }
 
-.hideSearchWords{
+.hideSearchWords {
   display: none;
 }
 
 /* md-autocomplete */
-
-
 
 md-autocomplete[md-floating-label] md-autocomplete-wrap {
   height: 90px;

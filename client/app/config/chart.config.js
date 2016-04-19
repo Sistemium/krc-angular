@@ -38,7 +38,6 @@ angular.module('stklcApp')
       colours: ['#1700AA', '#AA0330'],
       barShowStroke : true,
       barStrokeWidth : 1,
-      barValueSpacing : 5,
       scaleShowVerticalLines: false,
       barDatasetSpacing : 1
     });
