@@ -25,7 +25,6 @@ angular.module('stklcApp')
        * loading at the most 6 elems. All other elems are empty; 60 words * 40px = 2400px;
        */
       this.loadedPages = [];
-      this.loadedTime = [];
 
       /** @type {number} Total number of items. */
       this.numItems = 0;
@@ -48,9 +47,11 @@ angular.module('stklcApp')
       var pageNumber = Math.floor(index / this.PAGE_SIZE);
       var page = this.loadedPages[pageNumber];
 
+
       if ((page) && (this.loadArr[pageNumber] == 'loaded')) {
 
         return page[index % this.PAGE_SIZE];
+
 
       } else if (this.loadArr[pageNumber] == 'deleted') {
 
@@ -81,15 +82,20 @@ angular.module('stklcApp')
         this.loadedPages[pageNumber] = [];
 
         for (var i in obj.data) {
-          if (obj.data[i].word.length > 30) {
-            this.loadedPages[pageNumber].push('The text is too long. No output' + '|' + ' ' + obj.data[i].ts.slice(0, -4));
-            //this.loadedTime[pageNumber].push(obj.data[i].ts.slice(0, -4));
+          var tempObj = {};
+          if (obj.data[i].word.length > 26) {
+            tempObj.word = ('NO OUTPUT');
+            tempObj.ts = obj.data[i].ts.slice(0, -4);
+            this.loadedPages[pageNumber].push(tempObj);
           }
           else {
-            this.loadedPages[pageNumber].push(obj.data[i].word + ' ' + '|' + ' ' + obj.data[i].ts.slice(0, -4));
-            //this.loadedTime[pageNumber].push(obj.data[i].ts.slice(0, -4));
+            tempObj.word = obj.data[i].word;
+            tempObj.ts = obj.data[i].ts.slice(0, -4);
+            this.loadedPages[pageNumber].push(tempObj);
           }
         }
+
+        console.log(this.loadedPages);
 
         this.loadArr[pageNumber] = 'loaded';
 
@@ -168,9 +174,11 @@ angular.module('stklcApp')
       var pageNumber = Math.floor(index / this.PAGE_SIZE);
       var page = this.loadedPages[pageNumber];
 
+
       if ((page) && (this.loadArr[pageNumber] == 'loaded')) {
 
         return page[index % this.PAGE_SIZE];
+
 
       } else if (this.loadArr[pageNumber] == 'deleted') {
 
@@ -201,10 +209,21 @@ angular.module('stklcApp')
         this.loadedPages[pageNumber] = [];
 
         for (var i in obj.data) {
-
-          this.loadedPages[pageNumber].push(obj.data[i].word + ' ' + '|' + ' ' + obj.data[i].ts.slice(0, -4));
-
+          var tempObj = {};
+          if (obj.data[i].word.length > 26) {
+            tempObj.word = ('NO OUTPUT');
+            tempObj.ts = obj.data[i].ts.slice(0, -4);
+            this.loadedPages[pageNumber].push(tempObj);
+          }
+          else {
+            tempObj.word = obj.data[i].word;
+            tempObj.ts = obj.data[i].ts.slice(0, -4);
+            this.loadedPages[pageNumber].push(tempObj);
+          }
         }
+
+        console.log(this.loadedPages.length, 'loadedPages');
+        console.log(this.loadedPages, 'loadedPages');
 
         this.loadArr[pageNumber] = 'loaded';
 
@@ -236,7 +255,6 @@ angular.module('stklcApp')
             _.fill(this.loadedPages, [], (pageNumber + this.keepItemsConst), this.loadedPages.length);
 
           }
-
         }
 
       }));
