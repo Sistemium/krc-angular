@@ -71,7 +71,7 @@ angular.module('stklcApp')
         return page[index % this.PAGE_SIZE];
 
 
-      } else if (this.loadArr[pageNumber] == 'deleted') {
+      } else if (this.loadArr[pageNumber] == '') {
 
         this.fetchPage_(pageNumber);
         this.loadArr[pageNumber] = 'loaded';
@@ -112,7 +112,8 @@ angular.module('stklcApp')
             this.loadedPages[pageNumber].push(tempObj);
           }
         }
-        
+
+        console.log(this.loadedPages, 'notFound');
 
         this.loadArr[pageNumber] = 'loaded';
 
@@ -133,14 +134,14 @@ angular.module('stklcApp')
 
           if ((this.loadArr[pageNumber] == 'loaded') && (this.loadArr[pageNumber - 1] == 'loaded')) {
 
-            _.fill(this.loadArr, 'deleted', 0, ((pageNumber + 1) - this.keepItemsConst));
+            _.fill(this.loadArr, '', 0, ((pageNumber + 1) - this.keepItemsConst));
             _.fill(this.loadedPages, [], 0, ((pageNumber + 1) - this.keepItemsConst));
 
           }
 
-          else if ((this.loadArr[pageNumber] == 'loaded') && (this.loadArr[pageNumber - 1] == 'deleted')) {
+          else if ((this.loadArr[pageNumber] == 'loaded') && (this.loadArr[pageNumber - 1] == '')) {
 
-            _.fill(this.loadArr, 'deleted', (pageNumber + this.keepItemsConst), this.loadArr.length);
+            _.fill(this.loadArr, '', (pageNumber + this.keepItemsConst), this.loadArr.length);
             _.fill(this.loadedPages, [], (pageNumber + this.keepItemsConst), this.loadedPages.length);
 
           }
@@ -197,7 +198,7 @@ angular.module('stklcApp')
         return page[index % this.PAGE_SIZE];
 
 
-      } else if (this.loadArr[pageNumber] == 'deleted') {
+      } else if (this.loadArr[pageNumber] == '') {
 
         this.fetchPage_(pageNumber);
         this.loadArr[pageNumber] = 'loaded';
@@ -239,6 +240,8 @@ angular.module('stklcApp')
           }
         }
 
+        console.log(this.loadedPages, 'foundWords');
+
         this.loadArr[pageNumber] = 'loaded';
 
         // Counting how many pages are loaded
@@ -258,15 +261,17 @@ angular.module('stklcApp')
 
           if ((this.loadArr[pageNumber] == 'loaded') && (this.loadArr[pageNumber - 1] == 'loaded')) {
 
-            _.fill(this.loadArr, 'deleted', 0, ((pageNumber + 1) - this.keepItemsConst));
+            _.fill(this.loadArr, '', 0, ((pageNumber + 1) - this.keepItemsConst));
             _.fill(this.loadedPages, [], 0, ((pageNumber + 1) - this.keepItemsConst));
+
 
           }
 
-          else if ((this.loadArr[pageNumber] == 'loaded') && (this.loadArr[pageNumber - 1] == 'deleted')) {
+          else if ((this.loadArr[pageNumber] == 'loaded') && (this.loadArr[pageNumber - 1] == '')) {
 
-            _.fill(this.loadArr, 'deleted', (pageNumber + this.keepItemsConst), this.loadArr.length);
+            _.fill(this.loadArr, '', (pageNumber + this.keepItemsConst), this.loadArr.length);
             _.fill(this.loadedPages, [], (pageNumber + this.keepItemsConst), this.loadedPages.length);
+
 
           }
         }
