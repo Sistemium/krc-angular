@@ -95,8 +95,7 @@ angular.module('stklcApp')
             this.loadedPages[pageNumber].push(tempObj);
           }
         }
-
-        console.log(this.loadedPages);
+        
 
         this.loadArr[pageNumber] = 'loaded';
 
@@ -222,9 +221,6 @@ angular.module('stklcApp')
             this.loadedPages[pageNumber].push(tempObj);
           }
         }
-
-        console.log(this.loadedPages.length, 'loadedPages');
-        console.log(this.loadedPages, 'loadedPages');
 
         this.loadArr[pageNumber] = 'loaded';
 
