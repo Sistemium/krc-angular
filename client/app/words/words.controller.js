@@ -7,8 +7,9 @@ angular.module('stklcApp')
 
     angular.extend (me, {
 
-      getWords(){
-        me.foundWords.fetchPage_(0);
+      getWords: function () {
+        me.foundWords.loadedPages = [];
+        me.notFoundWords.loadedPages = [];
       }
 
     });
