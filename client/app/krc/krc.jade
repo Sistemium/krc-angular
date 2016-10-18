@@ -47,8 +47,9 @@ div(layout-fill resize flex)
                   | {{item}}
               md-icon.md-icon-float#delete(md-svg-icon="content:clear" ng-show="wordInputForm.word.$viewValue" ng-click="ctrl.clearInput()")
           div
-            md-button.w360.md-raised.md-primary.md-hue-2(type='submit')
+            md-button#krc-button.w360.md-raised.md-primary.md-hue-2(type='submit')
               | Kirčiuoti
+            md-progress-linear(ng-show='ctrl.busy')
 
           div(layout='column' layout-align='center center' layout-padding)
             div(ng-repeat='item in ctrl.data' layout-padding)

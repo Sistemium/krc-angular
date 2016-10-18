@@ -111,8 +111,10 @@ angular.module('stklcApp').controller('KrcCtrl', [
           }
 
           if (w) {
+            me.busy = true;
             WordService.getWordData(w).success(function (data) {
               me.data = data;
+              me.busy = false;
             }).error(function (data, res) {
 
               if (res == 404) {
@@ -127,6 +129,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
                 me.data = [];
                 me.showSimpleToast('Serverio klaida');
               }
+              me.busy = false;
             });
           }
 

@@ -340,3 +340,7 @@ md-tooltip .md-content.md-show-remove.md-show-remove-active {
 md-autocomplete[md-floating-label] md-autocomplete-wrap {
   height: 90px;
 }
+
+#krc-button {
+  margin: 8px 0;
+}

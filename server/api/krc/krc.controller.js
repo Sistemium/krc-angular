@@ -79,7 +79,8 @@ function sendRequest(res, text, req) {
     method: 'POST',
     form: {
       tekstas: text
-    }
+    },
+    timeout: 5000
   }, function (error, response, body) {
 
     var deviceUUID = req.headers.deviceuuid;
