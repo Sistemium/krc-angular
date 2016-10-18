@@ -11,14 +11,14 @@ var async = require('async');
 module.exports.name = function (req, model, keys, data) {
 
   req.app.models[model].findOne(keys)
-    .then (function (foundRec) {
+    .then(function (foundRec) {
       if (!foundRec) {
         return req.app.models[model]
-          .create (_.assignIn(keys, data))
-          .then (function (newRec) {
+          .create(_.assignIn(keys, data))
+          .then(function (newRec) {
             return newRec.save();
           })
-          .catch (console.error);
+          .catch(console.error);
       } else {
         foundRec.cnt++;
         return foundRec.save()
@@ -39,14 +39,14 @@ exports.index = function (req, res) {
   var statsSaver = function (req, model, keys, data) {
 
     req.app.models[model].findOne(keys)
-      .then (function (foundRec) {
+      .then(function (foundRec) {
         if (!foundRec) {
           return req.app.models[model]
-            .create (_.assignIn(keys, data))
-            .then (function (newRec) {
+            .create(_.assignIn(keys, data))
+            .then(function (newRec) {
               return newRec.save();
             })
-            .catch (console.error);
+            .catch(console.error);
         } else {
           foundRec.cnt++;
           return foundRec.save()
@@ -141,7 +141,7 @@ exports.stats = function (req, res) {
             doneKey(err);
           }
 
-          responseData [modelName].push(JSON.parse (data));
+          responseData [modelName].push(JSON.parse(data));
 
           doneKey();
 
@@ -152,9 +152,9 @@ exports.stats = function (req, res) {
         }
 
         if (primaryKey != 'browser') {
-          responseData [modelName] = _.sortBy (responseData [modelName], primaryKey);
+          responseData [modelName] = _.sortBy(responseData [modelName], primaryKey);
         } else {
-          responseData [modelName] = _.sortBy (responseData [modelName], 'cnt');
+          responseData [modelName] = _.sortBy(responseData [modelName], 'cnt');
         }
 
         doneModel();
@@ -167,7 +167,7 @@ exports.stats = function (req, res) {
     if (err)
       throw err;
     else {
-      res.json (responseData);
+      res.json(responseData);
     }
 
   });
