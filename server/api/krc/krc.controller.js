@@ -92,6 +92,7 @@ function sendRequest(res, text, req) {
       var stressedWord = $('textarea').last().text();
     }
     else {
+      writeToAmazon(text, 'errorWord', deviceUUID);
       return res.status(500).send('The server is down. Please try later.');
     }
 
