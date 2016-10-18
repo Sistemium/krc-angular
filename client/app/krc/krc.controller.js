@@ -4,7 +4,8 @@ angular.module('stklcApp').controller('KrcCtrl', [
     'WordService', '$scope', '$mdToast', '$mdSidenav', '$window', '$uiViewScroll', '$document', '$filter',
     '$http', '$q',
     'DictionaryModel',
-    function (WordService, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document, $filter, $http, $q, DictionaryModel) {
+    '$timeout',
+    function (WordService, $scope, $mdToast, $mdSidenav, $window, $uiViewScroll, $document, $filter, $http, $q, DictionaryModel, $timeout) {
 
       var toastPosition = {
         bottom: false,
@@ -111,9 +112,13 @@ angular.module('stklcApp').controller('KrcCtrl', [
           }
 
           if (w) {
-            me.busy = true;
+            var ti = $timeout(500);
+            ti.then(function(){
+              me.busy = true;
+            });
             WordService.getWordData(w).success(function (data) {
               me.data = data;
+              $timeout.cancel(ti);
               me.busy = false;
             }).error(function (data, res) {
 
@@ -129,6 +134,7 @@ angular.module('stklcApp').controller('KrcCtrl', [
                 me.data = [];
                 me.showSimpleToast('Serverio klaida');
               }
+              $timeout.cancel(ti);
               me.busy = false;
             });
           }
