@@ -344,3 +344,7 @@ md-autocomplete[md-floating-label] md-autocomplete-wrap {
 #krc-button {
   margin: 8px 0;
 }
+
+.progress-wrapper {
+  min-height: 5px;
+}
