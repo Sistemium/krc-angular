@@ -3,7 +3,7 @@ var request = require('request');
 var fs = require('fs');
 var redisClient = require('../../config/redis').redisClient;
 
-var DICTIONARY_KEY ='mixed_accent_words';
+var DICTIONARY_KEY = 'mixed_accent_words';
 var ACCENTUATED_WORDS = 'accentuated_words';
 
 // For tests
@@ -11,11 +11,11 @@ var ACCENTUATED_WORDS = 'accentuated_words';
 //DICTIONARY_KEY ='test_mixed_accent_words';
 
 var readline = require('linebyline');
-var debug = require('debug') ('krc:zodynas.controller');
-var async = require ('async');
-var _ = require ('lodash');
+var debug = require('debug')('krc:zodynas.controller');
+var async = require('async');
+var _ = require('lodash');
 
-exports.index = function(req, res) {
+exports.index = function (req, res) {
 
   var word = req.params.word.toLowerCase();
 
@@ -24,26 +24,26 @@ exports.index = function(req, res) {
   var response = [];
   var accentuatedWordsSplit;
 
-  redisClient.ZRANGEBYLEX([DICTIONARY_KEY, '[' + word, '[' + word + 'ž', 'LIMIT', '0', '60' ],
+  redisClient.ZRANGEBYLEX([DICTIONARY_KEY, '[' + word, '[' + word + 'ž', 'LIMIT', '0', '60'],
     function (err, accentlessWords) {
 
       if (err) throw err;
 
-     //debug('index', 'accentlessWords:', accentlessWords);
+      //debug('index', 'accentlessWords:', accentlessWords);
 
-      async.each (accentlessWords, function (accentlessWord, done){
-        redisClient.HGET([ACCENTUATED_WORDS, accentlessWord], function(err, accentuatedWords){
+      async.each (accentlessWords, function (accentlessWord, done) {
+        redisClient.HGET([ACCENTUATED_WORDS, accentlessWord], function (err, accentuatedWords) {
           if (err) {
-            done (err);
+            done(err);
           }
 
-         //debug('index', 'ACCENTUATED_WORDS:', accentlessWord, accentuatedWords);
+          //debug('index', 'ACCENTUATED_WORDS:', accentlessWord, accentuatedWords);
 
-          if (accentuatedWords){
+          if (accentuatedWords) {
 
             accentuatedWordsSplit = accentuatedWords.split(',');
 
-            accentuatedWordsSplit.forEach(function(word){
+            accentuatedWordsSplit.forEach(function (word) {
               response.push(word);
             });
 
@@ -56,8 +56,8 @@ exports.index = function(req, res) {
           done();
 
         });
-      }, function (err){
-        if (err){
+      }, function (err) {
+        if (err) {
           throw err;
         } else {
           var sorted = _.uniq(response).sort(lcompare);
@@ -71,11 +71,11 @@ exports.index = function(req, res) {
 
 };
 
-var lcompare = function (a,b) {
+var lcompare = function (a, b) {
 
   var res = 0;
 
-  _.each (a,function (l,i){
+  _.each (a, function (l, i) {
     res = i < b.length ? l.localeCompare (b[i]) : -1;
     return !res;
   });
@@ -85,9 +85,9 @@ var lcompare = function (a,b) {
 };
 
 
-exports.post = function (req,res) {
+exports.post = function (req, res) {
 
-  var fileName ='tmp.txt';
+  var fileName = 'tmp.txt';
   var wrongCount = 0;
   var successCount = 0;
   var alreadyKnownWords = 0;
@@ -101,7 +101,7 @@ exports.post = function (req,res) {
     res.write(success);
     res.end(overwritten);
 
-    fs.unlink(fileName,function(){
+    fs.unlink(fileName, function () {
       console.log (fileName, 'deleted');
     });
 
@@ -110,13 +110,13 @@ exports.post = function (req,res) {
 
   var accentLess = function (line) {
 
-    var to = ['a','c','e','e','i','s','u','u','z'],
+    var to = ['a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z'],
       from = 'ąčęėįšųūž';
 
-    var re = new RegExp ('['+from+']','ig');
+    var re = new RegExp('[' + from + ']', 'ig');
 
-    var atext = line.replace(re,function(m){
-      return  to[from.indexOf(m)];
+    var atext = line.replace(re, function (m) {
+      return to[from.indexOf(m)];
     });
 
     return (atext);
@@ -125,7 +125,7 @@ exports.post = function (req,res) {
 
   var processLine = (line) => {
 
-    processLineAsync (line,(err) => {
+    processLineAsync(line, (err) => {
       if (err) {
         throw (err);
       }
@@ -141,16 +141,16 @@ exports.post = function (req,res) {
 
       var accentLessWord = accentLess(word);
 
-      redisClient.HGET([ACCENTUATED_WORDS, accentLessWord], function(err, w){
+      redisClient.HGET([ACCENTUATED_WORDS, accentLessWord], function (err, w) {
 
-        if (err){
-          debug ('processLine error', 'word:', word);
+        if (err) {
+          debug('processLine error', 'word:', word);
           throw err;
         }
 
         var words = w && w.split (',') || [];
 
-        if (words.indexOf(word)>=0) {
+        if (words.indexOf(word) >= 0) {
           alreadyKnownWords++;
           return done();
         }
@@ -164,16 +164,16 @@ exports.post = function (req,res) {
           }
 
           successCount++;
-          redisClient.ZADD([DICTIONARY_KEY, 0, word], (err,reply) => {
+          redisClient.ZADD([DICTIONARY_KEY, 0, word], (err, reply) => {
 
-            if (err){
+            if (err) {
               return done(err);
             }
 
             if (reply) {
               redisClient.ZADD([DICTIONARY_KEY, 0, accentLessWord], done);
             } else {
-              done ();
+              done();
             }
 
           });
@@ -192,20 +192,20 @@ exports.post = function (req,res) {
 
   var stream = req.pipe(fs.createWriteStream(fileName));
 
-  stream.on('error',finish);
+  stream.on('error', finish);
 
-  stream.on('finish',function(){
+  stream.on('finish', function () {
 
     var rl = readline('tmp.txt');
 
     rl.on('line', processLine);
 
-    rl.on('close',function () {
+    rl.on('close', function () {
       finish();
       res.end();
     });
 
-    rl.on('error', function(err) {
+    rl.on('error', function (err) {
       finish();
       res.end(err);
     });
