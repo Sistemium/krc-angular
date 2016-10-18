@@ -139,7 +139,6 @@ angular.module ('stklcApp')
 
           var wordsData = data.foundwordcount.concat(data.notfoundwordcount);
 
-          wordsData = _.takeRight(wordsData, 60);
 
           wordsData = _.groupBy (wordsData, 'date');
 
@@ -150,6 +149,10 @@ angular.module ('stklcApp')
               notFoundCnt: _.get (_.find (val, 'notFoundCnt'), 'notFoundCnt')
             };
           });
+
+          wordsData = _.sortBy(wordsData,'date');
+
+          wordsData = _.takeRight(wordsData, 60);
 
           result.wordStats = seriesChartData(wordsData, ['foundCnt', 'notFoundCnt']);
 
