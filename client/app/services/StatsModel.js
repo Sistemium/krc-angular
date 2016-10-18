@@ -139,6 +139,8 @@ angular.module ('stklcApp')
 
           var wordsData = data.foundwordcount.concat(data.notfoundwordcount);
 
+          wordsData = _.takeRight(wordsData, 60);
+
           wordsData = _.groupBy (wordsData, 'date');
 
           wordsData = _.map (wordsData, function (val, key) {
