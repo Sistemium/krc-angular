@@ -8,6 +8,7 @@ var request = require('request'),
   http = require('http'),
   config = require('../../config/environment');
 
+var _ = require ('lodash');
 var link = 'http://donelaitis.vdu.lt/main.php?id=4&nr=9_1';
 // alternative http://www.zodynas.lt/kirciavimo-zodynas; form property == text
 
@@ -87,12 +88,17 @@ function sendRequest(res, text, req) {
 
     // if else rewrite
 
-    if (!error && response.statusCode == 200) {
+    if (!error && _.get(response,'statusCode') == 200) {
       var $ = cheerio.load(body);
       var stressedWord = $('textarea').last().text();
     }
     else {
-      writeToAmazon(text, 'errorWord', deviceUUID);
+      console.error('sendRequest error:', error);
+      console.error('sendRequest error:', response);
+      writeToAmazon(text, 'errorWord', deviceUUID, {
+        status: _.get(response,'statusCode'),
+        error: error ? JSON.stringify(error) : body
+      });
       return res.status(500).send('The server is down. Please try later.');
     }
 
@@ -186,14 +192,14 @@ function sendRequest(res, text, req) {
   });
 }
 
-function writeToAmazon(word, path, deviceUUID) {
+function writeToAmazon(word, path, deviceUUID, etc) {
   request({
     uri: config.STAPI + path,
     method: 'POST',
-    json: {
+    json: _.assign({
       word: word,
       deviceUUID: deviceUUID
-    }
+    }, etc)
 
   }, function (error) {
     if (error) {
