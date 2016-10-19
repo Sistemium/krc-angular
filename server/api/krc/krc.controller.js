@@ -93,8 +93,7 @@ function sendRequest(res, text, req) {
       var stressedWord = $('textarea').last().text();
     }
     else {
-      console.error('sendRequest error:', error);
-      console.error('sendRequest error:', response);
+      debug('sendRequest error:', error);
       writeToAmazon(text, 'errorWord', deviceUUID, {
         status: _.get(response,'statusCode'),
         error: error ? JSON.stringify(error) : body
