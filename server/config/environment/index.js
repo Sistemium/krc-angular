@@ -32,7 +32,7 @@ var all = {
   },
 
   STAPI: env.STAPI,
-  HTTP_TIMEOUT: env.HTTP_TIMEOUT || 5000
+  HTTP_TIMEOUT: parseInt(env.HTTP_TIMEOUT) || 5000
 
 };
 
