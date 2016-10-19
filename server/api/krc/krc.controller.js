@@ -80,7 +80,7 @@ function sendRequest(res, text, req) {
     form: {
       tekstas: text
     },
-    timeout: 5000
+    timeout: config.HTTP_TIMEOUT
   }, function (error, response, body) {
 
     var deviceUUID = req.headers.deviceuuid;

@@ -3,6 +3,8 @@
 var path = require('path');
 var _ = require('lodash');
 
+var env = process.env || {};
+
 function requiredProcessEnv(name) {
   if (!process.env[name]) {
     throw new Error('You must set the ' + name + ' environment variable');
@@ -13,23 +15,24 @@ function requiredProcessEnv(name) {
 // All configurations will extend these options
 // ============================================
 var all = {
-  env: process.env.NODE_ENV,
+  env: env.NODE_ENV,
 
   // Root path of server
   root: path.normalize(__dirname + '/../../..'),
 
   // Server port
-  port: process.env.PORT || 9000,
+  port: env.PORT || 9000,
 
   // Server IP
-  ip: process.env.IP || '0.0.0.0',
+  ip: env.IP || '0.0.0.0',
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
     session: 'stklc-secret'
   },
 
-  STAPI: process.env.STAPI
+  STAPI: env.STAPI,
+  HTTP_TIMEOUT: env.HTTP_TIMEOUT || 5000
 
 };
 
@@ -37,4 +40,4 @@ var all = {
 // ==============================================
 module.exports = _.merge(
   all,
-  require('./' + process.env.NODE_ENV + '.js') || {});
+  require('./' + env.NODE_ENV + '.js') || {});
