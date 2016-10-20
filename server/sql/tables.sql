@@ -16,5 +16,4 @@ meta.createTable 'krc.NotFoundWord',0,1;
 meta.createTable 'krc.FoundWord',0,1;
 meta.createTable 'krc.ErrorWord',0,1;
 
-select * from krc.FoundWord
-select * from krc.NotFoundWord
+create index XK_krc_FoundWord_word_id on krc.FoundWord (word, id);
