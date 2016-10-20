@@ -10,7 +10,12 @@ create or replace view krc.DailyStats as
     (select count (distinct word)
       from krc.ErrorWord
       where ts BETWEEN [date] and [date]+1
-    ) as errorWords
+    ) as errorWords,
+    (select count (*)
+      from krc.foundword fw
+      where ts between [date] and [date]+1
+      and not exists (select * from krc.foundword where word = fw.word and id < fw.id)
+    ) as newWords
   FROM krc.FoundWord
   GROUP BY [date]
 ;
