@@ -1,5 +1,9 @@
 'use strict';
 
+function upperFirst(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
+
 angular.module('stklcApp').controller('KrcCtrl', [
     'WordService', '$scope', '$mdToast', '$mdSidenav', '$window', '$uiViewScroll', '$document', '$filter',
     '$http', '$q',
@@ -74,6 +78,19 @@ angular.module('stklcApp').controller('KrcCtrl', [
         },
 
         history: WordService.history,
+
+        properCase: function(wordInfo) {
+
+          var word = wordInfo.word;
+          var state = wordInfo.state || [];
+
+          if (state.indexOf('T.') >= 0) {
+            return upperFirst(word);
+          }
+
+          return word.toLocaleLowerCase();
+
+        },
 
         kirciuoti: function (word) {
 
