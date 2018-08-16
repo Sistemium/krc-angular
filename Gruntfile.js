@@ -40,7 +40,7 @@ module.exports = function (grunt) {
       dev: {
         options: {
           script: 'server/app.js',
-          debug: true
+          debug: false
         }
       },
       prod: {
@@ -119,6 +119,7 @@ module.exports = function (grunt) {
         ],
         tasks: ['express:dev', 'wait'],
         options: {
+          nodeArgs: ['--inspect-brk'],
           livereload: true,
           nospawn: true //Without this option specified express won't be reloaded
         }
@@ -205,7 +206,7 @@ module.exports = function (grunt) {
       debug: {
         script: 'server/app.js',
         options: {
-          nodeArgs: ['--debug-brk'],
+          nodeArgs: ['--inspect-brk'],
           env: {
             PORT: process.env.PORT || 9000
           },
