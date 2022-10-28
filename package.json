@@ -81,7 +81,7 @@
     "karma-coffee-preprocessor": ">=0.2.1",
     "karma-jade-preprocessor": ">=0.0.11",
     "karma-phantomjs-launcher": ">=0.1.4",
-    "karma": ">=0.13.15",
+    "karma": ">=6.4.1",
     "karma-ng-html2js-preprocessor": ">=0.1.0",
     "supertest": ">=0.11.0",
     "should": ">=3.3.1"
