@@ -8,3 +8,4 @@ dist
 npm-debug.log
 *.rdb
 etc
+.DS_Store
